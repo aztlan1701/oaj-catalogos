@@ -40,7 +40,8 @@ estatus_registro:   # del trámite de registro
   - {valor: "Ficha enviada", descripcion: "La DGETD envió la ficha prellenada para que el área la confirme."}
   - {valor: "Confirmado", descripcion: "El área confirmó la ficha. El registro está completo."}
 
-estatus_inventario:  # del catálogo dentro del inventario institucional (art. 14 fr. I)
+estatus_inventario:  # de cada lista dentro del inventario del registro (Transitorio CUARTO y art. 14 fr. IX).
+                     # Solo los catálogos autorizados forman el inventario del art. 14 fr. I (vacío V4).
   - {valor: "Registrado", descripcion: "Está en el inventario por el registro del Transitorio CUARTO. Aún no es catálogo autorizado."}
   - {valor: "En dictamen", descripcion: "La DGETD analiza si cumple los criterios del art. 6 y prepara dictamen."}
   - {valor: "Autorizado", descripcion: "Aprobado por el Comité y publicado en la Plataforma (art. 4 fr. IV)."}
@@ -58,7 +59,7 @@ reglas:
   - "Se piden datos sobre la lista (metadatos), no su contenido. No se adjunta la lista ni datos personales."
   - "Propietario, custodio y clasificación son propuestas. Los formaliza el Comité al aprobar el catálogo (art. 12)."
   - "«Por confirmar» es una respuesta válida en los campos que lo permiten. La DGETD ayuda a completarlos."
-  - "El registro se tiene por presentado con el área, el nombre y la descripción. Los demás campos pueden ir «por confirmar»; el registro queda completo cuando el área confirma la ficha."
+  - "Criterio operativo de la DGETD (no regla del plazo): la DGETD recibe y da trámite a todo registro que traiga el área, el nombre y la descripción (A1, B2, B3) y completa con el área los metadatos del art. 8 que lleguen «por confirmar». El registro queda completo cuando el área confirma la ficha. Si un registro con metadatos «por confirmar» se tiene por presentado en tiempo para el Transitorio CUARTO lo decide el Comité (Transitorio SÉPTIMO); está pendiente."
   - "Registrar no publica la lista, no cambia quién la administra ni modifica ningún sistema."
 
 # -----------------------------------------------------------------------------
@@ -91,7 +92,7 @@ secciones:
       - id: A3
         nombre: "Persona titular que valida"
         pregunta: "¿Qué persona titular del área conoce y respalda este registro?"
-        ayuda: "Nombre y puesto. Recibe copia del acuse."
+        ayuda: "Escriba el nombre completo y el puesto de la persona titular. Recibe copia del acuse."
         tipo: persona
         obligatorio: si
         quien: area
@@ -140,7 +141,7 @@ secciones:
       - id: C1
         nombre: "Propietario propuesto"
         pregunta: "¿Qué área decide qué entra y qué sale de esta lista, y con qué reglas?"
-        ayuda: "Es el área con autoridad sobre el contenido, aunque no sea la que captura. Viene marcada su propia área; cámbiela si decide otra. Si el contenido deriva de la función jurisdiccional, el propietario es el área administrativa competente, que recaba la opinión de los órganos jurisdiccionales involucrados (art. 4 fr. XVII). En los Lineamientos se llama «propietario»."
+        ayuda: "Es el área administrativa con autoridad sobre el contenido, aunque no sea la que captura. Si es su propia área, anótela. Si no sabe cuál es, responda «Por confirmar»; si deja el campo vacío, se registra «Por confirmar». Si el contenido deriva de la función jurisdiccional, el propietario es el área administrativa competente, que recaba la opinión de los órganos jurisdiccionales involucrados (art. 4 fr. XVII). En los Lineamientos se llama «propietario»."
         tipo: area
         obligatorio: por_confirmar
         quien: area
@@ -156,7 +157,7 @@ secciones:
       - id: C2b
         nombre: "Preferencia de custodia"
         pregunta: "(Opcional) ¿Le interesaría que la DGETD se encargue del mantenimiento operativo de esta lista?"
-        ayuda: "Solo registra su interés. Lo decide el Comité (art. 17) y depende de que la lista sea transversal. Su área seguiría decidiendo las reglas."
+        ayuda: "Solo registra su interés. Lo decide el Comité (arts. 12 y 17). Según el art. 17, la DGETD es preferentemente custodio cuando la lista es transversal, se integra en la arquitectura institucional de datos o se administra mediante la Plataforma. Su área seguiría decidiendo las reglas."
         tipo: opcion
         valores: ["Sí", "No", "No sé"]
         obligatorio: no
@@ -165,7 +166,7 @@ secciones:
       - id: C3
         nombre: "Clasificación (tipo de lista)"
         pregunta: "¿A qué se parece más su lista?"
-        ayuda: "Elija la opción más parecida. No se preocupe por acertar: la DGETD revisa su respuesta y propone la clasificación definitiva (art. 5)."
+        ayuda: "Elija la opción más parecida. No se preocupe por acertar: la DGETD revisa su respuesta y registra una clasificación propuesta, que se formaliza cuando se aprueba el catálogo. Las cuatro opciones son los tipos del art. 5."
         tipo: opcion
         valores_ref: clasificacion
         obligatorio: por_confirmar
@@ -198,7 +199,7 @@ secciones:
         pregunta: "¿Su lista maneja versiones numeradas (por ejemplo, v2.3)?"
         ayuda: "Lo más común es que no. Si responde «No», la DGETD registra la versión inicial 1.0 con la fecha de su registro. No tiene que crear un esquema de versiones."
         tipo: opcion
-        valores: ["Sí (indique cuál es la actual)", "No"]
+        valores: ["Sí (indique cuál es la actual)", "No", "Por confirmar"]
         obligatorio: por_confirmar
         quien: ambos
         art8: "IX"
@@ -218,7 +219,7 @@ secciones:
       - id: E1
         nombre: "Nivel de acceso"
         pregunta: "¿Quién debería poder consultar esta lista?"
-        ayuda: "Registrar no publica su lista. Si contiene información reservada o confidencial, la revisan la DGETD y la unidad de transparencia competente, y se aplican controles de acceso (art. 23). Si duda, elija la opción más restrictiva."
+        ayuda: "Registrar no publica su lista. Si contiene información reservada o confidencial, márquela como «Clasificada»: la clasificación se rige por la normativa de transparencia y la DGETD la usa para proteger la ficha y aplicar controles de acceso (art. 23). Si duda, elija la opción más restrictiva."
         tipo: opcion
         valores_ref: nivel_acceso
         obligatorio: por_confirmar
@@ -236,7 +237,7 @@ secciones:
 
   - id: F
     titulo: "Para entender mejor su lista (opcional)"
-    nota: "Estas preguntas no son obligatorias. Nos ayudan a preparar el plan de adecuación (Transitorio QUINTO) sin volver a pedirle información después."
+    nota: "Estas preguntas no son obligatorias. Nos ayudan a preparar el plan de adecuación (Transitorio QUINTO). La DGETD no le volverá a pedir lo que ya entregó."
     campos:
       - id: F1
         nombre: "Dónde vive la lista"
@@ -323,8 +324,9 @@ valores:
     - {valor: "Clasificada", descripcion: "Contiene información reservada o confidencial conforme a la normativa de transparencia."}
     - {valor: "Por confirmar", descripcion: "No estoy seguro."}
   nota_nivel_acceso: >-
-    Valores propuestos por la DGETD. Deben alinearse con el Acuerdo General del OAJ en materia de
-    transparencia, acceso a la información y protección de datos personales, con la unidad de transparencia
+    Valores propuestos por la DGETD. Deben alinearse con el Acuerdo General del Pleno del Órgano de
+    Administración Judicial que establece las disposiciones en materia de transparencia, acceso a la
+    información pública y protección de datos personales (art. 23), con la unidad de transparencia
     competente, antes de la versión 1.0.
 
 # -----------------------------------------------------------------------------
@@ -341,3 +343,16 @@ marcadores:
   titular_dgetd: "[nombre de la persona titular de la DGETD]"
   plazo_ficha_confirmacion: "[plazo por definir según capacidad de la DGETD]"
   plazo_respuesta_dudas: "[plazo por definir según capacidad de la DGETD]"
+  fecha_designacion_enlace: "[fecha por definir]"
+  numero_circular: "[número y fecha por asignar]"
+  firmante_circular: "[nombre y cargo de la persona que firma, por confirmar]"
+  liga_confirmacion_oj: "[liga para confirmar, por definir]"
+  liga_aviso_privacidad: "[liga al aviso de privacidad simplificado, por definir con la unidad de transparencia]"
+  plazo_conservacion: "[plazo de conservación por definir con la unidad de transparencia y el área de archivo]"
+  dominio_institucional: "[dominio institucional]"
+  fecha_plan_adecuacion: "[domingo 14 de febrero de 2027, por confirmar]"
+  fecha_dia_75: "[jueves 31 de diciembre de 2026, por confirmar]"
+  fecha_piloto: "[segunda quincena de noviembre de 2026, por confirmar]"
+  fecha_publicacion_anticipada: "[fines de noviembre de 2026, por confirmar]"
+  fecha_bilaterales: "[primera semana de diciembre de 2026, por confirmar]"
+  sesion_comite: "[fecha de sesión del Comité por confirmar]"

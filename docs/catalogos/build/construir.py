@@ -270,6 +270,16 @@ def incrustar_fuentes(ruta_docx):
     os.replace(tmp, ruta_docx)
 
 
+def filas_enteras(doc):
+    """Evita que una fila de tabla se parta entre dos páginas (w:cantSplit)."""
+    for fila in doc.element.body.iter(qn("w:tr")):
+        trPr = fila.find(qn("w:trPr"))
+        if trPr is None:
+            trPr = OxmlElement("w:trPr"); fila.insert(0, trPr)
+        if trPr.find(qn("w:cantSplit")) is None:
+            trPr.insert(0, OxmlElement("w:cantSplit"))
+
+
 def construir(ruta_md, pdf=False):
     meta = leer_front_matter(ruta_md)
     base = os.path.splitext(os.path.basename(ruta_md))[0]
@@ -284,6 +294,7 @@ def construir(ruta_md, pdf=False):
 
     doc = Document(destino)
     portada(doc, meta)
+    filas_enteras(doc)
     preparar_secciones(doc, meta)
     propiedades(doc, meta)
     doc.save(destino)
