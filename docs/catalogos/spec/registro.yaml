@@ -1,0 +1,343 @@
+# Especificación única del registro de catálogos existentes (Transitorio CUARTO)
+# Fuente de verdad para F-CAT-01 (Word y Excel), el formulario en línea, la lista de SharePoint,
+# PR-CAT-04, ET-CAT-01 (capítulos de ficha y valores permitidos), la guía y la circular.
+# Si algo cambia aquí, se reconstruyen todas las piezas.
+
+version: "0.1"
+estatus: Borrador para revisión
+fundamento:
+  - "Lineamientos Generales de Catálogos Institucionales (LGCI), Transitorio CUARTO"
+  - "LGCI, art. 8 (metadatos obligatorios)"
+  - "LGCI, art. 12 (el Comité formaliza propietario y custodio al aprobar)"
+  - "LGCI, art. 5 (clasificación; estratégico u operativo lo determina el Comité a propuesta de la DGETD)"
+
+# -----------------------------------------------------------------------------
+# Claves y folios
+# -----------------------------------------------------------------------------
+claves:
+  catalogo:
+    formato: "CAT-NNNN"
+    ejemplo: "CAT-0042"
+    regla: >-
+      Correlativo de 4 dígitos, asignado por la DGETD al recibir el registro. No contiene siglas de área,
+      fechas, materias ni ningún otro significado (mismo criterio de neutralidad que el art. 7 fr. I c).
+      Nunca se reutiliza ni cambia, aunque el catálogo cambie de nombre, de área o se retire.
+      Si se agotan 4 dígitos se pasa a 5 (CAT-10000) sin renumerar.
+    fundamento: "LGCI art. 8 fr. I; art. 7 fr. I a)–c) por analogía; art. 25 fr. I"
+  folio_registro:
+    formato: "RC-AAAA-NNNN"
+    ejemplo: "RC-2027-0118"
+    regla: >-
+      Identifica el trámite de registro (no al catálogo). Año de recepción y correlativo anual.
+      Un catálogo conserva su clave CAT aunque tenga varios folios (por ejemplo, una corrección).
+
+# -----------------------------------------------------------------------------
+# Estatus
+# -----------------------------------------------------------------------------
+estatus_registro:   # del trámite de registro
+  - {valor: "Recibido", descripcion: "Llegó el registro; se envió acuse con folio y clave."}
+  - {valor: "En revisión", descripcion: "La DGETD revisa, prellena lo que conoce y, si falta algo, contacta al enlace."}
+  - {valor: "Ficha enviada", descripcion: "La DGETD envió la ficha prellenada para que el área la confirme."}
+  - {valor: "Confirmado", descripcion: "El área confirmó la ficha. El registro está completo."}
+
+estatus_inventario:  # del catálogo dentro del inventario institucional (art. 14 fr. I)
+  - {valor: "Registrado", descripcion: "Está en el inventario por el registro del Transitorio CUARTO. Aún no es catálogo autorizado."}
+  - {valor: "En dictamen", descripcion: "La DGETD analiza si cumple los criterios del art. 6 y prepara dictamen."}
+  - {valor: "Autorizado", descripcion: "Aprobado por el Comité y publicado en la Plataforma (art. 4 fr. IV)."}
+  - {valor: "En adecuación", descripcion: "Autorizado o en proceso, con ajustes pendientes conforme al plan del Transitorio QUINTO."}
+  - {valor: "Uso local", descripcion: "No cumple los criterios del art. 6 para ser institucional. Queda documentado y lo sigue llevando el área."}
+  - {valor: "Duplicado", descripcion: "Repite otro catálogo registrado; se indica la clave del catálogo con el que coincide."}
+  - {valor: "Retirado", descripcion: "Se dejó de usar de forma controlada. Su clave no se reutiliza."}
+
+# -----------------------------------------------------------------------------
+# Reglas de llenado comunes
+# -----------------------------------------------------------------------------
+reglas:
+  - "Un registro por cada lista. Un área con varias listas hace varios registros (o usa la plantilla de Excel)."
+  - "Ante la duda, regístrela. La DGETD revisa después si es catálogo institucional (art. 6). Registrar no es autorizar."
+  - "Se piden datos sobre la lista (metadatos), no su contenido. No se adjunta la lista ni datos personales."
+  - "Propietario, custodio y clasificación son propuestas. Los formaliza el Comité al aprobar el catálogo (art. 12)."
+  - "«Por confirmar» es una respuesta válida en los campos que lo permiten. La DGETD ayuda a completarlos."
+  - "El registro se tiene por presentado con el área, el nombre y la descripción. Los demás campos pueden ir «por confirmar»; el registro queda completo cuando el área confirma la ficha."
+  - "Registrar no publica la lista, no cambia quién la administra ni modifica ningún sistema."
+
+# -----------------------------------------------------------------------------
+# Campos
+#   art8: fracción del art. 8 que cubre (null si no es metadato del art. 8)
+#   quien: area | dgetd | ambos
+#   obligatorio: si | no | por_confirmar (obligatorio pero acepta «por confirmar»)
+#   tipo: texto | texto_largo | opcion | opciones_multiples | area | persona | fecha_mes | si_no
+# -----------------------------------------------------------------------------
+secciones:
+  - id: A
+    titulo: "Quién registra"
+    campos:
+      - id: A1
+        nombre: "Área que registra"
+        pregunta: "¿Qué área o qué órgano jurisdiccional registra esta lista?"
+        ayuda: "Elíjala de la lista oficial de áreas y órganos. No la escriba a mano: así evitamos que la misma área aparezca escrita de varias formas."
+        tipo: area
+        obligatorio: si
+        quien: area
+        art8: null
+      - id: A2
+        nombre: "Persona enlace"
+        pregunta: "¿Quién es la persona de contacto para este registro?"
+        ayuda: "Nombre completo, puesto, correo institucional y extensión. Es a quien llamaremos si tenemos dudas."
+        tipo: persona
+        obligatorio: si
+        quien: area
+        art8: null
+      - id: A3
+        nombre: "Persona titular que valida"
+        pregunta: "¿Qué persona titular del área conoce y respalda este registro?"
+        ayuda: "Nombre y puesto. Recibe copia del acuse."
+        tipo: persona
+        obligatorio: si
+        quien: area
+        art8: null
+
+  - id: B
+    titulo: "Su lista"
+    campos:
+      - id: B1
+        nombre: "Identificador del catálogo"
+        pregunta: "No tiene que responder: la DGETD asigna la clave de su lista al recibir el registro."
+        ayuda: "La clave tiene la forma CAT-0042. Es un número sin significado que no cambia aunque su área o la lista cambien de nombre. Llega en el acuse."
+        tipo: texto
+        obligatorio: no
+        quien: dgetd
+        art8: "I"
+      - id: B1b
+        nombre: "Clave interna actual"
+        pregunta: "(Opcional) ¿Su lista ya tiene una clave o código interno? Escríbalo aquí."
+        ayuda: "Nos sirve para relacionar la clave nueva con la que ya usan."
+        tipo: texto
+        obligatorio: no
+        quien: area
+        art8: null
+      - id: B2
+        nombre: "Nombre oficial"
+        pregunta: "¿Cómo se llama esta lista? Escriba el nombre completo, sin siglas."
+        ayuda: "Ejemplo: «Catálogo de inmuebles del OAJ». Si en su área le dicen de otra forma («el Excel de inmuebles»), escríbalo entre paréntesis. Si no tiene nombre formal, propóngale uno."
+        tipo: texto
+        obligatorio: si
+        quien: area
+        art8: "II"
+      - id: B3
+        nombre: "Descripción y propósito"
+        pregunta: "¿Qué contiene esta lista y para qué la usan?"
+        ayuda: "En dos a cuatro oraciones, sin tecnicismos: de qué es la lista y qué trámite, reporte o decisión depende de ella. Ejemplo: «Lista de los inmuebles que ocupa el OAJ, con domicilio y uso. Se usa para programar mantenimiento y para ubicar órganos en los reportes estadísticos»."
+        tipo: texto_largo
+        obligatorio: si
+        quien: area
+        art8: "III"
+
+  - id: C
+    titulo: "Quién decide y quién la mantiene"
+    nota: "Lo que anote aquí son propuestas. El Comité formaliza al propietario y al custodio cuando aprueba el catálogo (art. 12)."
+    campos:
+      - id: C1
+        nombre: "Propietario propuesto"
+        pregunta: "¿Qué área decide qué entra y qué sale de esta lista, y con qué reglas?"
+        ayuda: "Es el área con autoridad sobre el contenido, aunque no sea la que captura. Viene marcada su propia área; cámbiela si decide otra. Si el contenido deriva de la función jurisdiccional, el propietario es el área administrativa competente, que recaba la opinión de los órganos jurisdiccionales involucrados (art. 4 fr. XVII). En los Lineamientos se llama «propietario»."
+        tipo: area
+        obligatorio: por_confirmar
+        quien: area
+        art8: "IV"
+      - id: C2
+        nombre: "Custodio propuesto"
+        pregunta: "¿Qué área mantiene la lista al día en la práctica: da de alta, corrige y da de baja?"
+        ayuda: "Indique el área y una persona de contacto. En los Lineamientos se llama «custodio»."
+        tipo: area
+        obligatorio: por_confirmar
+        quien: area
+        art8: "V"
+      - id: C2b
+        nombre: "Preferencia de custodia"
+        pregunta: "(Opcional) ¿Le interesaría que la DGETD se encargue del mantenimiento operativo de esta lista?"
+        ayuda: "Solo registra su interés. Lo decide el Comité (art. 17) y depende de que la lista sea transversal. Su área seguiría decidiendo las reglas."
+        tipo: opcion
+        valores: ["Sí", "No", "No sé"]
+        obligatorio: no
+        quien: area
+        art8: null
+      - id: C3
+        nombre: "Clasificación (tipo de lista)"
+        pregunta: "¿A qué se parece más su lista?"
+        ayuda: "Elija la opción más parecida. No se preocupe por acertar: la DGETD revisa su respuesta y propone la clasificación definitiva (art. 5)."
+        tipo: opcion
+        valores_ref: clasificacion
+        obligatorio: por_confirmar
+        quien: ambos
+        art8: "VI"
+
+  - id: D
+    titulo: "Quién la usa y cada cuánto cambia"
+    campos:
+      - id: D1
+        nombre: "Sistemas consumidores"
+        pregunta: "¿Qué sistemas, aplicaciones, archivos o reportes usan esta lista?"
+        ayuda: "Anote los que conozca, uno por línea, dentro y fuera de su área. Incluya hojas de cálculo o tableros de otras áreas que la copian. Lo preguntamos para poder avisarles antes de un cambio de estructura (art. 13). Si no los conoce todos, marque la casilla y la DGETD completa la lista con las áreas de sistemas."
+        tipo: texto_largo
+        casilla: "No conozco todos. Que la DGETD complete la lista."
+        obligatorio: por_confirmar
+        quien: ambos
+        art8: "VII"
+      - id: D2
+        nombre: "Frecuencia de actualización"
+        pregunta: "En la práctica, ¿cada cuánto se agrega, quita o corrige algo en esta lista?"
+        ayuda: "Responda con lo que pasa hoy, no con lo ideal. Si cambia cuando ocurre algo (por ejemplo, cuando se crea o se readscribe un órgano), elija «Cada vez que ocurre un cambio» y diga qué lo dispara."
+        tipo: opcion
+        valores_ref: frecuencia
+        obligatorio: por_confirmar
+        quien: area
+        art8: "VIII"
+      - id: D3
+        nombre: "Versión vigente"
+        pregunta: "¿Su lista maneja versiones numeradas (por ejemplo, v2.3)?"
+        ayuda: "Lo más común es que no. Si responde «No», la DGETD registra la versión inicial 1.0 con la fecha de su registro. No tiene que crear un esquema de versiones."
+        tipo: opcion
+        valores: ["Sí (indique cuál es la actual)", "No"]
+        obligatorio: por_confirmar
+        quien: ambos
+        art8: "IX"
+      - id: D4
+        nombre: "Fecha de última actualización"
+        pregunta: "¿Cuándo fue la última vez que se agregó, quitó o corrigió algo en esta lista?"
+        ayuda: "Basta mes y año aproximados. Si la lista vive en un sistema, marque «Está en un sistema» y la DGETD obtiene la fecha exacta."
+        tipo: fecha_mes
+        casilla: "Está en un sistema; que la DGETD obtenga la fecha."
+        obligatorio: por_confirmar
+        quien: ambos
+        art8: "X"
+
+  - id: E
+    titulo: "Quién puede verla"
+    campos:
+      - id: E1
+        nombre: "Nivel de acceso"
+        pregunta: "¿Quién debería poder consultar esta lista?"
+        ayuda: "Registrar no publica su lista. Si contiene información reservada o confidencial, la revisan la DGETD y la unidad de transparencia competente, y se aplican controles de acceso (art. 23). Si duda, elija la opción más restrictiva."
+        tipo: opcion
+        valores_ref: nivel_acceso
+        obligatorio: por_confirmar
+        quien: area
+        art8: "XI"
+      - id: E2
+        nombre: "Datos personales"
+        pregunta: "¿La lista contiene datos personales, como nombres, RFC, CURP, domicilios particulares o teléfonos?"
+        ayuda: "No necesitamos verlos; solo saber si existen para proteger la lista."
+        tipo: opcion
+        valores: ["Sí", "No", "No sé"]
+        obligatorio: si
+        quien: area
+        art8: "XI"
+
+  - id: F
+    titulo: "Para entender mejor su lista (opcional)"
+    nota: "Estas preguntas no son obligatorias. Nos ayudan a preparar el plan de adecuación (Transitorio QUINTO) sin volver a pedirle información después."
+    campos:
+      - id: F1
+        nombre: "Dónde vive la lista"
+        pregunta: "¿Dónde está hoy la lista?"
+        tipo: opcion
+        valores: ["En un sistema o base de datos", "En una hoja de cálculo en carpeta compartida", "En una hoja de cálculo en el equipo de una persona", "En papel", "Otro"]
+        obligatorio: no
+        quien: area
+        art8: null
+      - id: F2
+        nombre: "Tamaño aproximado"
+        pregunta: "¿Cuántos renglones (elementos) tiene, aproximadamente?"
+        tipo: opcion
+        valores: ["Menos de 50", "De 50 a 500", "De 501 a 5,000", "Más de 5,000", "No sé"]
+        obligatorio: no
+        quien: area
+        art8: null
+      - id: F3
+        nombre: "Clave de cada renglón"
+        pregunta: "¿Cada renglón de la lista tiene una clave?"
+        ayuda: "Por ejemplo, si un juzgado tiene la clave «0901-P-01», esa clave «dice» circuito y materia. Nos sirve para planear la transición a claves que no cambien (art. 7)."
+        tipo: opcion
+        valores: ["Sí, y la clave tiene significado (incluye año, lugar, materia u otro dato)", "Sí, y es un número sin significado", "No tiene clave", "No sé"]
+        obligatorio: no
+        quien: area
+        art8: null
+      - id: F4
+        nombre: "Listas parecidas"
+        pregunta: "¿Sabe de otra área que lleve una lista parecida?"
+        tipo: texto
+        obligatorio: no
+        quien: area
+        art8: null
+      - id: F5
+        nombre: "Problema actual"
+        pregunta: "¿Qué problema le causa hoy esta lista?"
+        ayuda: "Por ejemplo: la recapturan en varios sistemas, otras áreas tienen versiones distintas, depende de una sola persona. Nos ayuda a priorizar."
+        tipo: texto_largo
+        obligatorio: no
+        quien: area
+        art8: null
+
+  - id: G
+    titulo: "Para uso de la DGETD (ficha de confirmación)"
+    nota: "Esta sección la llena la DGETD. El área la revisa y la confirma."
+    campos:
+      - {id: G1, nombre: "Folio de registro", tipo: texto, quien: dgetd, art8: null}
+      - {id: G2, nombre: "Clave de catálogo asignada", tipo: texto, quien: dgetd, art8: "I"}
+      - {id: G3, nombre: "Fecha de recepción", tipo: texto, quien: dgetd, art8: null}
+      - {id: G4, nombre: "Clasificación propuesta (art. 5 fr. I–IV)", tipo: opcion, valores_ref: clasificacion, quien: dgetd, art8: "VI"}
+      - {id: G5, nombre: "Alcance propuesto (estratégico u operativo)", tipo: opcion, valores: ["Estratégico", "Operativo o de alcance acotado", "Por determinar"], quien: dgetd, art8: null, nota: "Lo determina el Comité al aprobar (art. 5)."}
+      - {id: G6, nombre: "Sistemas consumidores detectados por la DGETD", tipo: texto_largo, quien: dgetd, art8: "VII"}
+      - {id: G7, nombre: "Versión inicial registrada", tipo: texto, quien: dgetd, art8: "IX"}
+      - {id: G8, nombre: "Estatus del registro", tipo: opcion, valores_ref: estatus_registro, quien: dgetd, art8: null}
+      - {id: G9, nombre: "Estatus en el inventario", tipo: opcion, valores_ref: estatus_inventario, quien: dgetd, art8: null}
+      - {id: G10, nombre: "Observaciones", tipo: texto_largo, quien: dgetd, art8: null}
+      - {id: G11, nombre: "Confirmación del área (nombre, fecha)", tipo: texto, quien: area, art8: null}
+
+# -----------------------------------------------------------------------------
+# Valores permitidos
+# -----------------------------------------------------------------------------
+valores:
+  clasificacion:
+    - {valor: "Entidades", pregunta: "Una lista de personas, lugares o cosas de la institución", ejemplo: "órganos jurisdiccionales, inmuebles, cargos", art5: "I"}
+    - {valor: "Clasificación", pregunta: "Una lista de opciones para clasificar información", ejemplo: "tipos de documento, sentidos de resolución, entidades federativas", art5: "II"}
+    - {valor: "Parámetros", pregunta: "Valores de configuración que usa un sistema", ejemplo: "plazos, montos, porcentajes, umbrales", art5: "III"}
+    - {valor: "Relación", pregunta: "Una tabla que une dos listas", ejemplo: "qué órgano pertenece a qué circuito", art5: "IV"}
+    - {valor: "Por confirmar", pregunta: "No estoy seguro", ejemplo: "", art5: null}
+  frecuencia:
+    - "Cada vez que ocurre un cambio"
+    - "Diaria"
+    - "Semanal"
+    - "Mensual"
+    - "Trimestral"
+    - "Semestral"
+    - "Anual"
+    - "Casi nunca cambia"
+    - "No hay una periodicidad definida"
+    - "Por confirmar"
+  nivel_acceso:
+    - {valor: "Pública", descripcion: "Cualquier persona puede consultarla."}
+    - {valor: "Interna", descripcion: "Todo el personal del OAJ puede consultarla."}
+    - {valor: "Restringida", descripcion: "Solo ciertas áreas o personas pueden consultarla."}
+    - {valor: "Clasificada", descripcion: "Contiene información reservada o confidencial conforme a la normativa de transparencia."}
+    - {valor: "Por confirmar", descripcion: "No estoy seguro."}
+  nota_nivel_acceso: >-
+    Valores propuestos por la DGETD. Deben alinearse con el Acuerdo General del OAJ en materia de
+    transparencia, acceso a la información y protección de datos personales, con la unidad de transparencia
+    competente, antes de la versión 1.0.
+
+# -----------------------------------------------------------------------------
+# Marcadores por confirmar (se resaltan con el estilo «Marcador»)
+# -----------------------------------------------------------------------------
+marcadores:
+  fecha_limite_registro: "[viernes 15 de enero de 2027, por confirmar]"
+  fecha_limite_formatos: "[miércoles 16 de diciembre de 2026, por confirmar]"
+  fecha_entrada_vigor: "[fecha de entrada en vigor por confirmar]"
+  contacto_dgetd: "[correo, extensión y horario de la asesoría DGETD]"
+  liga_formulario: "[liga al formulario de registro]"
+  liga_sharepoint: "[liga a la carpeta de SharePoint para plantillas de Excel]"
+  autoridad_emisora: "[autoridad que emite la circular]"
+  titular_dgetd: "[nombre de la persona titular de la DGETD]"
+  plazo_ficha_confirmacion: "[plazo por definir según capacidad de la DGETD]"
+  plazo_respuesta_dudas: "[plazo por definir según capacidad de la DGETD]"

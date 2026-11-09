@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<title>¿Su área lleva una lista que otros también usan? · Registro de catálogos</title>
+<meta name="author" content="Dirección General de Estrategia y Transformación Digital (DGETD)">
+<meta name="description" content="Hoja de valor del registro de catálogos existentes (Transitorio CUARTO de los Lineamientos Generales de Catálogos Institucionales).">
+<style>
+  @page { size: A4; margin: 0; }
+  :root {
+    --ink: #161A1D; --ink-2: #575F71; --line: #E6EAEF; --panel: #F8FAFC;
+    --mint: #49B6B2; --mint-2: #78C9C6; --mint-tint: #E8F5F4; --mint-ink: #2A7370;
+    --amber-tint: #FBF1DA; --amber-ink: #8A5D06; --coral-ink: #C42F3D; --coral-tint: #FDECEE;
+    --serif: "Source Serif 4", Georgia, serif; --sans: "Source Sans 3", "Segoe UI", sans-serif; --mono: "Source Code Pro", Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #fff; color: var(--ink); font-family: var(--sans); }
+  .page { width: 210mm; height: 297mm; position: relative; overflow: hidden; display: grid; grid-template-rows: auto auto 1fr auto; page-break-after: always; break-after: page; }
+  .page:last-child { page-break-after: auto; break-after: auto; }
+  .top { display: flex; justify-content: space-between; align-items: center; padding: 11mm 16mm 0; font-size: 8.5pt; color: var(--ink-2); }
+  .brand { display: flex; align-items: center; gap: 2.4mm; font-weight: 700; color: var(--ink); font-size: 9pt; }
+  .brand i { width: 5mm; height: 5mm; border-radius: 1mm; background: var(--mint); display: inline-block; }
+  .tag { font-family: var(--mono); font-size: 7.5pt; letter-spacing: .08em; text-transform: uppercase; color: var(--mint-ink); }
+  .ph { font-family: var(--sans); font-weight: 700; color: var(--amber-ink); background: var(--amber-tint); padding: .3mm 1.4mm; border-radius: 1mm; }
+
+  /* Portada */
+  .hero { padding: 13mm 16mm 9mm; display: grid; grid-template-columns: 1.25fr 1fr; gap: 10mm; align-items: end; }
+  .hero h1 { font-family: var(--serif); font-weight: 700; font-size: 29pt; line-height: 1.06; margin: 3mm 0 0; letter-spacing: -.01em; }
+  .hero h1 em { font-style: normal; color: var(--mint-ink); }
+  .hero p.lede { font-size: 11.5pt; line-height: 1.45; color: var(--ink-2); margin: 5mm 0 0; }
+  .variants { border: 0.3mm solid var(--line); border-radius: 1.5mm; overflow: hidden; font-size: 8.5pt; }
+  .variants .row { display: grid; grid-template-columns: 21mm 1fr; gap: 3mm; padding: 2.3mm 3.2mm; border-bottom: 0.3mm solid var(--line); align-items: center; }
+  .variants .row:last-child { border-bottom: 0; background: var(--mint-tint); }
+  .variants .sys { font-family: var(--mono); font-size: 6.6pt; letter-spacing: .05em; text-transform: uppercase; color: var(--ink-2); }
+  .variants .val { font-family: var(--mono); font-size: 8pt; }
+  .variants .row:last-child .val { font-family: var(--sans); font-weight: 700; font-size: 8.6pt; }
+  .variants figcaption { font-size: 7.2pt; color: var(--ink-2); padding: 2mm 3.2mm; background: var(--panel); border-top: 0.3mm solid var(--line); }
+  figure { margin: 0; }
+
+  .body { padding: 0 16mm; display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; align-content: start; }
+  .box { border: 0.3mm solid var(--line); border-radius: 1.5mm; padding: 5mm 5.5mm; }
+  .box h2 { font-family: var(--serif); font-weight: 700; font-size: 13pt; margin: 0 0 2.5mm; }
+  .box ul { margin: 0; padding-left: 4.5mm; font-size: 10pt; line-height: 1.45; display: grid; gap: 1.2mm; }
+  .box.yes { border-top: 1.2mm solid var(--mint); }
+  .box.no { border-top: 1.2mm solid var(--ink-2); }
+  .steps { grid-column: 1 / -1; background: var(--mint-tint); border-radius: 1.5mm; padding: 5.5mm 5.5mm 6mm; }
+  .steps h2 { font-family: var(--serif); font-weight: 700; font-size: 13pt; margin: 0 0 4mm; }
+  .steps ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 4mm; counter-reset: s; }
+  .steps li { counter-increment: s; font-size: 9.3pt; line-height: 1.4; color: var(--ink-2); display: grid; gap: 1mm; align-content: start; }
+  .steps li::before { content: counter(s); font-family: var(--mono); font-weight: 500; color: var(--ink); width: 7mm; height: 7mm; border-radius: 50%; border: 0.5mm solid var(--mint-ink); display: grid; place-items: center; font-size: 9pt; background: #fff; }
+  .steps li b { color: var(--ink); font-size: 10.3pt; }
+  .why { grid-column: 1 / -1; padding: 1mm 0 0; }
+  .why h2 { font-family: var(--serif); font-weight: 700; font-size: 13pt; margin: 0 0 2.5mm; }
+  .why ul { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 4mm; }
+  .why li { border-left: 0.9mm solid var(--mint); padding: .5mm 0 .5mm 3.2mm; font-size: 9.6pt; line-height: 1.42; }
+  .foot { margin-top: auto; padding: 5mm 16mm 9mm; background: var(--panel); border-top: 0.3mm solid var(--line); display: flex; justify-content: space-between; gap: 6mm; align-items: center; font-size: 9pt; color: var(--ink-2); flex-wrap: wrap; }
+  .foot strong { color: var(--ink); }
+  .deadline { font-size: 11pt; color: var(--ink); font-weight: 700; }
+
+  /* Reverso */
+  .p2 .head { padding: 12mm 16mm 6mm; }
+  .p2 h1 { font-family: var(--serif); font-weight: 700; font-size: 20pt; margin: 2.5mm 0 0; line-height: 1.12; }
+  .p2 .grid { padding: 0 16mm; display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; align-content: start; }
+  .col3 { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, 1fr); border: 0.3mm solid var(--line); border-radius: 1.5mm; overflow: hidden; }
+  .col3 section { padding: 4.5mm 4.5mm 5mm; display: grid; gap: 2mm; align-content: start; }
+  .col3 section + section { border-left: 0.3mm solid var(--line); }
+  .col3 h3 { font-family: var(--serif); font-size: 11pt; margin: 0; line-height: 1.2; }
+  .col3 .k { font-family: var(--mono); font-size: 6.8pt; letter-spacing: .07em; text-transform: uppercase; }
+  .col3 ul { margin: 0; padding-left: 4mm; font-size: 8.8pt; line-height: 1.4; display: grid; gap: 1mm; }
+  .col3 .ref { color: var(--ink-2); font-size: 7.6pt; }
+  .s1 { background: var(--mint-tint); } .s1 .k { color: var(--mint-ink); }
+  .s2 { background: var(--amber-tint); } .s2 .k { color: var(--amber-ink); }
+  .s3 { background: #EEF5EA; } .s3 .k { color: #4A7A3C; }
+  .faq { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 3.5mm 6mm; }
+  .faq h2 { grid-column: 1 / -1; font-family: var(--serif); font-size: 13pt; margin: 2mm 0 0; }
+  .faq div { display: grid; gap: 1mm; }
+  .faq h3 { font-size: 10pt; margin: 0; font-weight: 700; }
+  .faq p { margin: 0; font-size: 9.2pt; line-height: 1.42; color: var(--ink-2); }
+  .oj { grid-column: 1 / -1; border-radius: 1.5mm; border: 0.3mm solid var(--line); border-left: 1.2mm solid var(--ink); padding: 4mm 5mm; font-size: 9.4pt; line-height: 1.45; }
+  .oj b { font-family: var(--serif); font-size: 10.5pt; }
+  .src { padding: 3mm 16mm 0; font-size: 7.2pt; color: var(--ink-2); line-height: 1.4; }
+</style>
+</head>
+<body>
+
+<article class="page" aria-label="Página 1">
+  <header class="top">
+    <span class="brand"><i aria-hidden="true"></i>Órgano de Administración Judicial · DGETD</span>
+    <span class="tag">Registro de catálogos · Transitorio CUARTO</span>
+  </header>
+
+  <section class="hero">
+    <div>
+      <span class="tag">Para su área · 1 hoja</span>
+      <h1>¿Su área lleva una lista que <em>otros también usan</em>?</h1>
+      <p class="lede">Órganos, cargos, inmuebles, materias, tipos de documento. Si otra área o un sistema consulta o copia esa lista, regístrela. Le pedimos una ficha con datos sobre la lista. No le pedimos la lista.</p>
+    </div>
+    <figure class="variants" aria-label="Ejemplo ilustrativo de un mismo juzgado escrito de tres formas en tres sistemas">
+      <div class="row"><span class="sys">Sistema A</span><span class="val">Juzgado Primero de Distrito en Materia Penal en la Ciudad de México</span></div>
+      <div class="row"><span class="sys">Sistema B</span><span class="val">Jdo. 1o. Dto. Penal CDMX</span></div>
+      <div class="row"><span class="sys">Hoja de cálculo</span><span class="val">JUZ 1 DIST PEN</span></div>
+      <div class="row"><span class="sys">Una sola lista</span><span class="val">Juzgado Primero de Distrito en Materia Penal en la Ciudad de México</span></div>
+      <figcaption>Ejemplo ilustrativo. Así nacen los reportes que no coinciden entre áreas.</figcaption>
+    </figure>
+  </section>
+
+  <section class="body">
+    <div class="box yes">
+      <h2>Qué le pedimos</h2>
+      <ul>
+        <li>Una ficha por cada lista.</li>
+        <li>11 datos sobre la lista que usted ya conoce: nombre, para qué sirve, quién la mantiene, quién la usa.</li>
+        <li>Si no sabe un dato, márquelo «por confirmar».</li>
+      </ul>
+    </div>
+    <div class="box no">
+      <h2>Qué no le pedimos</h2>
+      <ul>
+        <li>El contenido de la lista.</li>
+        <li>Datos personales.</li>
+        <li>Cambiar sus sistemas o su forma de trabajar.</li>
+      </ul>
+    </div>
+    <div class="steps">
+      <h2>Cómo funciona</h2>
+      <ol>
+        <li><b>Registra</b>En línea, con la plantilla de Excel si son más de 5 listas, o con nosotros por Teams.</li>
+        <li><b>Recibe acuse</b>Con folio y la clave de su lista, por ejemplo CAT-0042.</li>
+        <li><b>Prellenamos</b>Completamos lo que la DGETD ya sabe, como los sistemas que la usan.</li>
+        <li><b>Confirma</b>Revisa su ficha y nos dice si está correcta.</li>
+      </ol>
+    </div>
+    <div class="why">
+      <h2>Por qué vale la pena</h2>
+      <ul>
+        <li>Su lista queda documentada a nombre del área, no de una persona. Si alguien cambia de puesto, no se pierde.</li>
+        <li>Sabremos qué sistemas dependen de su lista y a quién avisar antes de un cambio de estructura.</li>
+        <li>Es el primer paso para que dos áreas dejen de llegar con cifras distintas. No lo resuelve hoy; lo hace posible.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span>Fecha límite: <span class="deadline">viernes 15 de enero de 2027</span> <span class="ph">por confirmar</span></span>
+    <span><strong>Regístrela aquí:</strong> <span class="ph">[liga al formulario]</span></span>
+  </footer>
+</article>
+
+<article class="page p2" aria-label="Página 2">
+  <header class="top">
+    <span class="brand"><i aria-hidden="true"></i>Órgano de Administración Judicial · DGETD</span>
+    <span class="tag">Registro de catálogos · reverso</span>
+  </header>
+  <div class="head">
+    <span class="tag">Sin letra chica</span>
+    <h1>Lo que es obligatorio, lo que es posible y lo que nosotros firmamos</h1>
+  </div>
+  <div class="grid">
+    <div class="col3">
+      <section class="s1">
+        <span class="k">Lo que obligan los Lineamientos</span>
+        <h3>Firme</h3>
+        <ul>
+          <li>Registrar las listas que administra su área. <span class="ref">Transitorio CUARTO</span></li>
+          <li>Se piden datos sobre la lista, no su contenido. <span class="ref">art. 8</span></li>
+          <li>El área propietaria define las reglas de la lista y aprueba sus cambios de fondo. <span class="ref">art. 15</span></li>
+          <li>Antes de un cambio de estructura se avisa a los sistemas que la usan. <span class="ref">art. 13</span></li>
+          <li>La DGETD da asesoría técnica. <span class="ref">art. 14 fr. V</span></li>
+        </ul>
+      </section>
+      <section class="s2">
+        <span class="k">Lo que permiten, sin asegurarlo</span>
+        <h3>Posible</h3>
+        <ul>
+          <li>Un trámite más corto para listas pequeñas, si lo aprueba el Comité. <span class="ref">art. 5</span></li>
+          <li>Que la DGETD mantenga las listas transversales; lo decide el Comité. <span class="ref">art. 17</span></li>
+          <li>Medir la calidad de forma automática, sin reportes a mano. <span class="ref">art. 19</span></li>
+        </ul>
+      </section>
+      <section class="s3">
+        <span class="k">Lo que la DGETD firma</span>
+        <h3>Compromiso</h3>
+        <ul>
+          <li>Acuse con folio y fecha.</li>
+          <li>Clave de su lista asignada por nosotros.</li>
+          <li>Prellenado de lo que ya sabemos.</li>
+          <li>Una persona de contacto con nombre.</li>
+          <li>No volver a pedirle lo que ya nos dio.</li>
+          <li>Correcciones sin costo hasta el dictamen.</li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="faq">
+      <h2>Lo que más nos preguntan</h2>
+      <div><h3>¿Me van a quitar la lista?</h3><p>No. Registrar no cambia quién la administra. Lo que anote sobre quién decide y quién la mantiene es una propuesta que formaliza el Comité.</p></div>
+      <div><h3>¿Se va a publicar?</h3><p>Registrar no publica nada. Si la lista tiene información reservada o confidencial, se protege con controles de acceso.</p></div>
+      <div><h3>No sé qué sistemas la usan</h3><p>Anote los que conozca y marque la casilla para que la DGETD complete la lista con las áreas de sistemas.</p></div>
+      <div><h3>¿Y si me equivoco?</h3><p>El registro no es una auditoría. Puede corregir sin costo hasta el dictamen.</p></div>
+      <div><h3>No sé si mi lista «cuenta»</h3><p>Ante la duda, regístrela. Después revisamos con usted si es catálogo institucional o de uso local.</p></div>
+      <div><h3>Esto ya lo hicimos con el CJF</h3><p>Si existe información previa verificable, la usaremos para prellenar. Al cierre recibirá su ficha y el estatus de cada lista.</p></div>
+    </div>
+
+    <div class="oj"><b>Órganos jurisdiccionales.</b> Esto no toca la función jurisdiccional ni la independencia judicial. No se piden expedientes, contenidos ni datos personales. Si su órgano no lleva listas propias, no tiene que hacer nada más.</div>
+  </div>
+
+  <p class="src">Fundamento: Lineamientos Generales de Catálogos Institucionales, artículos 5, 8, 12, 13, 14, 15, 17, 19 y Transitorio CUARTO. Las fechas están por confirmar. Los ejemplos son ilustrativos.</p>
+  <footer class="foot">
+    <span><strong>¿Dudas?</strong> Asesoría DGETD · <span class="ph">[correo, extensión y horario]</span></span>
+    <span>Guía completa, formato y plantilla: <span class="ph">[liga al kit]</span></span>
+  </footer>
+</article>
+</body>
+</html>
