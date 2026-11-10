@@ -32,7 +32,7 @@ Lo leen todas las personas (y agentes) que redactan piezas del paquete. Si algo 
 
 Ola 1 (este paquete): ET-CAT-01 (capítulos del registro completos; el resto como estructura), PR-CAT-04, F-CAT-01 (Word y Excel), circular, guía de registro, lista de verificación para órganos jurisdiccionales y la especificación de implementación del formulario.
 
-F-CAT-01 tiene además una versión imprimible diseñada (`fuentes/F-CAT-01-imprimible.html` → `entregables/F-CAT-01-imprimible.pdf`) que se genera desde `registro.yaml` y no se edita a mano: `cd docs/catalogos/build && python3 formato_html.py [--png]`. Sirve para preparar respuestas o para el registro acompañado; no es medio de captura.
+F-CAT-01 tiene además una versión imprimible diseñada (`fuentes/F-CAT-01-imprimible.html` → `entregables/F-CAT-01-imprimible.pdf`) que se genera desde `registro.yaml` y no se edita a mano: `cd docs/catalogos/build && python3 formato_html.py [--png]`. Sirve para preparar respuestas o para el registro acompañado; no es medio de captura. Las ayudas cortas de papel están en la tabla `AYUDA_CORTA` del script: si cambia una ayuda en `registro.yaml`, se revisa esa tabla. El script también comprueba la página del recuadro para órganos jurisdiccionales y corrige los títulos de los marcadores del PDF.
 
 Cuando un documento cite otro que todavía no existe, se cita por su código y nombre igual.
 

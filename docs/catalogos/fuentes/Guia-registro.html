@@ -9,6 +9,12 @@
 <meta name="pdf-pie" content="Borrador para revisión · no vigente">
 <link rel="stylesheet" href="diseno/kit.css">
 <style>
+  /* ---------- Generales de la pieza ---------- */
+  /* pre-wrap conserva el espacio al final de cada renglón: sin él, Chromium pega las palabras en los marcadores del PDF */
+  h1, h2, h3, h4 { white-space: pre-wrap; }
+  .termino { font-size: max(var(--t-min), .78em); }
+  a { color: inherit; text-decoration: none; }
+
   /* ---------- Portada (página fija) ---------- */
   .portada { align-items: center; padding-bottom: 7mm; }
   .portada h1 { font-size: 30pt; }
@@ -23,7 +29,7 @@
   .acuse figcaption { font-size: var(--t-min); color: var(--ink-2); padding: 2mm 3.6mm; background: var(--panel); border-top: var(--borde); line-height: 1.35; }
 
   .esencial { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 3.5mm; }
-  .esencial > li { margin: 0; border: var(--borde); border-top: var(--barra) solid var(--mint); border-radius: var(--radio); padding: 4mm 4mm 4.2mm; display: grid; gap: 1.6mm; align-content: start; font-size: var(--t-chico); line-height: 1.38; color: var(--ink-2); }
+  .esencial > li { margin: 0; border: var(--borde); border-top: var(--barra) solid var(--mint); border-radius: var(--radio); padding: 3.4mm 3.8mm 3.6mm; display: grid; gap: 1.4mm; align-content: start; font-size: var(--t-chico); line-height: 1.38; color: var(--ink-2); }
   .esencial .ico-insignia { margin-bottom: .8mm; }
   .esencial b { font-family: var(--serif); font-size: 12pt; color: var(--ink); line-height: 1.15; }
   .esencial .ph { display: inline; }
@@ -34,6 +40,10 @@
 
   .indice { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 3mm; counter-reset: ind; }
   .indice > li { margin: 0; counter-increment: ind; border-top: .3mm solid var(--ink); padding-top: 2mm; font-size: var(--t-chico); line-height: 1.25; font-weight: 600; }
+  .indice > li a { display: block; }
+  .indice > li.sin-num { counter-increment: none; }
+  .indice > li.sin-num::before { content: "—" / ""; }
+  .indice .pag { display: block; margin-top: .5mm; font-family: var(--mono); font-weight: 400; font-size: var(--t-min); letter-spacing: .04em; color: var(--ink-2); }
   .indice > li::before { content: counter(ind, decimal-leading-zero); display: block; font-family: var(--mono); font-weight: 500; font-size: var(--t-min); letter-spacing: .08em; color: var(--mint-ink); margin-bottom: 1mm; }
   .version { font-size: var(--t-min); color: var(--ink-2); }
 
@@ -50,12 +60,12 @@
   .arbol { border: var(--borde); border-radius: var(--radio); padding: 4.5mm 5mm 4mm; background: #fff; break-inside: avoid; }
   .arbol-inicio { margin: 0 0 3mm; font-size: var(--t-chico); color: var(--ink-2); display: flex; align-items: center; gap: 2mm; }
   .arbol-inicio .ico { color: var(--mint-ink); }
-  ol.arbol-preguntas { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(0, .72fr); grid-template-rows: auto 8mm auto; column-gap: 8mm; }
+  ol.arbol-preguntas { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(0, .7fr); grid-template-rows: auto 7mm auto; column-gap: 8mm; }
   ol.arbol-preguntas > li { margin: 0; display: grid; grid-row: span 3; grid-template-rows: subgrid; position: relative; }
   .nodo { position: relative; border: .3mm solid var(--line); border-top: var(--barra) solid var(--mint); border-radius: var(--radio); padding: 2.4mm 2.8mm 2.8mm; background: #fff; margin: 0; }
   .nodo .nodo-num { display: block; font-family: var(--mono); font-weight: 500; font-size: var(--t-min); letter-spacing: .08em; text-transform: uppercase; color: var(--mint-ink); }
   .nodo .nodo-q { display: block; font-family: var(--serif); font-weight: 700; font-size: 11pt; line-height: 1.2; margin-top: .8mm; }
-  .nodo .nodo-sub { display: block; font-size: var(--t-nota); color: var(--ink-2); line-height: 1.35; margin-top: 1.2mm; }
+  .nodo .nodo-sub { display: block; font-size: var(--t-chico); color: var(--ink-2); line-height: 1.35; margin-top: 1.2mm; }
   /* flecha «Sí» hacia la derecha, en el hueco entre columnas */
   .si { position: absolute; right: -8mm; width: 8mm; top: 9mm; height: 6mm; text-align: center; font-size: var(--t-nota); font-weight: 700; color: var(--ink); }
   .si::before { content: ""; position: absolute; left: 1mm; right: 2mm; top: 5.6mm; height: .45mm; background: var(--ink-2); }
@@ -65,23 +75,24 @@
   .no-baja::before { content: ""; position: absolute; left: 6mm; top: 0; bottom: 1.8mm; width: .45mm; background: var(--ink-2); }
   .no-baja::after { content: ""; position: absolute; left: calc(6mm - 1.3mm); bottom: 0; border-left: 1.5mm solid transparent; border-right: 1.5mm solid transparent; border-top: 2mm solid var(--ink-2); }
   .no-baja span { position: absolute; left: 8mm; top: 1.6mm; font-size: var(--t-nota); font-weight: 700; color: var(--ink); }
-  .salida { background: var(--panel); border: var(--borde); border-radius: var(--radio); padding: 2.4mm 3mm; font-size: var(--t-nota); line-height: 1.38; color: var(--ink-2); margin: 0; }
+  .salida { background: var(--panel); border: var(--borde); border-radius: var(--radio); padding: 2.4mm 3mm; font-size: var(--t-chico); line-height: 1.38; color: var(--ink-2); margin: 0; }
   .salida b { color: var(--ink); }
   ol.arbol-preguntas > li.resultado { grid-column: 4; grid-row: 1 / span 3; display: block; min-width: 0; }
   .arbol-final { height: 100%; background: var(--mint-tint); border: .5mm solid var(--mint); border-radius: var(--radio); padding: 3mm 2.6mm; display: flex; flex-direction: column; justify-content: center; gap: 1.5mm; margin: 0; }
-  .arbol-final small { font-size: var(--t-nota); color: var(--ink-2); line-height: 1.3; }
+  .arbol-final small { font-size: var(--t-chico); color: var(--ink-2); line-height: 1.3; }
   .arbol-final b { display: block; font-family: var(--serif); font-size: 13pt; color: var(--mint-ink); line-height: 1.1; }
   .arbol-final span { font-size: var(--t-chico); line-height: 1.3; }
-  .arbol-pie { display: flex; gap: 2.2mm; align-items: flex-start; margin-top: 3.5mm; padding-top: 3mm; border-top: var(--borde); font-size: var(--t-nota); color: var(--ink-2); line-height: 1.4; }
+  .arbol-pie { display: flex; gap: 2.2mm; align-items: flex-start; margin-top: 3.5mm; padding-top: 3mm; border-top: var(--borde); font-size: var(--t-chico); color: var(--ink-2); line-height: 1.4; }
   .arbol-pie .ico { color: var(--mint-ink); width: 4.2mm; height: 4.2mm; margin-top: .2mm; }
 
   /* ---------- Pedimos / no pedimos ---------- */
   .pide { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border: var(--borde); border-radius: var(--radio); overflow: hidden; break-inside: avoid; }
   .pide > * + * { margin-top: 0 !important; }
-  .pide > div { padding: 4.5mm 5.5mm 5mm; }
+  .pide > div { padding: 3.6mm 5mm 4mm; }
+  .pide li { font-size: var(--t-chico); line-height: 1.4; }
   .pide-si { border-top: var(--barra) solid var(--mint); }
   .pide-no { border-top: var(--barra) solid var(--ink-2); border-left: var(--borde); background: var(--panel); }
-  .pide h3 { font-size: 13pt; margin-bottom: 2.5mm; }
+  .pide h3 { font-size: 12pt; margin-bottom: 2mm; }
   .pide h3 .ico { color: var(--mint-ink); margin-right: 1.8mm; vertical-align: -.16em; }
   .pide-no h3 .ico { color: var(--ink-2); }
   .pide ul { display: grid; gap: 1.2mm; } .pide li + li { margin-top: 0; }
@@ -101,11 +112,12 @@
   .nota-linea { display: grid; grid-template-columns: auto 1fr; gap: 2.4mm; font-size: var(--t-chico); color: var(--ink-2); line-height: 1.4; }
   .nota-linea .ico { color: var(--mint-ink); width: 5mm; height: 5mm; }
   .nota-linea b { color: var(--ink); }
-  .pendiente-linea { margin-top: 2.5mm !important; padding-top: 2.5mm; border-top: var(--borde); }
+  .pendiente-linea { margin-top: 2.2mm !important; padding: .4mm 0 .4mm 3mm; border-left: .9mm solid var(--amber); }
+  .tres-datos p.pendiente-linea { color: var(--ink); font-size: var(--t-chico); }
   .pendiente-linea .estado { margin-right: 1mm; }
   .tres-datos { display: grid; grid-template-columns: 30mm minmax(0, 1fr); gap: 6mm; align-items: center; background: var(--panel); border: var(--borde); border-radius: var(--radio); padding: 5.5mm 6mm; break-inside: avoid; }
   .tres-datos .cifra > b { font-size: 36pt; }
-  .tres-datos { padding: 4.5mm 5.5mm; }
+  .tres-datos { padding: 4mm 5.5mm; }
   .tres-datos h3 { font-size: 13pt; margin-bottom: 2.2mm; }
   .tres-datos > div > * + * { margin-top: 0; }
   .tres-datos p { font-size: var(--t-chico); color: var(--ink-2); }
@@ -115,84 +127,93 @@
 
   /* ---------- Preguntas ---------- */
   .leyenda { display: flex; flex-wrap: wrap; gap: 2mm 3mm; align-items: center; font-size: var(--t-nota); color: var(--ink-2); }
-  .seccion-guia { display: grid; grid-template-columns: 9mm minmax(0, 1fr); column-gap: 3.5mm; align-items: center; padding-bottom: 2mm; border-bottom: .6mm solid var(--ink); break-after: avoid; break-inside: avoid; }
-  .seccion-guia .letra { width: 9mm; height: 9mm; border-radius: 50%; background: var(--ink); color: #fff; display: grid; place-items: center; font-family: var(--serif); font-weight: 700; font-size: 13pt; }
+  .seccion-guia { display: grid; grid-template-columns: 9mm minmax(0, 1fr) auto; column-gap: 3.5mm; align-items: center; padding-bottom: 2mm; border-bottom: .3mm solid var(--mint); break-after: avoid; break-inside: avoid; }
+  .seccion-guia .letra { width: 9mm; height: 9mm; border-radius: 50%; background: var(--mint-tint); color: var(--mint-ink); display: grid; place-items: center; font-family: var(--serif); font-weight: 700; font-size: 13pt; }
   .seccion-guia h3 { font-size: 13pt; font-weight: 700; }
   .seccion-guia p { font-size: var(--t-chico); color: var(--ink-2); margin-top: .3mm; line-height: 1.35; }
+  .seccion-guia > .estado { align-self: center; }
+  /* 1 mm arriba en los encabezados que abren página: sin él, Chromium duplica su texto en los marcadores del PDF */
+  .flujo section > .seccion-guia.salto-antes { margin-top: 1mm !important; }
   .flujo section > .seccion-guia { margin-top: 4.2mm; }
   .flujo section > .seccion-guia + .preguntas, .flujo section > .seccion-guia + .opcionales { margin-top: 2.6mm; }
 
   .preguntas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.2mm; }
   .preguntas > * + * { margin-top: 0 !important; }
-  .pq { border: var(--borde); border-radius: var(--radio); background: #fff; padding: 2.6mm 3.6mm 0; display: flex; flex-direction: column; gap: 1.1mm; break-inside: avoid; page-break-inside: avoid; }
-  .pq-meta { display: flex; justify-content: space-between; align-items: center; gap: 2mm; }
+  .pq { border: var(--borde); border-radius: var(--radio); background: #fff; padding: 2.8mm 3.6mm 0; display: flex; flex-direction: column; gap: 1.1mm; break-inside: avoid; page-break-inside: avoid; }
+  .pq > .estado { align-self: flex-start; margin-bottom: .4mm; }
   .pq h4 { font-family: var(--serif); font-weight: 600; font-size: 10.5pt; line-height: 1.2; }
   .pq .para { font-size: var(--t-chico); color: var(--ink-2); line-height: 1.36; }
   .pq .para .ref { margin-left: .6mm; }
-  .pq-pie { margin: auto -3.6mm 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: var(--borde); background: var(--panel); border-radius: 0 0 var(--radio) var(--radio); }
-  .pq-pie > div { padding: 1.4mm 3.6mm 1.8mm; }
-  .pq-pie > div + div { border-left: var(--borde); }
-  .pq-pie dt { font-family: var(--mono); font-weight: 500; font-size: var(--t-min); letter-spacing: .07em; text-transform: uppercase; color: var(--mint-ink); margin-bottom: .3mm; }
-  .pq-pie > div:last-child dt { color: var(--amber-ink); }
-  .pq-pie dd { margin: 0; display: inline; font-size: var(--t-nota); line-height: 1.32; }
-  .pq-pie dt { display: inline; margin-right: 1.4mm; white-space: nowrap; }
-  .pq.dgetd-campo { background: var(--mint-tint); border: .4mm dashed var(--mint-ink); }
-  .pq.dgetd-campo .pq-pie { background: #fff; }
+  .pq .termino, .pq .aviso .termino { font-size: var(--t-min); }
+  .pq-pie { margin: auto -3.6mm 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; border-top: var(--borde); background: var(--panel); border-radius: 0 0 var(--radio) var(--radio); }
+  .pq-pie > * + * { margin-top: 0; }
+  .pq-pie dl { margin: 0; display: grid; grid-template-columns: minmax(0, 1fr); }
+  .pq-pie dl > div { padding: 1.3mm 2mm 1.5mm 3.6mm; }
+  .pq-pie dl > div + div { border-top: var(--borde); }
+  .pq-pie dt { display: inline; margin-right: 1mm; white-space: nowrap; font-weight: 600; font-size: var(--t-nota); color: var(--ink-2); }
+  .pq-pie dt .ico { width: 3.6mm; height: 3.6mm; color: var(--mint-ink); vertical-align: -.17em; margin-right: .8mm; }
+  .pq-pie dd { margin: 0; display: inline; font-size: var(--t-chico); line-height: 1.34; }
+  .cod { font-family: var(--mono); font-weight: 400; font-size: var(--t-min); letter-spacing: .04em; color: var(--ink-2); white-space: nowrap; }
+  .pq-pie > .cod { align-self: end; padding: 0 2.4mm 1.9mm 1mm; }
   .mini-opciones { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2mm; }
-  .mini-opciones > li { margin: 0; font-size: var(--t-min); line-height: 1.28; border: var(--borde); border-radius: 1mm; padding: 1mm 1.8mm; color: var(--ink-2); }
+  .mini-opciones > li { margin: 0; font-size: var(--t-nota); line-height: 1.28; border: var(--borde); border-radius: 1mm; padding: 1mm 1.8mm; color: var(--ink-2); }
   .mini-opciones > li b { display: block; color: var(--ink); font-size: var(--t-nota); }
-  .pq .aviso { font-size: var(--t-nota); color: var(--ink-2); line-height: 1.35; }
+  .pq .aviso { font-size: var(--t-chico); color: var(--ink-2); line-height: 1.35; }
   .preguntas.tres { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .preguntas.tres .pq-pie { grid-template-columns: 1fr; }
-  .preguntas.tres .pq-pie > div + div { border-left: 0; border-top: var(--borde); }
   .pq.ancha { grid-column: 1 / -1; }
+  .pq.ancha .pq-pie dl { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pq.ancha .pq-pie dl > div + div { border-top: 0; border-left: var(--borde); }
   .mini-opciones.cuatro { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  h4.en-linea { display: inline; font: inherit; font-weight: 700; color: var(--ink); }
   ul.tiras { list-style: none; margin: 0; padding: 0; display: grid; gap: 2mm; }
   .flujo section > .preguntas + ul.tiras { margin-top: 2.2mm; }
-  ul.tiras > li { margin: 0; display: grid; grid-template-columns: auto auto minmax(0, 1fr); gap: 2.4mm; align-items: baseline; border: var(--borde); border-radius: var(--radio); padding: 2.2mm 3.6mm; font-size: var(--t-chico); line-height: 1.38; color: var(--ink-2); }
-  ul.tiras > li b { color: var(--ink); }
-  ul.tiras > li i { font-style: normal; font-family: var(--mono); font-size: var(--t-min); letter-spacing: .07em; text-transform: uppercase; color: var(--mint-ink); }
+  ul.tiras > li { margin: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4mm; align-items: baseline; border: var(--borde); border-radius: var(--radio); padding: 2.2mm 3.6mm; font-size: var(--t-chico); line-height: 1.4; color: var(--ink-2); }
+  ul.tiras > li > * + * { margin-top: 0; }
+  ul.tiras > li .estado { margin-right: 1.6mm; vertical-align: .05em; }
   ul.tiras > li.dgetd { background: var(--mint-tint); border: .4mm dashed var(--mint-ink); }
-  .pq.ancha .cols { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 5mm; align-items: start; }
-  .pq.ancha .cols > * + * { margin-top: 0; }
 
   .opcionales { border: var(--borde); border-radius: var(--radio); overflow: hidden; break-inside: avoid; }
   .opcionales ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .opcionales li { margin: 0; display: grid; grid-template-columns: 9mm minmax(0, 1fr); gap: .6mm 2.5mm; padding: 2mm 4mm; border-bottom: var(--borde); align-items: baseline; font-size: var(--t-chico); }
+  .opcionales li { margin: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .6mm 3mm; padding: 2.2mm 4mm; border-bottom: var(--borde); align-items: baseline; font-size: var(--t-chico); }
+  .opcionales li > * + * { margin-top: 0; }
   .opcionales li:nth-child(odd) { border-right: var(--borde); }
-  .opcionales li .ej { grid-column: 2; font-size: var(--t-nota); }
   .opcionales li:nth-last-child(-n+2) { border-bottom: 0; }
-  
-  .opcionales .ref { justify-self: start; }
-  .opcionales .q { font-weight: 600; }
-  .opcionales .ej { color: var(--ink-2); }
-  .opcionales .ej i { font-style: normal; font-family: var(--mono); font-size: var(--t-min); letter-spacing: .06em; text-transform: uppercase; color: var(--mint-ink); margin-right: 1.2mm; }
-  .opcionales .cabeza { background: var(--panel); font-size: var(--t-nota); color: var(--ink-2); }
+  .opcionales li h4 { font-family: var(--sans); font-weight: 600; font-size: var(--t-chico); line-height: 1.3; }
+  .opcionales .ej { grid-column: 1; font-size: var(--t-chico); color: var(--ink-2); line-height: 1.36; }
+  .opcionales .ej .ico { width: 3.6mm; height: 3.6mm; color: var(--mint-ink); vertical-align: -.17em; margin-right: .8mm; }
+  .opcionales .cod { grid-column: 2; grid-row: 1; }
 
   /* ---------- Ficha de ejemplo ---------- */
-  .ficha-ej { border: .4mm solid var(--ink); border-radius: 2mm; overflow: hidden; background: #fff; break-inside: avoid; }
-  .fe-cabeza { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6mm; align-items: center; padding: 3.8mm 5mm; background: var(--ink); color: #fff; }
-  .fe-cabeza .tarjeta-etiqueta { color: #CFE9E7; }
-  .fe-cabeza .fe-nombre { font-family: var(--serif); font-weight: 700; font-size: 15pt; line-height: 1.15; margin-top: 1mm; color: #fff; }
-  .fe-cabeza .fe-alias { font-size: var(--t-chico); color: #DCE1E7; margin-top: .6mm; }
+  .ficha-ej { border: var(--borde); border-top: var(--barra) solid var(--mint); border-radius: 2mm; overflow: hidden; background: #fff; break-inside: avoid; }
+  .fe-cabeza { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6mm; align-items: center; padding: 3.8mm 5mm; background: var(--mint-tint); color: var(--ink); }
+  .fe-cabeza .tarjeta-etiqueta { color: var(--mint-ink); }
+  .fe-cabeza .fe-nombre { font-family: var(--serif); font-weight: 700; font-size: 15pt; line-height: 1.15; margin-top: 1mm; color: var(--ink); }
+  .fe-cabeza .fe-alias { font-size: var(--t-chico); color: var(--ink-2); margin-top: .6mm; }
   .fe-claves { margin: 0; display: grid; grid-template-columns: auto auto; gap: 1.4mm 3mm; align-items: center; font-size: var(--t-chico); }
-  .fe-claves dt { font-family: var(--mono); font-size: var(--t-min); letter-spacing: .06em; text-transform: uppercase; color: #CFE9E7; text-align: right; }
+  .fe-claves dt { font-family: var(--mono); font-size: var(--t-min); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); text-align: right; }
   .fe-claves dd { margin: 0; }
   .fe-claves .clave { background: #fff; }
-  .fe-cuerpo { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .fe-grupo { padding: 2.6mm 4mm 2.8mm; border-bottom: var(--borde); }
-  .fe-grupo:not(:nth-child(3n)) { border-right: var(--borde); }
-  .fe-grupo:nth-last-child(-n+3) { border-bottom: 0; }
-  .fe-grupo-titulo { display: flex; align-items: center; gap: 2mm; font-family: var(--mono); font-weight: 500; font-size: var(--t-min); letter-spacing: .07em; text-transform: uppercase; color: var(--mint-ink); margin: 0 0 1.4mm; }
-  .fe-grupo-titulo .l { width: 4.6mm; height: 4.6mm; border-radius: 50%; background: var(--mint-tint); display: grid; place-items: center; font-size: var(--t-min); color: var(--mint-ink); }
-  .fe-grupo dl { margin: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; font-size: var(--t-chico); line-height: 1.35; }
+  .fe-cuerpo { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .92fr) minmax(0, 1.15fr); grid-template-areas: "a b c" "d d e" "f f f"; border-top: var(--borde); }
+  .fe-grupo { padding: 2.6mm 4mm 2.8mm; }
+  .fe-grupo.a { grid-area: a; } .fe-grupo.b { grid-area: b; } .fe-grupo.c { grid-area: c; }
+  .fe-grupo.d { grid-area: d; } .fe-grupo.e { grid-area: e; } .fe-grupo.f { grid-area: f; display: flex; flex-wrap: wrap; align-items: baseline; gap: 1mm 3mm; padding-top: 2.2mm; padding-bottom: 2.2mm; }
+  .fe-grupo.f > * + * { margin-top: 0; }
+  .fe-grupo.f .fe-grupo-titulo { margin: 0; }
+  .fe-grupo.f p:last-child { font-size: var(--t-chico); }
+  .fe-grupo.a, .fe-grupo.b, .fe-grupo.d { border-right: var(--borde); }
+  .fe-grupo.a, .fe-grupo.b, .fe-grupo.c, .fe-grupo.d, .fe-grupo.e { border-bottom: var(--borde); }
+  .fe-grupo.d .fe-dos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 5mm; }
+  .fe-grupo.d .fe-dos > * + * { margin-top: 0; }
+  .fe-grupo-titulo { display: flex; align-items: center; gap: 2mm; font-family: var(--mono); font-weight: 500; font-size: var(--t-min); letter-spacing: .04em; text-transform: uppercase; color: var(--mint-ink); margin: 0 0 1.4mm; }
+  .fe-grupo-titulo .l { width: 4.6mm; height: 4.6mm; border-radius: 50%; background: var(--mint-tint); display: grid; place-items: center; font-size: var(--t-min); color: var(--mint-ink); flex: none; }
+  .fe-grupo dl { margin: 0; display: grid; grid-template-columns: minmax(0, 1fr); align-content: start; gap: 0; font-size: var(--t-chico); line-height: 1.35; }
   .fe-grupo dt { color: var(--ink-2); font-size: var(--t-min); padding-top: 1.3mm; line-height: 1.2; }
   .fe-grupo dt:first-child { padding-top: 0; }
   .fe-grupo dd { margin: 0; }
   .fe-grupo .marca-casilla { display: block; font-size: var(--t-nota); color: var(--ink-2); margin-top: .6mm; }
   .fe-grupo .marca-casilla::before { content: ""; display: inline-block; width: 2.8mm; height: 2.8mm; border-radius: .5mm; background: var(--mint-ink) center / 80% no-repeat; vertical-align: -.35mm; margin-right: 1.4mm;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4.5 12.5l5 5L20 7'/%3E%3C/svg%3E"); }
-  .n { display: inline-grid; place-items: center; width: 4.4mm; height: 4.4mm; border-radius: 50%; background: var(--amber-tint); border: .3mm solid var(--amber); color: var(--amber-ink); font-family: var(--mono); font-weight: 500; font-size: var(--t-min); line-height: 1; vertical-align: .15em; margin-left: 1mm; }
+  .n { display: inline-grid; place-items: center; width: 4.4mm; height: 4.4mm; border-radius: 50%; background: var(--mint-tint); border: .3mm solid var(--mint); color: var(--mint-ink); font-family: var(--mono); font-weight: 500; font-size: var(--t-min); line-height: 1; vertical-align: .15em; margin-left: 1mm; }
   .ficha-ej figcaption { font-size: var(--t-nota); color: var(--ink-2); padding: 2.4mm 5.5mm; background: var(--panel); border-top: var(--borde); }
   .porque { list-style: none; margin: 3mm 0 0 !important; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4mm; }
   .porque > li { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 2.4mm; font-size: var(--t-chico); line-height: 1.36; color: var(--ink-2); }
@@ -201,12 +222,12 @@
 
   /* ---------- Qué pasa después ---------- */
   ol.pasos.recorrido > li .estado { margin-top: 1.8mm; }
-  .compromisos { background: var(--green-tint); border-radius: var(--radio); padding: 4mm 5mm 4mm; break-inside: avoid; }
+  .compromisos { background: var(--green-tint); border-radius: var(--radio); padding: 3.6mm 5mm 3.6mm; break-inside: avoid; }
   .compromisos-cabeza { display: flex; align-items: center; gap: 3mm; margin-bottom: 2.6mm; }
   .compromisos-cabeza .ico-insignia { background: #fff; color: var(--green-ink); }
   .compromisos-cabeza .tarjeta-etiqueta { color: var(--green-ink); display: block; }
   .compromisos-cabeza h3 { font-size: 13pt; font-weight: 700; }
-  .compromisos ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.4mm 4mm; }
+  .compromisos ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.6mm 6mm; }
   .compromisos ul > li { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 1.8mm; font-size: var(--t-chico); line-height: 1.35; align-items: start; }
   .compromisos ul > li .ico { color: var(--green-ink); width: 4.2mm; height: 4.2mm; margin-top: .2mm; }
   .compromisos .remate { margin-top: 2.6mm; padding-top: 2.4mm; border-top: .3mm solid #D3E4CB; font-size: var(--t-chico); color: var(--ink); }
@@ -222,21 +243,44 @@
   .criterios > li { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 2mm; align-items: start; border-top: .9mm solid var(--mint); padding-top: 2mm; font-size: var(--t-chico); line-height: 1.36; }
   .criterios > li .ico { color: var(--mint-ink); width: 4.6mm; height: 4.6mm; }
 
-  .estatus { margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 6mm; border-top: var(--borde); }
-  .estatus > div { display: grid; grid-template-columns: 25mm minmax(0, 1fr); gap: 2.5mm; align-items: baseline; padding: 1.7mm 0; border-bottom: var(--borde); break-inside: avoid; }
-  .estatus dt { margin: 0; }
-  .estatus dd { margin: 0; font-size: var(--t-chico); color: var(--ink-2); line-height: 1.35; }
-  .chip { display: inline-flex; align-items: center; gap: 1.3mm; font-weight: 700; font-size: 8pt; line-height: 1; padding: 1mm 2.2mm; border-radius: 10mm; white-space: nowrap; border: .25mm solid var(--line); background: #fff; color: var(--ink); }
+  /* recorrido de estatus del inventario */
+  .ruta-fig { margin: 0; break-inside: avoid; }
+  ol.ruta { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, .85fr) minmax(0, 3.1fr); column-gap: 8mm; align-items: center; }
+  ol.ruta > li { margin: 0; }
+  .et { border: var(--borde); border-radius: var(--radio); background: #fff; padding: 2.4mm 3mm 2.6mm; display: grid; gap: 1.2mm; align-content: start; }
+  .et > * + * { margin-top: 0; }
+  .et p { font-size: var(--t-chico); color: var(--ink-2); line-height: 1.36; }
+  ol.ruta > li.et { position: relative; }
+  ol.ruta > li.et::after { content: ""; position: absolute; top: 50%; right: -8mm; width: 6.4mm; height: .45mm; background: var(--ink-2); }
+  ol.ruta > li.et::before { content: ""; position: absolute; top: calc(50% - 1.3mm); right: -8.2mm; border-top: 1.5mm solid transparent; border-bottom: 1.5mm solid transparent; border-left: 2mm solid var(--ink-2); }
+  ol.ruta > li:nth-child(2)::after { width: 4mm; right: -4.4mm; }
+  ol.ruta > li:nth-child(2)::before { display: none; }
+  li.desenlace { position: relative; padding-left: 3.6mm; }
+  li.desenlace::before { content: ""; position: absolute; left: 0; top: 7mm; bottom: 7mm; width: .45mm; background: var(--ink-2); }
+  li.desenlace > ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2mm; }
+  li.desenlace > ul > li { margin: 0; position: relative; }
+  li.desenlace > ul > li::before { content: ""; position: absolute; left: -3.6mm; top: 50%; width: 2.2mm; height: .45mm; background: var(--ink-2); }
+  li.desenlace > ul > li::after { content: ""; position: absolute; left: -1.6mm; top: calc(50% - 1.3mm); border-top: 1.5mm solid transparent; border-bottom: 1.5mm solid transparent; border-left: 1.8mm solid var(--ink-2); }
+  .et.doble { gap: 1.8mm; }
+  .fila-et { display: grid; grid-template-columns: 24mm minmax(0, 1fr); gap: 2mm; align-items: baseline; }
+  .fila-et > * + * { margin-top: 0; }
+  .fila-et.sub { position: relative; grid-template-columns: 24mm minmax(0, 1fr); padding: 1.8mm 0 0 5mm; margin-left: 2mm; border-top: var(--borde); }
+  .fila-et.sub::before { content: ""; position: absolute; left: 0; top: 0; width: 3.2mm; height: 3.6mm; border-left: .45mm solid var(--ink-2); border-bottom: .45mm solid var(--ink-2); border-bottom-left-radius: 1mm; }
+  .fila-et.sub { grid-template-columns: 22mm minmax(0, 1fr); }
+  .et.fila { grid-template-columns: 24mm minmax(0, 1fr); align-items: baseline; gap: 2mm; }
+  .retirado { margin-top: 2.4mm !important; display: grid; grid-template-columns: 24mm minmax(0, 1fr); gap: 2mm; align-items: baseline; border: .3mm dashed var(--line); border-color: #C9D0D8; border-radius: var(--radio); padding: 2.2mm 3mm; font-size: var(--t-chico); color: var(--ink-2); line-height: 1.36; }
+  .retirado > * + * { margin-top: 0; }
+  .chip { display: inline-flex; align-items: center; justify-self: start; gap: 1.3mm; font-weight: 700; font-size: 8pt; line-height: 1; padding: 1mm 2.2mm; border-radius: 10mm; white-space: nowrap; border: .25mm solid var(--line); background: #fff; color: var(--ink); }
   .chip .ico { width: 3.2mm; height: 3.2mm; }
   .chip.inicio { background: var(--panel); }
-  .chip.camino { background: var(--amber-tint); border-color: transparent; color: var(--amber-ink); }
+  .chip.camino { background: #fff; border-color: var(--mint); color: var(--ink); }
   .chip.bien { background: var(--green-tint); border-color: transparent; color: var(--green-ink); }
   .chip.local { background: var(--mint-tint); border-color: transparent; color: var(--mint-ink); }
   .chip.fin { background: #fff; color: var(--ink-2); }
 
   /* ---------- Palabras ---------- */
   .flujo section.glosario-sec { margin-top: 5mm; }
-  .flujo section.faq-sec { margin-top: 7mm; }
+  .flujo section.faq-sec { margin-top: 5.5mm; }
   .glosario-sec .titulo-bloque { gap: 1mm; }
   .glosario-sec h2 { font-size: 13pt; }
   .faq-sec h2 { font-size: 15pt; }
@@ -245,19 +289,20 @@
   dl.palabras dt { font-weight: 700; font-size: var(--t-chico); line-height: 1.25; }
   dl.palabras dt .termino { display: block; white-space: normal; font-size: var(--t-nota); margin-top: .2mm; }
   dl.palabras dd { margin: .3mm 0 0; font-size: var(--t-nota); color: var(--ink-2); line-height: 1.3; }
-  dl.palabras dd::before { content: "en los Lineamientos: "; font-size: var(--t-min); }
+  .palabras-guia { font-size: var(--t-chico); color: var(--ink-2); margin-top: 1mm; }
 
   /* ---------- Cierre ---------- */
   .cierre .contacto .ph { font-size: var(--t-chico); }
-  .final .cierre { padding: 5mm 6mm; gap: 6mm; align-items: start; }
+  .flujo section.final { margin-top: 6mm; }
+  .final .cierre { padding: 4mm 5.5mm; gap: 6mm; align-items: start; }
   .final .cierre h2 { font-size: 15pt; }
   .cierre .mas { margin-top: 3mm; padding-top: 2.5mm; border-top: .3mm solid #CFE6E4; font-size: var(--t-nota); }
-  .final .contacto { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3mm 4mm; }
+  .final .contacto { grid-template-columns: minmax(0, 1fr); }
   .final .contacto > li { grid-template-columns: 8mm 1fr; align-items: start; }
-  .final .cierre { grid-template-columns: 1fr 1.25fr; }
+  .final .cierre { grid-template-columns: 1.05fr 1fr; }
   .cierre .mas h3 { font-size: 10.5pt; margin-bottom: 1.2mm; }
   .cierre .mas p { font-size: var(--t-nota); line-height: 1.4; margin-top: 1.4mm; }
-  .final .contacto { gap: 2mm; }
+  .final .contacto { gap: 1.6mm; }
   .para-saber-mas ul.mas { list-style: none; padding: 0; margin: 2mm 0 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.5mm 7mm; }
   .para-saber-mas ul.mas li { margin: 0; font-size: var(--t-nota); line-height: 1.4; }
   .para-saber-mas { padding-top: 4mm; }
@@ -319,18 +364,18 @@
 
     <aside class="recuadro oj" aria-label="Órganos jurisdiccionales">
       <p class="recuadro-titulo"><span class="ico" data-icono="edificio"></span>Órganos jurisdiccionales</p>
-      <p>Si su órgano no lleva listas propias, no tiene que hacer nada más. Si lleva alguna, le invitamos a registrarla y le sugerimos el registro acompañado. No se piden expedientes, contenidos ni datos de partes, peritos o víctimas, y nada de esto toca la función jurisdiccional. Hay una lista de verificación pensada para su órgano.</p>
+      <p>Si su órgano no lleva listas propias, no tiene que hacer nada más. Si lleva alguna, le invitamos a registrarla y le sugerimos el registro acompañado. Una lista de referencia no fija criterios para resolver asuntos. No se piden expedientes, contenidos ni datos de partes, peritos o víctimas. Hay una lista de verificación pensada para su órgano.</p>
     </aside>
 
     <nav aria-label="En esta guía">
       <p class="etiqueta gris" style="margin-bottom:2.5mm">En esta guía</p>
       <ol class="indice">
-        <li>¿Me toca registrar?</li>
-        <li>Tres formas de registrar</li>
-        <li>Un ejemplo completo</li>
-        <li>Las preguntas, una por una</li>
-        <li>Qué pasa después</li>
-        <li>Dudas y contacto</li>
+        <li><a href="#s1">¿Me toca registrar?<span class="pag">pág. 2</span></a></li>
+        <li><a href="#s2">Tres formas de registrar<span class="pag">pág. 3</span></a></li>
+        <li><a href="#s4">Un ejemplo completo<span class="pag">pág. 4</span></a></li>
+        <li><a href="#s3">Las preguntas, una por una<span class="pag">pág. 5</span></a></li>
+        <li><a href="#s5">Qué pasa después<span class="pag">pág. 7</span></a></li>
+        <li class="sin-num"><a href="#s6">Dudas y contacto<span class="pag">pág. 8</span></a></li>
       </ol>
     </nav>
     <p class="version">Versión 0.1 · noviembre de 2026 · Borrador para revisión, no vigente · Dirección General de Estrategia y Transformación Digital (DGETD) del Órgano de Administración Judicial (OAJ)</p>
@@ -359,19 +404,19 @@
     <figure class="arbol" aria-label="Árbol de decisión de tres preguntas para saber si le toca registrar una lista">
       <ol class="arbol-preguntas">
         <li>
-          <p class="nodo"><span class="nodo-num">Pregunta 1</span><span class="nodo-q">¿Su área la lleva?</span><span class="nodo-sub">Da de alta, corrige o da de baja, aunque sea una copia propia de la lista de otra área.</span><span class="si">Sí<span class="visualmente-oculto">: pase a la pregunta 2.</span></span></p>
+          <p class="nodo"><span class="nodo-num">Pregunta 1</span><span class="nodo-q">¿Su área la lleva?</span><span class="nodo-sub">Da de alta, corrige o da de baja, aunque sea una copia de la lista de otra área.</span><span class="si">Sí<span class="visualmente-oculto">: pase a la pregunta 2.</span></span></p>
           <p class="no-baja"><span>No</span></p>
           <p class="salida"><span class="visualmente-oculto">Si no: </span>La registra el área que la lleva. <b>Si no sabe cuál es, pregúntenos.</b></p>
         </li>
         <li>
-          <p class="nodo"><span class="nodo-num">Pregunta 2</span><span class="nodo-q">¿Es una lista de referencia?</span><span class="nodo-sub">Nombra cosas que se repiten en muchos trámites: órganos, inmuebles, cargos, tipos de documento, plazos.</span><span class="si">Sí<span class="visualmente-oculto">: pase a la pregunta 3.</span></span></p>
+          <p class="nodo"><span class="nodo-num">Pregunta 2</span><span class="nodo-q">¿Es una lista de referencia?</span><span class="nodo-sub">Nombra cosas que se repiten en muchos trámites: órganos, inmuebles, cargos, plazos.</span><span class="si">Sí<span class="visualmente-oculto">: pase a la pregunta 3.</span></span></p>
           <p class="no-baja"><span>No</span></p>
-          <p class="salida"><span class="visualmente-oculto">Si no: </span>Un registro de trámites (expedientes, oficios, pagos) por lo general no lo es. <b>Si tiene duda, regístrela o pregúntenos.</b></p>
+          <p class="salida"><span class="visualmente-oculto">Si no: </span>Un registro de expedientes, oficios o pagos por lo general no lo es. <b>Si tiene duda, regístrela.</b></p>
         </li>
         <li>
-          <p class="nodo"><span class="nodo-num">Pregunta 3</span><span class="nodo-q">¿Alguien más la usa o la copia, o depende de una sola persona?</span><span class="nodo-sub">Otra área, un sistema, un reporte o un trámite.</span><span class="si">Sí<span class="visualmente-oculto">, o no lo sabe: regístrela.</span></span></p>
+          <p class="nodo"><span class="nodo-num">Pregunta 3</span><span class="nodo-q">¿Alguien más la usa o la copia?</span><span class="nodo-sub">Otra área, un sistema, un reporte o un trámite.</span><span class="si">Sí<span class="visualmente-oculto">, o no lo sabe: regístrela.</span></span></p>
           <p class="no-baja"><span>No</span></p>
-          <p class="salida"><span class="visualmente-oculto">Si no: </span><b>Si tiene duda, regístrela.</b> La DGETD revisa después si es una lista institucional.</p>
+          <p class="salida"><span class="visualmente-oculto">Si no: </span><b>Si solo una persona sabe llevarla, o si tiene duda, regístrela.</b> La DGETD revisa después si es institucional.</p>
         </li>
         <li class="resultado">
           <p class="arbol-final"><small>Si respondió «sí» a las tres, o no lo sabe:</small><b>Regístrela</b><span>Una ficha por cada lista.</span></p>
@@ -403,7 +448,8 @@
 
     <aside class="recuadro norma" aria-label="Lo que dice la norma">
       <p class="recuadro-titulo"><span class="ico" data-icono="libro"></span>Lo que dice la norma</p>
-      <p>Las áreas administrativas y los órganos jurisdiccionales que administren catálogos de información los registran ante la DGETD dentro de los 90 días naturales siguientes a la entrada en vigor de los Lineamientos, con los datos mínimos del art. 8. <span class="ref">Transitorio CUARTO</span> Entrada en vigor: <span class="ph">[fecha de entrada en vigor por confirmar]</span>.</p>
+      <p>Las áreas administrativas y los órganos jurisdiccionales que administren catálogos de información los registran ante la DGETD dentro de los 90 días naturales siguientes a la entrada en vigor de los Lineamientos, con los datos mínimos del art. 8 <span class="ref">Transitorio CUARTO</span>.</p>
+      <p>Entrada en vigor: <span class="ph">[fecha de entrada en vigor por confirmar]</span></p>
     </aside>
 
   </section>
@@ -427,9 +473,9 @@
         <p class="liga"><span class="ph">[liga al formulario de registro]</span></p>
       </div>
       <div class="tarjeta forma">
-        <div class="forma-cabeza"><span class="ico-insignia"><span class="ico" data-icono="hoja-calculo"></span></span><h3>Plantilla de Excel</h3></div>
+        <div class="forma-cabeza"><span class="ico-insignia"><span class="ico" data-icono="hoja-calculo"></span></span><h3>En Excel</h3></div>
         <p class="conviene">Le conviene si su área lleva más de 5 listas.</p>
-        <p>Un renglón por lista. Se sube a SharePoint, no por correo. El acuse llega cuando la DGETD procesa el archivo.</p>
+        <p>Una plantilla, un renglón por lista. Se sube a SharePoint, no por correo. El acuse llega cuando la DGETD procesa el archivo.</p>
         <p class="liga"><span class="ph">[liga a la carpeta de SharePoint para plantillas de Excel]</span></p>
       </div>
       <div class="tarjeta forma">
@@ -442,16 +488,16 @@
 
 
     <div class="tres-datos">
-      <div class="cifra"><b>3</b><span>datos indispensables</span></div>
+      <div class="cifra"><b>3</b><span>datos para empezar</span></div>
       <div>
-        <h3>¿Se le acerca la fecha? Envíe lo que sepa</h3>
+        <h3>¿Le faltan datos? Envíe lo que sepa</h3>
         <ul class="chips">
-          <li><span class="ico" data-icono="edificio"></span>Qué área registra</li>
-          <li><span class="ico" data-icono="etiqueta"></span>Cómo se llama la lista</li>
+          <li><span class="ico" data-icono="edificio"></span>Su área</li>
+          <li><span class="ico" data-icono="etiqueta"></span>Nombre de la lista</li>
           <li><span class="ico" data-icono="lapiz"></span>Qué contiene y para qué se usa</li>
         </ul>
         <p>La DGETD recibe y da trámite a todo registro que traiga estos tres datos, y completa el resto con usted. Lo demás puede ir «Por confirmar». El registro queda completo cuando usted confirma su ficha.</p>
-        <p class="pendiente-linea"><span class="estado por-confirmar">Por confirmar</span> Está pendiente que el Comité de Gobernanza Digital (el Comité) decida si un registro así cuenta como presentado en tiempo para el Transitorio CUARTO.</p>
+        <p class="pendiente-linea"><span class="estado por-confirmar">Por confirmar</span> Si un registro con solo estos tres datos cuenta como presentado en tiempo para el Transitorio CUARTO lo decide el Comité de Gobernanza Digital (el Comité).</p>
       </div>
     </div>
   </section>
@@ -466,8 +512,8 @@
       <div><h3>¿Me van a quitar la lista?</h3><p>Registrar no cambia quién la administra. Si se aprueba como catálogo institucional, el Comité formaliza quién decide y quién la mantiene, y el área propietaria define las reglas. <span class="ref">arts. 12, 15 y 17</span></p></div>
       <div><h3>¿Se va a publicar?</h3><p>Registrar no publica nada. Si un día se aprueba como catálogo institucional, los Lineamientos prevén publicarla, salvo lo reservado o confidencial, con controles de acceso. <span class="ref">arts. 21 y 23</span></p></div>
       
-      <div><h3>Esto ya lo hicimos con el CJF</h3><p>Tiene razón en desconfiar. Si hay información de aquel ejercicio que podamos verificar, la usamos para prellenar. Esta vez la DGETD prevé devolverle su ficha validada y el estatus de cada lista.</p></div>
-      <div><h3>El plazo cae en vacaciones</h3><p>Se cuenta en días naturales, receso incluido: le recomendamos registrar antes, con lo que sepa. Lo que llegue después del cierre se recibe con su fecha real y queda identificado como extemporáneo.</p></div>
+      <div><h3>Ya registramos listas con el Consejo de la Judicatura Federal (CJF)</h3><p>Esas reglas quedaron sin efectos y esas listas también se registran. Si hay información de aquel ejercicio que podamos verificar, la usamos para prellenar. Esta vez la DGETD prevé devolverle su ficha validada y el estatus de cada lista. <span class="ref">Transitorio SEXTO</span></p></div>
+      <div><h3>El plazo cae en vacaciones</h3><p>Se cuenta en días naturales, receso incluido: le recomendamos registrar antes, con lo que sepa. Lo que llegue después del cierre también se recibe, con la fecha en que llegó.</p></div>
     </div>
 
 
@@ -481,7 +527,7 @@
       <div>
         <span class="etiqueta">El resultado</span>
         <h2 id="s4">Un ejemplo completo</h2>
-        <p class="entrada">Así se ve una ficha terminada. Los números en ámbar explican tres respuestas.</p>
+        <p class="entrada">Así se ve una ficha terminada. Los números explican tres respuestas.</p>
       </div>
     </header>
 
@@ -499,53 +545,51 @@
         </dl>
       </div>
       <div class="fe-cuerpo">
-        <div class="fe-grupo">
+        <div class="fe-grupo a">
           <p class="fe-grupo-titulo"><span class="l">A</span>Quién registra</p>
           <dl>
             <dt>Área</dt><dd>Dirección General de Inmuebles y Mantenimiento</dd>
             <dt>Persona enlace</dt><dd>Ana Laura Pérez Gómez, Jefa de Departamento, ext. 4521</dd>
-            <dt>Titular que valida</dt><dd>Nombre y puesto de la persona titular</dd>
+            <dt>Titular que respalda</dt><dd>María Torres Ruiz, Directora General</dd>
           </dl>
         </div>
-        <div class="fe-grupo">
+        <div class="fe-grupo b">
           <p class="fe-grupo-titulo"><span class="l">B</span>Su lista</p>
           <dl>
             <dt>Para qué sirve</dt><dd>Los inmuebles que ocupa el OAJ, con domicilio y uso. Se usa para programar mantenimiento y ubicar órganos en los reportes estadísticos.</dd>
           </dl>
         </div>
-        <div class="fe-grupo">
+        <div class="fe-grupo c">
           <p class="fe-grupo-titulo"><span class="l">C</span>Quién decide y quién la mantiene</p>
           <dl>
             <dt>Quién decide <span class="n" aria-hidden="true">1</span></dt><dd>La misma Dirección General</dd>
             <dt>Quién la mantiene <span class="n" aria-hidden="true">1</span></dt><dd>La misma Dirección General; contacto: Ana Laura Pérez Gómez</dd>
-            <dt>Tipo de lista · ¿Mantenimiento por la DGETD?</dt><dd>Personas, lugares o cosas · No sé</dd>
+            <dt>Tipo de lista</dt><dd>Personas, lugares o cosas</dd>
+            <dt>¿Prefiere que la DGETD la mantenga?</dt><dd>No sé</dd>
           </dl>
         </div>
-        <div class="fe-grupo">
+        <div class="fe-grupo d">
           <p class="fe-grupo-titulo"><span class="l">D</span>Quién la usa y cada cuánto cambia</p>
-          <dl>
-            <dt>Quién la usa <span class="n" aria-hidden="true">2</span></dt><dd>Sistema de mantenimiento de inmuebles; reporte mensual de ocupación<span class="marca-casilla">No conozco todos. Que la DGETD complete la lista.</span></dd>
-            <dt>Cada cuánto cambia</dt><dd>Cada vez que se arrienda, adquiere o desocupa un inmueble</dd>
-          </dl>
+          <div class="fe-dos">
+            <dl>
+              <dt>Quién la usa <span class="n" aria-hidden="true">2</span></dt><dd>Sistema de mantenimiento de inmuebles; reporte mensual de ocupación<span class="marca-casilla">No conozco todos. Que la DGETD complete la lista.</span></dd>
+            </dl>
+            <dl>
+              <dt>Cada cuánto cambia</dt><dd>Cada vez que se arrienda, adquiere o desocupa un inmueble</dd>
+              <dt>Versión · último cambio</dt><dd>No maneja versiones · septiembre de 2026</dd>
+            </dl>
+          </div>
         </div>
-        <div class="fe-grupo">
+        <div class="fe-grupo e">
           <p class="fe-grupo-titulo"><span class="l">E</span>Quién puede verla</p>
           <dl>
             <dt>Acceso</dt><dd>Interna</dd>
             <dt>Datos personales <span class="n" aria-hidden="true">3</span></dt><dd>No</dd>
           </dl>
-          <p class="fe-grupo-titulo" style="margin-top:2.4mm"><span class="l">D</span>Versión y último cambio</p>
-          <dl>
-            <dt>Versión</dt><dd>No maneja versiones</dd>
-            <dt>Último cambio</dt><dd>Septiembre de 2026</dd>
-          </dl>
         </div>
-        <div class="fe-grupo">
+        <div class="fe-grupo f">
           <p class="fe-grupo-titulo"><span class="l">F</span>Para entender mejor (opcional)</p>
-          <dl>
-            <dt>Dónde y tamaño</dt><dd>Hoja de cálculo compartida · de 50 a 500 renglones</dd>
-            <dt>Claves y copias</dt><dd>Claves con significado · Estadística lleva una copia</dd>
-          </dl>
+          <p>Hoja de cálculo compartida · de 50 a 500 renglones · claves con significado · la Dirección de Estadística lleva una copia</p>
         </div>
       </div>
       <figcaption>Ejemplo ilustrativo. Las personas, sistemas y claves no son reales; el área se usa solo como ejemplo.</figcaption>
@@ -553,8 +597,8 @@
 
     <h3 class="visualmente-oculto">Por qué se respondió así</h3>
     <ol class="porque">
-      <li><span class="n" aria-hidden="true">1</span><div><b>Decide y mantiene la misma área</b>La Dirección General decide qué inmuebles entran y también actualiza la lista. Si otra área capturara los cambios, esa la mantendría.</div></li>
-      <li><span class="n" aria-hidden="true">2</span><div><b>No inventó nada</b>La persona enlace anotó los dos sistemas que conoce y marcó la casilla para que la DGETD complete el resto.</div></li>
+      <li><span class="n" aria-hidden="true">1</span><div><b>Decide y mantiene la misma área</b>La Dirección General decide qué entra y también actualiza la lista. Si otra área capturara los cambios, esa la mantendría.</div></li>
+      <li><span class="n" aria-hidden="true">2</span><div><b>Anotó solo lo que conoce</b>La persona enlace anotó los dos sistemas que conoce y marcó la casilla para que la DGETD complete el resto.</div></li>
       <li><span class="n" aria-hidden="true">3</span><div><b>Domicilios, pero no personales</b>Son domicilios de inmuebles del OAJ, no de personas. Con nombres o teléfonos de personas, la respuesta sería «Sí».</div></li>
     </ol>
   </section>
@@ -563,18 +607,19 @@
     <div class="titulo-bloque">
       <span class="etiqueta">Glosario corto</span>
       <h2 id="s-glos">Palabras que va a encontrar</h2>
+      <p class="palabras-guia">Arriba, la palabra que usamos en esta guía; abajo, en gris, cómo la llaman los Lineamientos.</p>
     </div>
     <dl class="palabras">
-      <div><dt>Lista</dt><dd>catálogo de información</dd></div>
-      <div><dt>Lista institucional</dt><dd>catálogo institucional</dd></div>
-      <div><dt>Datos sobre la lista</dt><dd>metadatos</dd></div>
-      <div><dt>Quién decide</dt><dd>propietario</dd></div>
-      <div><dt>Quién la mantiene</dt><dd>custodio</dd></div>
-      <div><dt>Quién la usa</dt><dd>sistema consumidor</dd></div>
-      <div><dt>Tipo de lista</dt><dd>clasificación</dd></div>
-      <div><dt>Clave de la lista</dt><dd>identificador</dd></div>
-      <div><dt>Quién puede verla</dt><dd>nivel de acceso</dd></div>
-      <div><dt>Plan para ajustar</dt><dd>plan de adecuación</dd></div>
+      <div><dt>Lista</dt><dd><span class="visualmente-oculto">En los Lineamientos: </span>catálogo de información</dd></div>
+      <div><dt>Lista institucional</dt><dd><span class="visualmente-oculto">En los Lineamientos: </span>catálogo institucional</dd></div>
+      <div><dt>Datos sobre la lista</dt><dd><span class="visualmente-oculto">En los Lineamientos: </span>metadatos</dd></div>
+      <div><dt>Quién decide</dt><dd><span class="visualmente-oculto">En los Lineamientos: </span>propietario</dd></div>
+      <div><dt>Quién la mantiene</dt><dd><span class="visualmente-oculto">En los Lineamientos: </span>custodio</dd></div>
+      <div><dt>Quién la usa</dt><dd><span class="visualmente-oculto">En los Lineamientos: </span>sistema consumidor</dd></div>
+      <div><dt>Tipo de lista</dt><dd><span class="visualmente-oculto">En los Lineamientos: </span>clasificación</dd></div>
+      <div><dt>Clave de la lista</dt><dd><span class="visualmente-oculto">En los Lineamientos: </span>identificador</dd></div>
+      <div><dt>Quién puede verla</dt><dd><span class="visualmente-oculto">En los Lineamientos: </span>nivel de acceso</dd></div>
+      <div><dt>Plan para ajustar</dt><dd><span class="visualmente-oculto">En los Lineamientos: </span>plan de adecuación</dd></div>
     </dl>
   </section>
 
@@ -585,8 +630,8 @@
       <div>
         <span class="etiqueta">Responda</span>
         <h2 id="s3">Las preguntas, una por una</h2>
-        <p class="entrada">Son las mismas en línea, en Excel y en Word. Cada tarjeta dice para qué la pedimos, un ejemplo y qué hacer si no sabe.</p>
-        <p class="leyenda"><span class="estado obligatorio">Obligatorio</span><span class="estado por-confirmar">Acepta «Por confirmar»</span><span class="estado opcional">Opcional</span><span class="estado dgetd">Lo llena la DGETD</span><span>Ejemplos ilustrativos.</span></p>
+        <p class="entrada">Son las mismas en línea, en Excel y en Word. Cada tarjeta dice para qué la pedimos, un ejemplo y qué hacer si tiene dudas.</p>
+        <p class="leyenda"><span>Junto a cada sección verá si sus preguntas son</span><span class="estado obligatorio">Obligatorias</span><span class="estado por-confirmar">Aceptan «Por confirmar»</span><span class="estado opcional">Opcionales</span><span>o si</span><span class="estado dgetd">Lo llena la DGETD</span><span>· Ejemplos ilustrativos.</span></p>
       </div>
     </header>
 
@@ -594,25 +639,23 @@
     <header class="seccion-guia">
       <span class="letra" aria-hidden="true">A</span>
       <div><h3><span class="visualmente-oculto">Sección A: </span>Quién registra</h3><p>Para saber a quién llamar si tenemos dudas.</p></div>
+      <span class="estado obligatorio">Obligatorias</span>
     </header>
     <div class="preguntas tres">
       <article class="pq">
-        <div class="pq-meta"><span class="estado obligatorio">Obligatorio</span><span class="ref">A1</span></div>
         <h4>¿Qué área o qué órgano jurisdiccional registra esta lista?</h4>
         <p class="para">Elíjala de la lista oficial, para que su área no aparezca escrita de varias formas.</p>
-        <dl class="pq-pie"><div><dt>Ejemplo</dt><dd>Dirección General de Inmuebles y Mantenimiento</dd></div><div><dt>Si no lo sabe</dt><dd>Si su área no aparece, escríbanos.</dd></div></dl>
+        <div class="pq-pie"><dl><div><dt><span class="ico" data-icono="foco"></span>Ejemplo:</dt><dd>Dirección General de Inmuebles y Mantenimiento</dd></div><div><dt><span class="ico" data-icono="pregunta"></span>Si tiene dudas:</dt><dd>Si su área no aparece, escríbanos y le ayudamos a ubicarla.</dd></div></dl><p class="cod"><span class="visualmente-oculto">Pregunta </span>A1</p></div>
       </article>
       <article class="pq">
-        <div class="pq-meta"><span class="estado obligatorio">Obligatorio</span><span class="ref">A2</span></div>
         <h4>¿Quién es la persona de contacto para este registro?</h4>
         <p class="para">Normalmente, usted: nombre, puesto, correo y extensión. Es a quien llamaremos.</p>
-        <dl class="pq-pie"><div><dt>Ejemplo</dt><dd>Ana Laura Pérez Gómez, ext. 4521</dd></div><div><dt>Si no lo sabe</dt><dd>Si la persona enlace cambia, avísenos.</dd></div></dl>
+        <div class="pq-pie"><dl><div><dt><span class="ico" data-icono="foco"></span>Ejemplo:</dt><dd>Ana Laura Pérez Gómez, ext. 4521</dd></div><div><dt><span class="ico" data-icono="pregunta"></span>Si tiene dudas:</dt><dd>Anótese usted; si después cambia, avísenos.</dd></div></dl><p class="cod"><span class="visualmente-oculto">Pregunta </span>A2</p></div>
       </article>
       <article class="pq">
-        <div class="pq-meta"><span class="estado obligatorio">Obligatorio</span><span class="ref">A3</span></div>
         <h4>¿Qué persona titular del área conoce y respalda este registro?</h4>
         <p class="para">Nombre completo y puesto de su titular. Recibe copia del acuse.</p>
-        <dl class="pq-pie"><div><dt>Ejemplo</dt><dd>Nombre y puesto, como «Directora General»</dd></div><div><dt>Si no lo sabe</dt><dd>Confírmelo con su titular antes de enviar.</dd></div></dl>
+        <div class="pq-pie"><dl><div><dt><span class="ico" data-icono="foco"></span>Ejemplo:</dt><dd>María Torres Ruiz, Directora General</dd></div><div><dt><span class="ico" data-icono="pregunta"></span>Si tiene dudas:</dt><dd>Confírmelo con su titular antes de enviar.</dd></div></dl><p class="cod"><span class="visualmente-oculto">Pregunta </span>A3</p></div>
       </article>
     </div>
 
@@ -620,46 +663,43 @@
     <header class="seccion-guia">
       <span class="letra" aria-hidden="true">B</span>
       <div><h3><span class="visualmente-oculto">Sección B: </span>Su lista</h3><p>Para identificarla sin confusiones.</p></div>
+      <span class="estado obligatorio">Obligatorias</span>
     </header>
     <div class="preguntas">
       <article class="pq">
-        <div class="pq-meta"><span class="estado obligatorio">Obligatorio</span><span class="ref">B2</span></div>
         <h4>¿Cómo se llama esta lista? Escriba el nombre completo, sin siglas.</h4>
         <p class="para">Es su nombre oficial. Si en su área le dicen de otra forma, anótelo entre paréntesis.</p>
-        <dl class="pq-pie"><div><dt>Ejemplo</dt><dd>Catálogo de inmuebles del OAJ (el Excel de inmuebles)</dd></div><div><dt>Si no lo sabe</dt><dd>Si no tiene nombre formal, propóngale uno que diga qué contiene.</dd></div></dl>
+        <div class="pq-pie"><dl><div><dt><span class="ico" data-icono="foco"></span>Ejemplo:</dt><dd>Catálogo de inmuebles del OAJ (el Excel de inmuebles)</dd></div><div><dt><span class="ico" data-icono="pregunta"></span>Si tiene dudas:</dt><dd>Si no tiene nombre formal, propóngale uno que diga qué contiene.</dd></div></dl><p class="cod"><span class="visualmente-oculto">Pregunta </span>B2</p></div>
       </article>
       <article class="pq">
-        <div class="pq-meta"><span class="estado obligatorio">Obligatorio</span><span class="ref">B3</span></div>
         <h4>¿Qué contiene esta lista y para qué la usan?</h4>
         <p class="para">De dos a cuatro oraciones, sin tecnicismos: de qué es y qué trámite, reporte o decisión depende de ella.</p>
-        <dl class="pq-pie"><div><dt>Ejemplo</dt><dd>«Los inmuebles que ocupa el OAJ, con domicilio y uso. Sirve para programar mantenimiento».</dd></div><div><dt>Si no lo sabe</dt><dd>Describa lo que ve en la lista y quién se la pide. La afinamos con usted.</dd></div></dl>
+        <div class="pq-pie"><dl><div><dt><span class="ico" data-icono="foco"></span>Ejemplo:</dt><dd>«Los inmuebles que ocupa el OAJ, con domicilio y uso. Sirve para programar mantenimiento».</dd></div><div><dt><span class="ico" data-icono="pregunta"></span>Si tiene dudas:</dt><dd>Describa lo que ve en la lista y quién se la pide. La afinamos con usted.</dd></div></dl><p class="cod"><span class="visualmente-oculto">Pregunta </span>B3</p></div>
       </article>
     </div>
     <ul class="tiras">
-      <li><span class="estado opcional">Opcional</span><span class="ref">B1b</span><span><b>¿Su lista ya tiene una clave o código interno?</b> Lo relacionamos con la clave nueva; su código no cambia. <i>Ejemplo</i> <span class="clave">INM-01</span>. Si no lo sabe, déjela en blanco.</span></li>
-      <li class="dgetd"><span class="estado dgetd">Lo llena la DGETD</span><span class="ref">B1</span><span><b>La clave de su lista: no tiene que responder.</b> La asignamos al recibir el registro y llega en el acuse, por ejemplo <span class="clave">CAT-0042</span>. No cambia aunque la lista o su área cambien de nombre.</span></li>
+      <li><div class="tira-txt"><span class="estado opcional">Opcional</span><h4 class="en-linea">¿Su lista ya tiene una clave o código interno?</h4> La relacionamos con la clave nueva; su código no cambia. Por ejemplo, <span class="clave">INM-01</span>. Si no tiene, déjela en blanco.</div><p class="cod"><span class="visualmente-oculto">Pregunta </span>B1b</p></li>
+      <li class="dgetd"><div class="tira-txt"><span class="estado dgetd">Lo llena la DGETD</span><h4 class="en-linea">La clave de su lista: no tiene que responder.</h4> La asignamos al recibir el registro y llega en el acuse, por ejemplo <span class="clave">CAT-0042</span>. No cambia aunque la lista o su área cambien de nombre.</div><p class="cod"><span class="visualmente-oculto">Pregunta </span>B1</p></li>
     </ul>
 
     <!-- C -->
-    <header class="seccion-guia">
+    <header class="seccion-guia salto-antes">
       <span class="letra" aria-hidden="true">C</span>
-      <div><h3><span class="visualmente-oculto">Sección C: </span>Quién decide y quién la mantiene</h3><p>Lo que anote aquí es una propuesta: lo formaliza el Comité, a propuesta de la DGETD. <span class="ref">arts. 5, 12 y 17</span></p></div>
+      <div><h3><span class="visualmente-oculto">Sección C: </span>Quién decide y quién la mantiene</h3><p>Lo que anote aquí es su propuesta. La DGETD la revisa y el Comité la formaliza cuando aprueba el catálogo. <span class="ref">arts. 5, 12 y 17</span></p></div>
+      <span class="estado por-confirmar">Aceptan «Por confirmar»</span>
     </header>
     <div class="preguntas">
       <article class="pq">
-        <div class="pq-meta"><span class="estado por-confirmar">Acepta «Por confirmar»</span><span class="ref">C1</span></div>
         <h4>¿Qué área decide qué entra y qué sale de esta lista, y con qué reglas?</h4>
-        <p class="para">Quién decide <span class="termino">(propietario)</span>, aunque no capture. Si el contenido viene de la función jurisdiccional, es el área administrativa competente. <span class="ref">art. 4 fr. XVII</span></p>
-        <dl class="pq-pie"><div><dt>Ejemplo</dt><dd>Dirección General de Inmuebles y Mantenimiento</dd></div><div><dt>Si no lo sabe</dt><dd>«Por confirmar»</dd></div></dl>
+        <p class="para">Quién decide <span class="termino">(propietario)</span>, aunque no capture. Si el contenido viene de la función jurisdiccional, es el área administrativa competente, que recaba la opinión de los órganos jurisdiccionales involucrados. <span class="ref">art. 4 fr. XVII</span></p>
+        <div class="pq-pie"><dl><div><dt><span class="ico" data-icono="foco"></span>Ejemplo:</dt><dd>Dirección General de Inmuebles y Mantenimiento</dd></div><div><dt><span class="ico" data-icono="pregunta"></span>Si tiene dudas:</dt><dd>Responda «Por confirmar».</dd></div></dl><p class="cod"><span class="visualmente-oculto">Pregunta </span>C1</p></div>
       </article>
       <article class="pq">
-        <div class="pq-meta"><span class="estado por-confirmar">Acepta «Por confirmar»</span><span class="ref">C2</span></div>
         <h4>¿Qué área mantiene la lista al día en la práctica: da de alta, corrige y da de baja?</h4>
         <p class="para">Quién la mantiene <span class="termino">(custodio)</span>, con una persona de contacto. Puede ser la misma que decide.</p>
-        <dl class="pq-pie"><div><dt>Ejemplo</dt><dd>La misma Dirección General; contacto: Ana Laura Pérez Gómez</dd></div><div><dt>Si no lo sabe</dt><dd>«Por confirmar»</dd></div></dl>
+        <div class="pq-pie"><dl><div><dt><span class="ico" data-icono="foco"></span>Ejemplo:</dt><dd>La misma Dirección General; contacto: Ana Laura Pérez Gómez</dd></div><div><dt><span class="ico" data-icono="pregunta"></span>Si tiene dudas:</dt><dd>Responda «Por confirmar».</dd></div></dl><p class="cod"><span class="visualmente-oculto">Pregunta </span>C2</p></div>
       </article>
       <article class="pq ancha">
-        <div class="pq-meta"><span class="estado por-confirmar">Acepta «Por confirmar»</span><span class="ref">C3</span></div>
         <h4>¿A qué se parece más su lista?</h4>
         <ul class="mini-opciones cuatro" aria-label="Opciones de respuesta">
           <li><b>Personas, lugares o cosas</b>inmuebles, órganos, cargos</li>
@@ -667,71 +707,71 @@
           <li><b>Valores de configuración</b>plazos, montos, umbrales</li>
           <li><b>Una tabla que une dos listas</b>qué órgano, en qué circuito</li>
         </ul>
-        <p class="aviso">Tipo de lista <span class="termino">(clasificación)</span>. La DGETD revisa y propone el tipo; el Comité lo determina, igual que si es estratégica u operativa.</p>
-        <dl class="pq-pie"><div><dt>Ejemplo</dt><dd>Personas, lugares o cosas</dd></div><div><dt>Si no lo sabe</dt><dd>«No estoy seguro»</dd></div></dl>
+        <p class="aviso">Tipo de lista <span class="termino">(clasificación)</span>. No se preocupe por acertar: la DGETD revisa y propone el tipo; el Comité lo determina, igual que si es estratégica u operativa.</p>
+        <div class="pq-pie"><dl><div><dt><span class="ico" data-icono="foco"></span>Ejemplo:</dt><dd>Personas, lugares o cosas</dd></div><div><dt><span class="ico" data-icono="pregunta"></span>Si tiene dudas:</dt><dd>Responda «No estoy seguro».</dd></div></dl><p class="cod"><span class="visualmente-oculto">Pregunta </span>C3</p></div>
       </article>
     </div>
-
     <ul class="tiras">
-      <li><span class="estado opcional">Opcional</span><span class="ref">C2b</span><span><b>¿Le interesaría que la DGETD se encargue del mantenimiento operativo de esta lista?</b> Solo registra su interés; lo decide el Comité. Si no lo sabe, «No sé». <span class="ref">arts. 12 y 17</span></span></li>
+      <li><div class="tira-txt"><span class="estado opcional">Opcional</span><h4 class="en-linea">¿Le interesaría que la DGETD se encargue del mantenimiento operativo de esta lista?</h4> Solo registra su interés; lo decide el Comité. Si tiene dudas, «No sé». <span class="ref">arts. 12 y 17</span></div><p class="cod"><span class="visualmente-oculto">Pregunta </span>C2b</p></li>
     </ul>
 
     <!-- D -->
     <header class="seccion-guia">
       <span class="letra" aria-hidden="true">D</span>
       <div><h3><span class="visualmente-oculto">Sección D: </span>Quién la usa y cada cuánto cambia</h3><p>Para poder avisar a tiempo a quien depende de su lista.</p></div>
+      <span class="estado por-confirmar">Aceptan «Por confirmar»</span>
     </header>
     <div class="preguntas">
       <article class="pq">
-        <div class="pq-meta"><span class="estado por-confirmar">Acepta «Por confirmar»</span><span class="ref">D1</span></div>
         <h4>¿Qué sistemas, aplicaciones, archivos o reportes usan esta lista?</h4>
-        <p class="para">Quién la usa <span class="termino">(sistemas consumidores)</span>. Solo podemos avisar de un cambio de estructura a quien sabemos que la usa. <span class="ref">art. 13</span></p>
-        <dl class="pq-pie"><div><dt>Ejemplo</dt><dd>Sistema de mantenimiento de inmuebles; reporte mensual de ocupación</dd></div><div><dt>Si no lo sabe</dt><dd>No invente. Anote lo que conozca y marque «No conozco todos».</dd></div></dl>
+        <p class="para">Quién la usa <span class="termino">(sistemas consumidores)</span>. Solo podemos avisar de un cambio a quien sabemos que la usa. <span class="ref">art. 13</span></p>
+        <div class="pq-pie"><dl><div><dt><span class="ico" data-icono="foco"></span>Ejemplo:</dt><dd>Sistema de mantenimiento de inmuebles; reporte mensual de ocupación</dd></div><div><dt><span class="ico" data-icono="pregunta"></span>Si tiene dudas:</dt><dd>Anote solo lo que conozca y marque «No conozco todos».</dd></div></dl><p class="cod"><span class="visualmente-oculto">Pregunta </span>D1</p></div>
       </article>
       <article class="pq">
-        <div class="pq-meta"><span class="estado por-confirmar">Acepta «Por confirmar»</span><span class="ref">D2</span></div>
         <h4>En la práctica, ¿cada cuánto se agrega, quita o corrige algo en esta lista?</h4>
         <p class="para">Lo que pasa hoy, no lo ideal. Si cambia cuando ocurre algo, diga qué lo dispara.</p>
-        <dl class="pq-pie"><div><dt>Ejemplo</dt><dd>Cada vez que se arrienda, adquiere o desocupa un inmueble</dd></div><div><dt>Si no lo sabe</dt><dd>«Por confirmar»</dd></div></dl>
+        <div class="pq-pie"><dl><div><dt><span class="ico" data-icono="foco"></span>Ejemplo:</dt><dd>Cada vez que se arrienda, adquiere o desocupa un inmueble</dd></div><div><dt><span class="ico" data-icono="pregunta"></span>Si tiene dudas:</dt><dd>Responda «Por confirmar».</dd></div></dl><p class="cod"><span class="visualmente-oculto">Pregunta </span>D2</p></div>
       </article>
     </div>
     <ul class="tiras">
-      <li><span class="estado por-confirmar">Acepta «Por confirmar»</span><span class="ref">D3</span><span><b>¿Su lista maneja versiones numeradas (por ejemplo, v2.3)?</b> Lo más común es que no; entonces la DGETD registra la versión 1.0 y usted no tiene que crear versiones. <i>Ejemplo</i> No. Si nadie en su área habla de versiones, responda «No».</span></li>
-      <li><span class="estado por-confirmar">Acepta «Por confirmar»</span><span class="ref">D4</span><span><b>¿Cuándo fue la última vez que se agregó, quitó o corrigió algo en esta lista?</b> Basta mes y año aproximados. <i>Ejemplo</i> Septiembre de 2026. Si vive en un sistema, márquelo y la DGETD obtiene la fecha.</span></li>
+      <li><div class="tira-txt"><h4 class="en-linea">¿Su lista maneja versiones numeradas (por ejemplo, v2.3)?</h4> Lo más común es «No»: entonces la DGETD registra la versión 1.0 y usted no tiene que crear versiones.</div><p class="cod"><span class="visualmente-oculto">Pregunta </span>D3</p></li>
+      <li><div class="tira-txt"><h4 class="en-linea">¿Cuándo fue la última vez que se agregó, quitó o corrigió algo en esta lista?</h4> Basta mes y año aproximados, por ejemplo, septiembre de 2026. Si la lista está en un sistema, marque «Está en un sistema» y la DGETD obtiene la fecha.</div><p class="cod"><span class="visualmente-oculto">Pregunta </span>D4</p></li>
     </ul>
 
     <!-- E -->
-    <header class="seccion-guia">
+    <header class="seccion-guia salto-antes">
       <span class="letra" aria-hidden="true">E</span>
-      <div><h3><span class="visualmente-oculto">Sección E: </span>Quién puede verla</h3><p>Registrar no publica su lista: estas respuestas sirven para protegerla. <span class="estado por-confirmar">Por confirmar</span> Los niveles de acceso son propuesta de la DGETD, por alinear con el Acuerdo General del OAJ en materia de transparencia.</p></div>
+      <div><h3><span class="visualmente-oculto">Sección E: </span>Quién puede verla</h3><p>Registrar no publica su lista: estas respuestas sirven para protegerla.</p></div>
+      <span class="estado por-confirmar">Acepta «Por confirmar»</span>
     </header>
     <div class="preguntas">
       <article class="pq">
-        <div class="pq-meta"><span class="estado por-confirmar">Acepta «Por confirmar»</span><span class="ref">E1</span></div>
         <h4>¿Quién debería poder consultar esta lista?</h4>
         <p class="para"><b>Pública</b> (cualquier persona), <b>interna</b> (el personal del OAJ), <b>restringida</b> (ciertas áreas) o <b>clasificada</b> (reservada o confidencial, conforme a la normativa de transparencia).</p>
-        <dl class="pq-pie"><div><dt>Ejemplo</dt><dd>Interna</dd></div><div><dt>Si no lo sabe</dt><dd>Si duda entre dos, elija la más restrictiva.</dd></div></dl>
+        <p class="aviso"><span class="estado por-confirmar">Por confirmar</span> Estos niveles son propuesta de la DGETD, por alinear con el Acuerdo General del OAJ en materia de transparencia.</p>
+        <div class="pq-pie"><dl><div><dt><span class="ico" data-icono="foco"></span>Ejemplo:</dt><dd>Interna</dd></div><div><dt><span class="ico" data-icono="pregunta"></span>Si tiene dudas:</dt><dd>Si duda entre dos, elija la más restrictiva.</dd></div></dl><p class="cod"><span class="visualmente-oculto">Pregunta </span>E1</p></div>
       </article>
       <article class="pq">
-        <div class="pq-meta"><span class="estado obligatorio">Obligatorio</span><span class="ref">E2</span></div>
+        <span class="estado obligatorio">Obligatoria</span>
         <h4>¿La lista contiene datos personales, como nombres, RFC, CURP, domicilios particulares o teléfonos?</h4>
         <p class="para">Solo queremos saber si existen, para proteger la lista. No los envíe.</p>
-        <dl class="pq-pie"><div><dt>Ejemplo</dt><dd>No</dd></div><div><dt>Si no lo sabe</dt><dd>«No sé» es una respuesta válida.</dd></div></dl>
+        <div class="pq-pie"><dl><div><dt><span class="ico" data-icono="foco"></span>Ejemplo:</dt><dd>No</dd></div><div><dt><span class="ico" data-icono="pregunta"></span>Si tiene dudas:</dt><dd>«No sé» es una respuesta válida.</dd></div></dl><p class="cod"><span class="visualmente-oculto">Pregunta </span>E2</p></div>
       </article>
     </div>
 
     <!-- F -->
     <header class="seccion-guia">
       <span class="letra" aria-hidden="true">F</span>
-      <div><h3><span class="visualmente-oculto">Sección F: </span>Para entender mejor su lista <span class="estado opcional">Opcional</span></h3><p>Nos ayudan a preparar el plan para ajustar las listas. La DGETD no le volverá a pedir lo que ya entregó. Si no sabe, déjelas en blanco.</p></div>
+      <div><h3><span class="visualmente-oculto">Sección F: </span>Para entender mejor su lista</h3><p>Nos ayudan a preparar el plan para ajustar las listas. La DGETD no le volverá a pedir lo que ya entregó. Si tiene dudas, déjelas en blanco.</p></div>
+      <span class="estado opcional">Opcionales</span>
     </header>
     <div class="opcionales">
       <ol>
-        <li><span class="ref">F1</span><span class="q">¿Dónde está hoy la lista?</span><span class="ej"><i>Ejemplo</i>Hoja de cálculo en carpeta compartida</span></li>
-        <li><span class="ref">F2</span><span class="q">¿Cuántos renglones (elementos) tiene, aproximadamente?</span><span class="ej"><i>Ejemplo</i>De 50 a 500</span></li>
-        <li><span class="ref">F3</span><span class="q">¿Cada renglón de la lista tiene una clave?</span><span class="ej"><i>Ejemplo</i>Sí, con significado: «0901-P-01» dice circuito y materia</span></li>
-        <li><span class="ref">F4</span><span class="q">¿Sabe de otra área que lleve una lista parecida?</span><span class="ej"><i>Ejemplo</i>La Dirección de Estadística lleva una copia</span></li>
-        <li class="ultima"><span class="ref">F5</span><span class="q">¿Qué problema le causa hoy esta lista?</span><span class="ej"><i>Ejemplo</i>Hay que conciliar a mano las versiones de otras áreas</span></li>
+        <li><h4>¿Dónde está hoy la lista?</h4><p class="ej"><span class="ico" data-icono="foco"></span>Ejemplo: hoja de cálculo en carpeta compartida</p><p class="cod"><span class="visualmente-oculto">Pregunta </span>F1</p></li>
+        <li><h4>¿Cuántos renglones (elementos) tiene, aproximadamente?</h4><p class="ej"><span class="ico" data-icono="foco"></span>Ejemplo: de 50 a 500</p><p class="cod"><span class="visualmente-oculto">Pregunta </span>F2</p></li>
+        <li><h4>¿Cada renglón de la lista tiene una clave?</h4><p class="ej"><span class="ico" data-icono="foco"></span>Ejemplo: sí, con significado: «0901-P-01» dice circuito y materia</p><p class="cod"><span class="visualmente-oculto">Pregunta </span>F3</p></li>
+        <li><h4>¿Sabe de otra área que lleve una lista parecida?</h4><p class="ej"><span class="ico" data-icono="foco"></span>Ejemplo: la Dirección de Estadística lleva una copia</p><p class="cod"><span class="visualmente-oculto">Pregunta </span>F4</p></li>
+        <li><h4>¿Qué problema le causa hoy esta lista?</h4><p class="ej"><span class="ico" data-icono="foco"></span>Ejemplo: hay que conciliar a mano las versiones de otras áreas</p><p class="cod"><span class="visualmente-oculto">Pregunta </span>F5</p></li>
       </ol>
     </div>
   </section>
@@ -774,26 +814,36 @@
 
     <div class="titulo-bloque">
       <h3>Luego, la DGETD revisa si su lista es institucional</h3>
-      <p class="atenuado">No tiene que decidirlo usted: la DGETD revisa cuatro criterios <span class="ref">art. 6</span>. Prevé devolverle su ficha validada y el estatus de cada lista en <span class="ph">[plazo por definir según capacidad de la DGETD]</span> después del cierre del registro.</p>
+      <p class="atenuado">No tiene que decidirlo usted. La DGETD revisa si la usan dos o más sistemas o procesos, si todos deben usarla igual, si es estable y si rebasa un área <span class="ref">art. 6</span>. Prevé devolverle su ficha validada y el estatus de cada lista en <span class="ph">[plazo por definir según capacidad de la DGETD]</span> después del cierre del registro.</p>
     </div>
-    <dl class="estatus">
-      <div><dt><span class="chip inicio">Registrado</span></dt><dd>Está en el inventario. Aún no es catálogo autorizado.</dd></div>
-      <div><dt><span class="chip camino">En dictamen</span></dt><dd>La DGETD revisa si la usan dos o más sistemas o procesos, si todos deben usarla igual, si es estable y si rebasa un área.</dd></div>
-      <div><dt><span class="chip bien"><span class="ico" data-icono="check"></span>Autorizado</span></dt><dd>Aprobado por el Comité y publicado como catálogo institucional.</dd></div>
-      <div><dt><span class="chip camino">En adecuación</span></dt><dd>Tiene ajustes pendientes del plan para ajustar las listas, que el Comité aprueba a más tardar el <span class="ph">[domingo 14 de febrero de 2027, por confirmar]</span>.</dd></div>
-      <div><dt><span class="chip local">Uso local</span></dt><dd>No es institucional. Queda documentada y su área la sigue llevando.</dd></div>
-      <div><dt><span class="chip fin">Duplicado</span></dt><dd>Repite otra lista registrada. Su registro y su clave se conservan.</dd></div>
-      <div><dt><span class="chip fin">Retirado</span></dt><dd>Se dejó de usar de forma controlada. Su clave no se reutiliza.</dd></div>
-    </dl>
+    <figure class="ruta-fig" aria-labelledby="ruta-cap">
+      <figcaption id="ruta-cap" class="visualmente-oculto">Recorrido de una lista en el inventario: primero Registrado, luego En dictamen y, al terminar el dictamen, uno de tres resultados. Retirado puede ocurrir en cualquier momento.</figcaption>
+      <ol class="ruta">
+        <li class="et"><span class="chip inicio">Registrado</span><p>Está en el inventario. Aún no es catálogo autorizado.</p></li>
+        <li class="et"><span class="chip camino">En dictamen</span><p>La DGETD revisa los cuatro criterios y prepara su dictamen.</p></li>
+        <li class="desenlace">
+          <p class="visualmente-oculto">Al terminar el dictamen, uno de estos resultados:</p>
+          <ul>
+            <li class="et doble">
+              <div class="fila-et"><span class="chip bien"><span class="ico" data-icono="check"></span>Autorizado</span><p>Aprobado por el Comité y publicado como catálogo institucional.</p></div>
+              <div class="fila-et sub"><span class="chip camino"><span class="visualmente-oculto">Si tiene cambios pendientes: </span>En adecuación</span><p>Tiene cambios pendientes según el plan para ajustar las listas. El Comité aprueba ese plan a más tardar el <span class="ph">[domingo 14 de febrero de 2027, por confirmar]</span>.</p></div>
+            </li>
+            <li class="et fila"><span class="chip local">Uso local</span><p>No es institucional. Queda documentada y su área la sigue llevando.</p></li>
+            <li class="et fila"><span class="chip fin">Duplicado</span><p>Repite otra lista registrada; le indicamos con cuál coincide. Su registro y su clave se conservan.</p></li>
+          </ul>
+        </li>
+      </ol>
+      <p class="retirado"><span class="chip fin">Retirado</span><span><b>En cualquier momento.</b> Se dejó de usar de forma controlada. Su clave no se reutiliza.</span></p>
+    </figure>
   </section>
 
   <!-- 6 · Dudas -->
   <section aria-labelledby="s6" class="final">
     <div class="cierre">
       <div>
-        <span class="etiqueta">06 · Dudas y contacto</span>
+        <span class="etiqueta">Dudas y contacto</span>
         <h2 id="s6">¿Dudas? Trabajemos juntos</h2>
-        <p>Le acompañamos en todo el registro, por correo, por teléfono o por Teams. Respondemos en <span class="ph">[plazo por definir según capacidad de la DGETD]</span>.</p>
+        <p>Tiene una persona de contacto de la DGETD, con nombre, y asesoría por correo, teléfono o Teams. Respondemos en <span class="ph">[plazo por definir según capacidad de la DGETD]</span>.</p>
         <p class="mas">Más detalle en PR-CAT-04 Procedimiento de registro de catálogos existentes y F-CAT-01 Registro de catálogo existente (en Word sirve para preparar sus respuestas; no es medio de envío).</p>
       </div>
       <ul class="contacto">

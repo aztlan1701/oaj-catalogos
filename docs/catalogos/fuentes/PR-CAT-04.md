@@ -21,6 +21,8 @@ El procedimiento busca un resultado concreto: un inventario de catálogos con un
 **Qué no hace este procedimiento.** No autoriza catálogos, no publica listas, no cambia quién las administra ni modifica ningún sistema. Tampoco es una auditoría: pide datos sobre cada lista (metadatos), no su contenido.
 :::
 
+Este procedimiento tiene un resumen visual de dos páginas, «PR-CAT-04 en una mirada», para personas titulares, el Comité y las áreas. En caso de diferencia entre el resumen y este procedimiento, manda el procedimiento.
+
 # 2. Alcance
 
 **A quién aplica.** A las áreas administrativas y a los órganos jurisdiccionales a cargo del Órgano de Administración Judicial (OAJ), conforme al artículo 3 de los Lineamientos, que hoy administren listas de información. También aplica a la DGETD, que recibe y administra el registro.

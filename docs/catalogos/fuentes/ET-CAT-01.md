@@ -47,6 +47,8 @@ Este estándar fija las reglas técnicas con las que se describe, identifica, ve
 
 : Documentos del paquete que dependen de este estándar
 
+La DGETD publica, además, un resumen visual de dos páginas, «ET-CAT-01 en una mirada», para áreas de tecnologías de la información, personas enlace y titulares. En caso de diferencia entre el resumen y este estándar, manda este estándar.
+
 # 2. Ámbito de aplicación
 
 ## 2.1 A quién aplica
