@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<title>¿Su órgano jurisdiccional tiene listas que registrar? · Lista de verificación</title>
+<meta name="author" content="Dirección General de Estrategia y Transformación Digital (DGETD)">
+<meta name="description" content="Lista de verificación para órganos jurisdiccionales. Anexo de la circular de registro de catálogos existentes (Transitorio CUARTO de los Lineamientos Generales de Catálogos Institucionales).">
+<link rel="stylesheet" href="diseno/kit.css">
+<style>
+  /* ---- Portada compacta ---- */
+  .oj .cabecera { padding-top: 9mm; }
+  .portada.oj-portada { padding: 5.5mm var(--pagina-x) 4mm; grid-template-columns: 1.3fr 1fr; gap: 7mm; align-items: end; }
+  .oj-portada h1 { font-size: 22pt; margin-top: 1.8mm; }
+  .oj-portada .entrada { margin-top: 2.6mm; font-size: 10.2pt; line-height: 1.4; }
+  .oj .cuerpo { gap: 3.2mm; padding-bottom: 3.5mm; }
+  .oj-portada .entrada .ref { margin-left: .5mm; }
+
+  /* Tarjeta de independencia judicial */
+  .resguardo { border: var(--borde); border-left: var(--barra) solid var(--ink); border-radius: var(--radio); padding: 3mm 4mm; display: flex; flex-direction: column; gap: 1.5mm; background: #fff; }
+  .resguardo-cabeza { display: grid; grid-template-columns: auto 1fr; gap: 2.6mm; align-items: center; }
+  .resguardo-cabeza .ico-insignia { width: 8mm; height: 8mm; background: var(--panel); color: var(--ink); border: var(--borde); }
+  .resguardo-cabeza .ico-insignia .ico { width: 4.6mm; height: 4.6mm; }
+  .resguardo h2 { font-size: 11pt; line-height: 1.15; }
+  .resguardo p { font-size: var(--t-chico); line-height: 1.36; }
+  .resguardo .rotulo { font-family: var(--mono); font-size: var(--t-min); font-weight: 500; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-2); }
+  .resguardo ul.marcas-no { font-size: var(--t-chico); line-height: 1.3; display: grid; gap: .6mm; }
+  .resguardo ul.marcas-no > li { margin: 0; }
+
+  /* ---- Encabezado de paso ---- */
+  .paso-cabeza { display: grid; grid-template-columns: 9mm 1fr; gap: 3.5mm; align-items: start; }
+  .paso-num { width: 9mm; height: 9mm; border-radius: 50%; background: var(--mint); color: var(--ink); display: grid; place-items: center;
+    font-family: var(--serif); font-weight: 700; font-size: 13pt; line-height: 1; }
+  .paso-cabeza h2 { font-size: 14.5pt; line-height: 1.2; padding-top: .4mm; }
+  .paso-cabeza p { font-size: var(--t-chico); color: var(--ink-2); margin-top: .8mm; line-height: 1.4; }
+
+  /* ---- Tabla de verificación ---- */
+  .verificacion { border: var(--borde); border-radius: var(--radio); overflow: hidden; }
+  table.listas { font-size: var(--t-chico); }
+  table.listas th, table.listas td { padding: 1.1mm 3mm; vertical-align: middle; border-bottom: var(--borde); }
+  table.listas thead th { background: var(--mint-tint); font-family: var(--sans); font-weight: 700; font-size: 8.5pt; line-height: 1.25; color: var(--ink); }
+  table.listas thead th .ico { color: var(--mint-ink); width: 4.2mm; height: 4.2mm; margin-right: 1.2mm; vertical-align: -.25em; }
+  table.listas thead th small { display: block; font-weight: 400; color: var(--ink-2); font-size: var(--t-min); margin-top: .3mm; }
+  table.listas thead th { padding-top: 1.5mm; padding-bottom: 1.5mm; }
+  table.listas thead th.col-sub { width: 39mm; text-align: center; }
+  table.listas tbody tr:last-child th, table.listas tbody tr:last-child td { border-bottom: 0; }
+  table.listas tbody th { font-weight: 400; background: #fff; }
+  table.listas td.col-sub { text-align: center; background: var(--panel); border-left: var(--borde); }
+  table.listas thead th.col-sub { border-left: .3mm solid #fff; }
+
+  .lista-fila { display: grid; grid-template-columns: 7mm 8mm 1fr; gap: 2.8mm; align-items: center; }
+  .lista-fila .ico-insignia { width: 7.5mm; height: 7.5mm; }
+  .lista-fila .ico-insignia .ico { width: 4.4mm; height: 4.4mm; }
+  .lista-fila b { display: block; font-size: 10pt; line-height: 1.25; }
+  .lista-fila span.ej { display: block; font-size: var(--t-nota); color: var(--ink-2); line-height: 1.3; margin-top: .1mm; }
+  .linea-otra { display: block; height: 5mm; border-bottom: .3mm solid var(--trazo); margin-top: .5mm; width: 92%; }
+
+  /* Casilla grande para marcar a mano */
+  .caja { display: inline-block; width: 6.5mm; height: 6.5mm; border: .5mm solid var(--ink-2); border-radius: 1.2mm; background: #fff; vertical-align: middle; }
+  .caja.media { width: 5.2mm; height: 5.2mm; border-width: .45mm; border-radius: 1mm; }
+  .sub-si { display: inline-flex; align-items: center; gap: 1.6mm; font-size: var(--t-nota); color: var(--ink-2); font-weight: 600; }
+
+  .pistas { display: flex; flex-wrap: wrap; gap: 1mm 5mm; margin-top: 1.4mm; font-size: var(--t-nota); color: var(--ink-2); line-height: 1.35; }
+  .pistas > span { display: inline-flex; align-items: center; gap: 1.4mm; }
+  .pistas .ico { color: var(--mint-ink); width: 4mm; height: 4mm; }
+  .pistas b { color: var(--ink); }
+
+  /* ---- Dos caminos ---- */
+  .caminos { display: grid; grid-template-columns: 1.75fr 1fr; gap: 4.5mm; align-items: stretch; }
+  .camino { border: var(--borde); border-radius: var(--radio); padding: 3.8mm 4.5mm 3.8mm; display: flex; flex-direction: column; gap: 2mm; background: #fff; }
+  .camino.si { border-top: var(--barra) solid var(--mint); }
+  .camino.no { border-top: var(--barra) solid var(--ink-2); background: var(--panel); }
+  .camino h3 { font-size: 12pt; font-weight: 700; display: flex; align-items: center; gap: 2mm; }
+  .camino h3 .marca-camino { font-family: var(--mono); font-weight: 500; font-size: var(--t-min); letter-spacing: .07em; text-transform: uppercase; color: var(--mint-ink); background: var(--mint-tint); border-radius: .8mm; padding: .6mm 1.6mm; }
+  .camino.no h3 .marca-camino { color: var(--ink-2); background: #fff; border: var(--borde); }
+  .camino > p { font-size: var(--t-chico); line-height: 1.42; color: var(--ink-2); }
+  .camino > p b { color: var(--ink); }
+
+  ul.vias { list-style: none; padding: 0; margin: 0; display: grid; gap: 1.6mm; }
+  ul.vias > li { margin: 0; display: grid; grid-template-columns: 7.5mm 1fr; gap: 2.6mm; align-items: center; font-size: var(--t-chico); line-height: 1.35; color: var(--ink-2); }
+  ul.vias > li .ico-insignia { width: 7.5mm; height: 7.5mm; }
+  ul.vias > li .ico-insignia .ico { width: 4.4mm; height: 4.4mm; }
+  ul.vias > li b { color: var(--ink); font-size: var(--t-cuerpo); }
+  ul.vias > li.principal { background: var(--mint-tint); border-radius: 1.2mm; padding: 1.8mm 2.4mm; margin: 0 -2.4mm; }
+  ul.vias > li.principal .ico-insignia { background: #fff; }
+  .recomendado { display: inline-block; margin-left: 1.5mm; font-family: var(--mono); font-weight: 500; font-size: var(--t-min); letter-spacing: .06em; text-transform: uppercase; color: var(--mint-ink); }
+
+  .nada-mas { display: grid; grid-template-columns: auto 1fr; gap: 3mm; align-items: center; }
+  .nada-mas .ico-insignia { width: 11mm; height: 11mm; background: #fff; border: var(--borde); }
+  .nada-mas .ico-insignia .ico { width: 6mm; height: 6mm; }
+  .nada-mas b { font-family: var(--serif); font-weight: 700; font-size: 13pt; line-height: 1.2; }
+  .enlace-confirmar { display: flex; align-items: center; gap: 1.8mm; font-size: var(--t-chico); }
+  .enlace-confirmar .ico { color: var(--mint-ink); width: 4.4mm; height: 4.4mm; }
+  .camino .duda { margin-top: auto; border-top: var(--borde); padding-top: 2.4mm; font-size: var(--t-nota); color: var(--ink-2); line-height: 1.4; }
+  .camino .duda b { color: var(--ink); }
+
+  .acuse-linea { display: flex; align-items: center; gap: 2mm; font-size: var(--t-nota); color: var(--ink-2); border-top: var(--borde); padding-top: 2mm; margin-top: auto; line-height: 1.4; }
+  .acuse-linea .ico { color: var(--green-ink); width: 4.4mm; height: 4.4mm; flex: none; }
+  .acuse-linea b { color: var(--green-ink); }
+
+  /* ---- Pie y nota interna ---- */
+  .pie.oj-pie { padding: 3mm var(--pagina-x) 2.8mm; gap: 1.2mm 6mm; font-size: 8.5pt; }
+  .pie .fuente-linea { flex-basis: 100%; font-size: var(--t-min); color: var(--ink-2); line-height: 1.35; }
+  .nota-interna { background: var(--amber-tint); border-top: .5mm dashed var(--amber-ink); padding: 2.6mm var(--pagina-x) 4mm; display: grid; grid-template-columns: auto 1fr; gap: 3mm; align-items: start; }
+  .nota-interna .ico-insignia { width: 8mm; height: 8mm; background: #fff; color: var(--amber-ink); }
+  .nota-interna .ico-insignia .ico { width: 4.6mm; height: 4.6mm; }
+  .nota-interna h2 { font-family: var(--mono); font-weight: 500; font-size: 8pt; letter-spacing: .07em; text-transform: uppercase; color: var(--amber-ink); line-height: 1.3; }
+  .nota-interna p { font-size: var(--t-nota); color: var(--amber-ink); line-height: 1.4; margin-top: 1mm; }
+  .nota-interna p b { color: var(--amber-ink); }
+  .nota-interna .ref { color: var(--amber-ink); background: #fff; border-color: transparent; }
+</style>
+</head>
+<body>
+
+<article class="page oj" aria-label="Lista de verificación para órganos jurisdiccionales">
+  <header class="cabecera">
+    <span class="marca">Órgano de Administración Judicial · DGETD</span>
+    <span class="etiqueta simple">Registro de catálogos · Transitorio CUARTO</span>
+  </header>
+
+  <section class="portada oj-portada">
+    <div>
+      <span class="etiqueta">Lista de verificación · anexo de la circular</span>
+      <h1>¿Su órgano jurisdiccional tiene <em>listas que registrar</em>?</h1>
+      <p class="entrada"><b>Para la persona secretaria o administradora del órgano.</b> Los Lineamientos Generales de Catálogos Institucionales (LGCI) piden a los órganos jurisdiccionales registrar sus listas ante la Dirección General de Estrategia y Transformación Digital (DGETD). Esta hoja le ayuda a saber si a su órgano le toca.</p>
+    </div>
+
+    <section class="resguardo" aria-labelledby="t-resguardo">
+      <div class="resguardo-cabeza">
+        <span class="ico-insignia"><span class="ico" data-icono="escudo-check"></span></span>
+        <h2 id="t-resguardo">Independencia judicial y datos personales</h2>
+      </div>
+      <p>Un catálogo es una lista de valores de referencia: no fija criterios para resolver asuntos. No se piden:</p>
+      <ul class="marcas-no">
+        <li>el contenido de las listas;</li>
+        <li>datos personales de partes, peritos o víctimas;</li>
+        <li>expedientes ni resoluciones.</li>
+      </ul>
+    </section>
+  </section>
+
+  <div class="cuerpo">
+    <section aria-labelledby="t-paso1">
+      <div class="paso-cabeza">
+        <span class="paso-num" aria-hidden="true">1</span>
+        <div>
+          <h2 id="t-paso1"><span class="visualmente-oculto">Paso 1. </span>¿Su órgano lleva alguna de estas listas?</h2>
+          <p>Llevarla es darla de alta, corregirla o darla de baja. Ante la duda, conviene marcarla.</p>
+        </div>
+      </div>
+
+      <div class="verificacion" style="margin-top:2.2mm">
+        <table class="listas">
+          <thead>
+            <tr>
+              <th scope="col">Listas que suele llevar un órgano <small>Ejemplos ilustrativos</small></th>
+              <th scope="col" class="col-sub"><span class="ico" data-icono="nodos"></span>¿La usa o la copia otra área, un sistema, un reporte o un trámite?</th>
+              <th scope="col" class="col-sub"><span class="ico" data-icono="persona"></span>¿Depende de una sola persona?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row"><div class="lista-fila"><span class="caja" role="img" aria-label="Casilla para marcar"></span><span class="ico-insignia"><span class="ico" data-icono="edificio"></span></span><div><b>Autoridades y domicilios para notificar</b><span class="ej">Fiscalías, dependencias y tribunales a los que se notifica.</span></div></div></th>
+              <td class="col-sub"><span class="sub-si"><span class="caja media" role="img" aria-label="Casilla para marcar"></span>Sí</span></td>
+              <td class="col-sub"><span class="sub-si"><span class="caja media" role="img" aria-label="Casilla para marcar"></span>Sí</span></td>
+            </tr>
+            <tr>
+              <th scope="row"><div class="lista-fila"><span class="caja" role="img" aria-label="Casilla para marcar"></span><span class="ico-insignia"><span class="ico" data-icono="grupo"></span></span><div><b>Peritos e intérpretes</b><span class="ej">Por especialidad o por lengua, con datos de contacto.</span></div></div></th>
+              <td class="col-sub"><span class="sub-si"><span class="caja media" role="img" aria-label="Casilla para marcar"></span>Sí</span></td>
+              <td class="col-sub"><span class="sub-si"><span class="caja media" role="img" aria-label="Casilla para marcar"></span>Sí</span></td>
+            </tr>
+            <tr>
+              <th scope="row"><div class="lista-fila"><span class="caja" role="img" aria-label="Casilla para marcar"></span><span class="ico-insignia"><span class="ico" data-icono="calendario"></span></span><div><b>Salas de audiencia u otros espacios</b><span class="ej">Salas, cabinas o espacios que se asignan o se reservan.</span></div></div></th>
+              <td class="col-sub"><span class="sub-si"><span class="caja media" role="img" aria-label="Casilla para marcar"></span>Sí</span></td>
+              <td class="col-sub"><span class="sub-si"><span class="caja media" role="img" aria-label="Casilla para marcar"></span>Sí</span></td>
+            </tr>
+            <tr>
+              <th scope="row"><div class="lista-fila"><span class="caja" role="img" aria-label="Casilla para marcar"></span><span class="ico-insignia"><span class="ico" data-icono="lista"></span></span><div><b>Listas internas de control o de turno</b><span class="ej">Roles de guardia o controles en una hoja de cálculo.</span></div></div></th>
+              <td class="col-sub"><span class="sub-si"><span class="caja media" role="img" aria-label="Casilla para marcar"></span>Sí</span></td>
+              <td class="col-sub"><span class="sub-si"><span class="caja media" role="img" aria-label="Casilla para marcar"></span>Sí</span></td>
+            </tr>
+            <tr>
+              <th scope="row"><div class="lista-fila"><span class="caja" role="img" aria-label="Casilla para marcar"></span><span class="ico-insignia gris"><span class="ico" data-icono="lapiz"></span></span><div><b>Otra</b><span class="linea-otra" role="img" aria-label="Espacio para escribir el nombre de la lista"></span></div></div></th>
+              <td class="col-sub"><span class="sub-si"><span class="caja media" role="img" aria-label="Casilla para marcar"></span>Sí</span></td>
+              <td class="col-sub"><span class="sub-si"><span class="caja media" role="img" aria-label="Casilla para marcar"></span>Sí</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="pistas">
+        <span><span class="ico" data-icono="foco"></span><span><b>Cuentan</b> las que su órgano lleva y que otros usan o que dependen de una sola persona.</span></span>
+        <span><span class="ico" data-icono="buscar"></span><span><b>¿Solo la consulta</b> en un sistema institucional? La registra el área que la lleva.</span></span>
+      </p>
+    </section>
+
+    <section aria-labelledby="t-paso2">
+      <div class="paso-cabeza">
+        <span class="paso-num" aria-hidden="true">2</span>
+        <div>
+          <h2 id="t-paso2"><span class="visualmente-oculto">Paso 2. </span>Lo que sigue depende de lo que marcó</h2>
+        </div>
+      </div>
+
+      <div class="caminos" style="margin-top:2.2mm">
+        <section class="camino si" aria-labelledby="t-si">
+          <h3 id="t-si"><span class="marca-camino" aria-hidden="true">Sí</span>Si marcó alguna lista</h3>
+          <p>Los Lineamientos piden registrarla: <b>una ficha por lista</b>, con datos sobre ella, no la lista. Lo que no sepa puede quedar «por confirmar».</p>
+          <ul class="vias">
+            <li class="principal"><span class="ico-insignia"><span class="ico" data-icono="videollamada"></span></span><div><b>Registro acompañado</b><span class="recomendado">Le sugerimos empezar aquí</span><br>Por Teams o teléfono: usted responde y la DGETD captura.</div></li>
+            <li><span class="ico-insignia"><span class="ico" data-icono="pantalla"></span></span><div><b>Formulario en línea</b> · <span class="ph">[liga al formulario de registro]</span></div></li>
+            <li><span class="ico-insignia"><span class="ico" data-icono="persona"></span></span><div><b>Persona enlace</b> · si el órgano designa una, puede ser usted.</div></li>
+          </ul>
+          <p class="acuse-linea"><span class="ico" data-icono="acuse"></span><span><b>Compromiso DGETD:</b> acuse con folio y fecha, y la clave de cada lista (por ejemplo, <span class="clave">CAT-0042</span>).</span></p>
+        </section>
+
+        <section class="camino no" aria-labelledby="t-no">
+          <h3 id="t-no"><span class="marca-camino" aria-hidden="true">No</span>Si no marcó ninguna</h3>
+          <p class="nada-mas"><span class="ico-insignia"><span class="ico" data-icono="check-circulo"></span></span><b>No tiene que hacer nada más.</b></p>
+          <p>Si quiere, puede confirmarlo con un clic. <b>Es opcional</b> y no genera seguimiento.</p>
+          <p class="enlace-confirmar"><span class="ico" data-icono="enlace"></span><span class="ph">[liga para confirmar, por definir]</span></p>
+          <p class="duda"><b>¿Tiene duda con alguna lista?</b> Puede marcarla y la revisamos con usted.</p>
+        </section>
+      </div>
+    </section>
+  </div>
+
+  <footer class="pie oj-pie">
+    <span>Fecha para registrar: <span class="ph">[viernes 15 de enero de 2027, por confirmar]</span></span>
+    <span><strong>¿Dudas?</strong> <span class="ph">[correo, extensión y horario de la asesoría DGETD]</span></span>
+    <span class="fuente-linea">Fundamento: LGCI, Transitorio CUARTO. Los ejemplos de listas son ilustrativos. Proyecto para revisión · no vigente.</span>
+  </footer>
+
+  <aside class="nota-interna" aria-labelledby="t-interna">
+    <span class="ico-insignia"><span class="ico" data-icono="alerta"></span></span>
+    <div>
+      <h2 id="t-interna">Nota interna · retirar antes de emitir</h2>
+      <p><b>Por confirmar:</b> el conducto institucional por el que llega esta hoja y su texto de invitación; quién figura como persona titular que valida en el registro de un órgano <span class="ref">F-CAT-01 · A3</span>.</p>
+    </div>
+  </aside>
+</article>
+
+<script src="diseno/iconos.js"></script>
+</body>
+</html>

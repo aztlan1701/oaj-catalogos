@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<title>F-CAT-01 · Registro de catálogo existente · versión imprimible</title>
+<meta name="author" content="Dirección General de Estrategia y Transformación Digital (DGETD)">
+<meta name="description" content="Versión imprimible del formato F-CAT-01 para registrar una lista (catálogo) ante la DGETD conforme al Transitorio CUARTO de los Lineamientos Generales de Catálogos Institucionales. Generada desde spec/registro.yaml.">
+<meta name="pdf-encabezado" content="F-CAT-01 · Registro de catálogo existente">
+<meta name="pdf-pie" content="Versión 0.1 · Borrador para revisión · no vigente">
+<meta name="generator" content="build/formato_html.py a partir de spec/registro.yaml">
+<link rel="stylesheet" href="diseno/kit.css">
+<style>
+  /* F-CAT-01 imprimible · CSS particular (kit.css no se edita) */
+  /* Formato impreso: nada menor a 9 pt salvo códigos */
+  .estado { font-size: 9pt; padding: 1.1mm 2.4mm; }
+  .campo { font-size: 9pt; }
+  ul.opciones > li small { font-size: 9pt; }
+  .etiqueta { font-size: 9pt; letter-spacing: .06em; }
+  .cabecera { font-size: 9pt; }
+  .contacto b { font-size: 9pt; }
+  .ref.codigo { font-family: var(--mono); font-weight: 500; letter-spacing: .03em; }
+
+  /* Página 1 */
+  .portada { padding-top: 11mm; padding-bottom: 6mm; grid-template-columns: 1.3fr 1fr; align-items: stretch; }
+  .portada h1 { font-size: 30pt; }
+  .portada .entrada { font-size: 12pt; }
+  .portada .nombre-oficial { margin-top: 4mm; font-size: 9.5pt; color: var(--ink-2); }
+  .resumen { background: var(--mint-tint); border-radius: var(--radio); padding: 5mm 5.5mm; display: flex; flex-direction: column; gap: 3mm; justify-content: center; }
+  .resumen-titulo { font-family: var(--serif); font-weight: 700; font-size: 13pt; line-height: 1.2; }
+  .resumen ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 3mm; }
+  .resumen li { display: grid; grid-template-columns: 10mm 1fr; column-gap: 3mm; align-items: center; margin: 0; }
+  .resumen li > b { font-family: var(--serif); font-weight: 700; font-size: 24pt; line-height: 1; color: var(--mint-ink); text-align: right; }
+  .resumen li > span { display: grid; gap: 1mm; justify-items: start; font-size: 9.5pt; color: var(--ink-2); line-height: 1.3; }
+  .page > .cuerpo { gap: 4.5mm; }
+  .antes-titulo { display: flex; align-items: baseline; gap: 4mm; }
+  .antes-titulo h2 { font-size: 17pt; }
+  .tarjetas-antes { list-style: none; padding: 0; margin: 0; gap: 4mm; }
+  .tarjetas-antes > li { margin: 0; padding: 4.5mm 5mm; gap: 2mm; }
+  .tarjetas-antes .tarjeta-cabeza { display: flex; align-items: center; gap: 3mm; }
+  .tarjetas-antes h3 { font-size: 12.5pt; }
+  .tarjetas-antes p { font-size: 10pt; color: var(--ink-2); line-height: 1.42; }
+  .tarjetas-antes p b { color: var(--ink); }
+  .leyenda { padding: 4.5mm 5.5mm 5mm; }
+  .leyenda h3 { font-size: 11.5pt; margin-bottom: 3mm; }
+  .leyenda ul { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.6mm 5mm; }
+  .leyenda li { margin: 0; display: grid; gap: 1.2mm; justify-items: start; font-size: 9.5pt; color: var(--ink-2); line-height: 1.32; }
+  .leyenda .muestra-casilla { position: relative; padding-left: 6.6mm; font-weight: 700; color: var(--ink); font-size: 9.5pt; }
+  .leyenda .muestra-casilla::before { content: ""; position: absolute; left: 0; top: .1mm; width: 4.2mm; height: 4.2mm; border: .35mm solid var(--ink-2); border-radius: .8mm; background: #fff; }
+  .leyenda .muestra-casilla.circulo::before { border-radius: 50%; }
+  .leyenda .muestra-renglon { display: block; width: 26mm; height: 4.4mm; border-bottom: .3mm solid var(--trazo); }
+  .pie .ph { font-size: 10.5pt; }
+
+  /* Partes A–F con número grande */
+  .parte + .parte { margin-top: 5mm; }
+  .parte-inicio { break-inside: avoid; page-break-inside: avoid; }
+  .parte-cabeza { display: grid; grid-template-columns: 19mm minmax(0, 1fr); column-gap: 5mm; align-items: end;
+    padding-bottom: 3mm; border-bottom: .6mm solid var(--ink); break-after: avoid; page-break-after: avoid; }
+  .parte-num { font-family: var(--serif); font-weight: 700; font-size: 48pt; line-height: .8; color: var(--mint-ink);
+    border-left: 1.6mm solid var(--mint); padding-left: 3mm; }
+  .parte-de { display: flex; align-items: center; gap: 2mm; font-size: 9.5pt; color: var(--ink-2); margin-bottom: 1.2mm; }
+  .parte-cabeza h2 { font-size: 18pt; line-height: 1.12; }
+  .parte-cabeza h2 .termino { font-size: 11pt; }
+  .parte-resumen { margin-top: 1.4mm; font-size: 10pt; color: var(--ink-2); }
+  .parte .recuadro { margin-top: 3mm; padding: 3mm 4.5mm; }
+  .parte .recuadro + .pregunta, .parte .aviso-dgetd + .pregunta { border-top: 0; }
+  .flujo .parte > * + * { margin-top: 0; }
+  .flujo .parte .recuadro + * { margin-top: 0; }
+
+  /* Pregunta */
+  .pregunta { padding: 3mm 0 3.2mm; }
+  .lineas { display: grid; }
+  .lineas > span { display: block; height: 8mm; border-bottom: .3mm solid var(--trazo); }
+  .parte-cabeza + .pregunta, .parte-inicio > .pregunta:first-of-type { border-top: 0; }
+  .pregunta-num { width: 9mm; height: 9mm; font-size: 11pt; background: var(--mint-tint); }
+  .pregunta { grid-template-columns: 9mm minmax(0, 1fr); }
+  .pregunta-cuerpo { gap: 1.8mm; }
+  .pregunta-meta .codigo { margin-left: auto; }
+  .pregunta-texto { font-family: var(--serif); font-weight: 700; font-size: 13pt; line-height: 1.25; text-wrap: pretty; }
+  .pregunta-texto .termino { font-size: 9.75pt; }
+  ul.opciones .termino { font-size: 9pt; }
+  .marque { font-size: 9pt; color: var(--ink-2); }
+  .ayuda { font-size: 10pt; line-height: 1.4; }
+  .ayuda > .ico { width: 4.2mm; height: 4.2mm; }
+  .ejemplo { display: flex; gap: 2.5mm; align-items: baseline; font-size: 10pt; color: var(--ink); background: var(--panel);
+    border: var(--borde); border-radius: 1mm; padding: 1.8mm 3mm; }
+  .ejemplo-etq { font-family: var(--mono); font-weight: 500; font-size: 9pt; letter-spacing: .06em; text-transform: uppercase; color: var(--mint-ink); flex: none; }
+  .nota-pregunta { font-size: 9pt; line-height: 1.42; color: var(--ink-2); border-left: .6mm solid var(--line); padding-left: 3mm; margin-left: 6mm; }
+  .pregunta .lineas, .pregunta .campos, .pregunta ul.opciones { margin-top: 1mm; }
+  .pregunta .campos { gap: 3mm 7mm; }
+  .campo { min-height: 10.5mm; }
+  .campos.cuatro { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .campo-pista { color: var(--ink-2); }
+  .campos.fecha { grid-template-columns: 34mm 34mm; }
+  ul.opciones { gap: 2.6mm; }
+  ul.opciones > li.otro::after { content: ""; display: inline-block; width: 40mm; margin-left: 2mm; border-bottom: .3mm solid var(--trazo); height: 3.6mm; vertical-align: -.6mm; }
+  .casilla { font-size: 10pt; margin-top: 1mm; }
+  .casilla::before { width: 4.2mm; height: 4.2mm; }
+
+  /* Revisión final */
+  .flujo section.revision { margin-top: 5mm; padding: 4.5mm 6mm 5mm; }
+  .revision-cabeza { display: flex; align-items: center; gap: 3mm; margin-bottom: 3.5mm; }
+  .revision h2 { font-size: 14pt; margin: 0 !important; }
+  .revision ul.opciones > li { font-size: 10pt; }
+
+  /* Aviso de campo que llena la DGETD (B1) */
+  .aviso-dgetd { display: grid; grid-template-columns: 9mm minmax(0, 1fr); column-gap: 4mm; align-items: start;
+    margin-top: 4mm; padding: 4mm 4.5mm; background: var(--mint-tint); border-radius: var(--radio); break-inside: avoid; }
+  .aviso-dgetd { grid-template-columns: 9mm minmax(0, 1fr) auto; align-items: center; padding: 3mm 4.5mm; }
+  .aviso-meta { display: grid; gap: 1.5mm; justify-items: end; }
+  .aviso-titulo { font-weight: 700; font-size: 10.5pt; }
+  .aviso-texto { font-size: 10pt; color: var(--ink-2); }
+
+  /* Sección G · panel gris claramente distinto */
+  .ficha-dgetd { background: var(--panel); border: .5mm dashed var(--ink-2); border-radius: 2.5mm; overflow: hidden; }
+  .ficha-dgetd-cabeza { display: grid; grid-template-columns: 9mm minmax(0, 1fr); column-gap: 4mm; align-items: start;
+    background: var(--line); padding: 4mm 6mm 3.5mm; }
+  .ficha-dgetd-cabeza > div { display: grid; gap: 1.8mm; }
+  .ficha-dgetd-cabeza h2 { font-size: 17pt; }
+  .ficha-dgetd-cabeza .termino { font-size: 11pt; }
+  .ficha-dgetd-entrada { font-size: 10pt; color: var(--ink); }
+  .ficha-dgetd-cuerpo { padding: 1mm 6mm 1mm; }
+  .ficha-dgetd-cuerpo > .campos { background: #fff; border-radius: 1mm; padding: 1.5mm 4mm 3mm; margin-top: 3.5mm; border: var(--borde); }
+  .g-bloque { padding: 2.3mm 0 2.4mm; border-top: var(--borde); display: grid; gap: 2.2mm; break-inside: avoid; }
+  .ficha-dgetd-cuerpo > .campos + .g-bloque { border-top: 0; }
+  .g-etiqueta { display: flex; align-items: center; gap: 2mm; font-weight: 700; font-size: 10.5pt; }
+  .g-etiqueta .codigo, .g-campo .codigo { margin-left: auto; }
+  .g-campo { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .6mm 2mm; align-content: start; align-items: start; }
+  ul.opciones.cinco { grid-template-columns: repeat(5, minmax(0, 1fr)); column-gap: 3mm; }
+  .forma-clave { grid-column: 1 / -1; font-family: var(--mono); font-size: 9pt; color: var(--ink-2); letter-spacing: .04em; }
+  .g-nota { font-weight: 400; font-size: 9pt; color: var(--ink-2); margin-left: 1.5mm; }
+  .ficha-dgetd .lineas { background: #fff; }
+  .ficha-dgetd ul.opciones > li { font-size: 9.5pt; }
+  .confirma-area { margin: 1mm 6mm 5mm; background: #fff; border: .45mm solid var(--mint-ink); border-radius: var(--radio); padding: 3mm 5mm 3.5mm; break-inside: avoid; }
+  .confirma-cabeza { display: flex; align-items: center; gap: 2.5mm; font-size: 10pt; }
+  .confirma-cabeza > .ico { color: var(--mint-ink); width: 5mm; height: 5mm; }
+  .confirma-cabeza p { color: var(--ink-2); }
+  .confirma-cabeza p b { color: var(--mint-ink); margin-right: 1.5mm; }
+  .confirma-cabeza .codigo { margin-left: auto; }
+  .confirma-area .campos.tres { grid-template-columns: 2fr 1fr; margin-top: 2mm; }
+
+  /* Cierre */
+  .despues .titulo-bloque h2 { font-size: 19pt; }
+  .despues ol.pasos > li { font-size: 10pt; }
+  .despues ol.pasos > li .ref { margin-top: 2mm; }
+  .despues .rejilla { margin-top: 6mm; align-items: stretch; }
+  .despues .recuadro.compromiso { padding: 5mm 5.5mm; font-size: 10pt; }
+  .despues .recuadro-titulo { font-size: 11.5pt; }
+  .despues .recuadro .ico { color: var(--green-ink); }
+  .compromiso-plazos { border-top: .3mm solid rgba(74, 122, 60, .25); padding-top: 2.5mm; margin: 0; display: grid; gap: .8mm; }
+  .compromiso-plazos dt { font-weight: 700; margin-top: 1mm; }
+  .compromiso-plazos dd { margin: 0; }
+  .despues ol.pasos .ref { font-size: 9pt; }
+  .despues .cierre { grid-template-columns: 1fr; gap: 4mm; padding: 5.5mm 6mm; align-content: start; }
+  .despues .cierre h3 { font-family: var(--serif); font-size: 14pt; }
+  .despues .cierre p { font-size: 10pt; margin-top: 1.5mm; }
+  .contacto { font-size: 9.5pt; }
+  .para-saber-mas { margin-top: 9mm; }
+  .para-saber-mas h3 { margin-top: 3mm; }
+  .para-saber-mas .recuadro { margin-top: 3mm; }
+  .para-saber-mas ul { padding-left: 4.5mm; }
+  .tabla-art8 { margin-top: 3mm; font-size: 9pt; color: var(--ink); }
+  .tabla-art8 caption { text-align: left; font-weight: 700; font-size: 9.5pt; padding-bottom: 2mm; color: var(--ink); }
+  .tabla-art8 th, .tabla-art8 td { padding: .6mm 2.5mm; }
+  .tabla-art8 .ref { vertical-align: 0; }
+  .flujo .para-saber-mas.salto-antes { border-top: 0; padding-top: 0; }
+  .para-saber-mas .recuadro { padding: 3mm 4.5mm; }
+  .tabla-art8 thead th { font-size: 9pt; }
+  .tabla-art8 tbody th { font-weight: 600; background: none; white-space: nowrap; width: 20mm; }
+  .identificacion { margin-top: 4mm; font-size: 9pt; color: var(--ink-2); }
+</style>
+</head>
+<body>
+<!-- Archivo generado por build/formato_html.py desde spec/registro.yaml. No se edita a mano. -->
+<article class="page" aria-label="Página 1: presentación y antes de empezar">
+<header class="cabecera"><span class="marca">Órgano de Administración Judicial · DGETD</span><span class="etiqueta simple">Formato F-CAT-01 · Para imprimir</span></header>
+<section class="portada">
+<div><span class="etiqueta">Registro de listas · Transitorio CUARTO</span><h1>Registro de una lista <em>de su área</em></h1><p class="entrada">Le pedimos datos sobre la lista, no la lista. Use estas hojas para preparar sus respuestas o para registrarla con nosotros por Teams o por teléfono.</p><p class="nombre-oficial">Nombre oficial: Registro de catálogo existente <span class="ref">F-CAT-01</span></p></div>
+<aside class="resumen" aria-label="Cuántas preguntas tiene el formato"><p class="resumen-titulo">21 preguntas en 6 partes</p><ul><li><b>6</b><span><span class="estado obligatorio">Obligatoria</span>Se responden siempre.</span></li><li><b>8</b><span><span class="estado por-confirmar">Acepta «por confirmar»</span>Si no sabe el dato, lo completamos con usted.</span></li><li><b>7</b><span><span class="estado opcional">Opcional</span>Nos ayudan a planear; puede dejarlas en blanco.</span></li></ul></aside>
+</section>
+<section class="cuerpo" aria-labelledby="antes">
+<div class="antes-titulo"><h2 id="antes">Antes de empezar</h2></div>
+<ul class="rejilla estirar tarjetas-antes">
+<li class="tarjeta si"><div class="tarjeta-cabeza"><span class="ico-insignia"><span class="ico" data-icono="documento"></span></span><h3>Una ficha por cada lista</h3></div><p>Si su área lleva varias listas, llene una ficha por cada una. <b>Ante la duda, regístrela</b>: registrar no es autorizar.</p></li>
+<li class="tarjeta si"><div class="tarjeta-cabeza"><span class="ico-insignia"><span class="ico" data-icono="candado"></span></span><h3>Datos sobre la lista, no la lista</h3></div><p>No adjunte su contenido ni datos personales. Registrar no publica la lista ni cambia quién la administra.</p></li>
+<li class="tarjeta si"><div class="tarjeta-cabeza"><span class="ico-insignia"><span class="ico" data-icono="pregunta"></span></span><h3>«Por confirmar» vale</h3></div><p>Si no sabe un dato, marque o escriba «Por confirmar» donde se indica. <b>No invente</b>: le ayudamos a completarlo.</p></li>
+<li class="tarjeta si"><div class="tarjeta-cabeza"><span class="ico-insignia"><span class="ico" data-icono="pantalla"></span></span><h3>Mejor en línea</h3></div><p>El camino principal es el formulario: <span class="ph">[liga al formulario de registro]</span>. Con más de 5 listas, use la plantilla de Excel.</p></li>
+</ul>
+<section class="banda gris leyenda" aria-labelledby="leyenda"><h3 id="leyenda">Cómo leer cada pregunta</h3><ul><li><span class="estado obligatorio">Obligatoria</span>Necesitamos la respuesta.</li><li><span class="estado por-confirmar">Acepta «por confirmar»</span>Puede responder «Por confirmar».</li><li><span class="estado opcional">Opcional</span>Puede dejarla en blanco.</li><li><span class="muestra-casilla circulo">Círculo</span>Marque una sola opción.</li><li><span class="muestra-casilla">Cuadro</span>Márquelo si es su caso.</li><li><span class="muestra-renglon" aria-hidden="true"></span>Escriba con letra clara, sin siglas.</li></ul></section>
+<div class="recuadro nota"><p class="recuadro-titulo"><span class="ico" data-icono="reloj"></span>¿Se acerca la fecha límite?</p><p>Envíe lo que sepa. Con el área, el nombre y la descripción de la lista (preguntas 1, 5 y 6), la DGETD recibe su registro, le da trámite y completa el resto con usted.</p></div>
+</section>
+<footer class="pie"><span>Fecha límite para registrar: <span class="ph">[viernes 15 de enero de 2027, por confirmar]</span></span><span><strong>Dudas:</strong> <span class="ph">[correo, extensión y horario de la asesoría DGETD]</span></span></footer>
+</article>
+<main class="flujo">
+<section class="parte" aria-labelledby="sec-A" id="seccion-A">
+<div class="parte-inicio">
+<header class="parte-cabeza"><span class="parte-num" aria-hidden="true">1</span><div><p class="parte-de">Parte 1 de 6 <span class="ref codigo">Sección A</span></p><h2 id="sec-A"><span class="visualmente-oculto">Parte 1. </span>Quién registra</h2><p class="parte-resumen">3 preguntas, las 3 obligatorias</p></div></header>
+<div class="pregunta" id="p-A1">
+<span class="pregunta-num" aria-hidden="true">1</span>
+<div class="pregunta-cuerpo">
+<div class="pregunta-meta"><span class="estado obligatorio">Obligatoria</span><span class="ref codigo">A1</span></div>
+<h3 class="pregunta-texto"><span class="visualmente-oculto">Pregunta 1. </span>¿Qué área o qué órgano jurisdiccional registra esta lista?</h3>
+<p class="ayuda"><span class="ico" data-icono="info"></span><span>Escríbala completa, sin siglas, como aparece en la lista oficial de áreas y órganos.</span></p>
+<p class="nota-pregunta">Así evitamos que la misma área aparezca escrita de varias formas.</p>
+<div class="lineas" aria-hidden="true"><span></span><span></span></div>
+</div></div>
+</div>
+<div class="pregunta" id="p-A2">
+<span class="pregunta-num" aria-hidden="true">2</span>
+<div class="pregunta-cuerpo">
+<div class="pregunta-meta"><span class="estado obligatorio">Obligatoria</span><span class="ref codigo">A2</span></div>
+<h3 class="pregunta-texto"><span class="visualmente-oculto">Pregunta 2. </span>¿Quién es la persona de contacto para este registro?</h3>
+<p class="ayuda"><span class="ico" data-icono="info"></span><span>Es a quien llamaremos si tenemos dudas.</span></p>
+<div class="campos"><p class="campo">Nombre completo</p><p class="campo">Puesto</p><p class="campo">Correo institucional</p><p class="campo">Extensión</p></div>
+</div></div>
+<div class="pregunta" id="p-A3">
+<span class="pregunta-num" aria-hidden="true">3</span>
+<div class="pregunta-cuerpo">
+<div class="pregunta-meta"><span class="estado obligatorio">Obligatoria</span><span class="ref codigo">A3</span></div>
+<h3 class="pregunta-texto"><span class="visualmente-oculto">Pregunta 3. </span>¿Qué persona titular del área conoce y respalda este registro?</h3>
+<p class="ayuda"><span class="ico" data-icono="info"></span><span>Recibe copia del acuse.</span></p>
+<div class="campos"><p class="campo">Nombre completo</p><p class="campo">Puesto</p></div>
+</div></div>
+</section>
+<section class="parte" aria-labelledby="sec-B" id="seccion-B">
+<div class="parte-inicio">
+<header class="parte-cabeza"><span class="parte-num" aria-hidden="true">2</span><div><p class="parte-de">Parte 2 de 6 <span class="ref codigo">Sección B</span></p><h2 id="sec-B"><span class="visualmente-oculto">Parte 2. </span>Su lista</h2><p class="parte-resumen">3 preguntas: 2 obligatorias y 1 opcional</p></div></header>
+<div class="aviso-dgetd" id="p-B1"><span class="ico-insignia"><span class="ico" data-icono="etiqueta"></span></span><p class="aviso-texto"><b>No tiene que responder: la DGETD asigna la clave de su lista al recibir el registro.</b> La clave tiene la forma <span class="clave">CAT-0042</span>. Es un número sin significado que no cambia aunque su área o la lista cambien de nombre. Llega en el acuse.</p><div class="aviso-meta"><span class="estado dgetd">Lo llena la DGETD</span><span class="ref codigo">B1</span></div></div>
+<div class="pregunta" id="p-B1b">
+<span class="pregunta-num" aria-hidden="true">4</span>
+<div class="pregunta-cuerpo">
+<div class="pregunta-meta"><span class="estado opcional">Opcional</span><span class="ref codigo">B1b</span></div>
+<h3 class="pregunta-texto"><span class="visualmente-oculto">Pregunta 4. </span>¿Su lista ya tiene una clave o código interno? Escríbalo aquí.</h3>
+<p class="ayuda"><span class="ico" data-icono="info"></span><span>Nos sirve para relacionar la clave nueva con la que ya usan.</span></p>
+<div class="lineas" aria-hidden="true"><span></span></div>
+</div></div>
+</div>
+<div class="pregunta" id="p-B2">
+<span class="pregunta-num" aria-hidden="true">5</span>
+<div class="pregunta-cuerpo">
+<div class="pregunta-meta"><span class="estado obligatorio">Obligatoria</span><span class="ref codigo">B2</span></div>
+<h3 class="pregunta-texto"><span class="visualmente-oculto">Pregunta 5. </span>¿Cómo se llama esta lista? Escriba el nombre completo, sin siglas.</h3>
+<p class="ayuda"><span class="ico" data-icono="info"></span><span>Si en su área le dicen de otra forma («el Excel de inmuebles»), escríbalo entre paréntesis.</span></p>
+<p class="ejemplo"><span class="ejemplo-etq">Ejemplo</span><span>«Catálogo de inmuebles del OAJ»</span></p>
+<p class="nota-pregunta">Si no tiene nombre formal, propóngale uno.</p>
+<div class="lineas" aria-hidden="true"><span></span><span></span></div>
+</div></div>
+<div class="pregunta" id="p-B3">
+<span class="pregunta-num" aria-hidden="true">6</span>
+<div class="pregunta-cuerpo">
+<div class="pregunta-meta"><span class="estado obligatorio">Obligatoria</span><span class="ref codigo">B3</span></div>
+<h3 class="pregunta-texto"><span class="visualmente-oculto">Pregunta 6. </span>¿Qué contiene esta lista y para qué la usan?</h3>
+<p class="ayuda"><span class="ico" data-icono="info"></span><span>En dos a cuatro oraciones, sin tecnicismos: de qué es la lista y qué trámite, reporte o decisión depende de ella.</span></p>
+<p class="ejemplo"><span class="ejemplo-etq">Ejemplo</span><span>«Lista de los inmuebles que ocupa el OAJ, con domicilio y uso. Se usa para programar mantenimiento y para ubicar órganos en los reportes estadísticos»</span></p>
+<div class="lineas" aria-hidden="true"><span></span><span></span><span></span></div>
+</div></div>
+</section>
+<section class="parte" aria-labelledby="sec-C" id="seccion-C">
+<div class="parte-inicio">
+<header class="parte-cabeza"><span class="parte-num" aria-hidden="true">3</span><div><p class="parte-de">Parte 3 de 6 <span class="ref codigo">Sección C</span></p><h2 id="sec-C"><span class="visualmente-oculto">Parte 3. </span>Quién decide y quién la mantiene</h2><p class="parte-resumen">4 preguntas: 3 aceptan «por confirmar» y 1 opcional</p></div></header>
+<div class="recuadro nota"><p class="recuadro-titulo"><span class="ico" data-icono="info"></span>Lo que anote aquí son propuestas.</p><p>El Comité formaliza al propietario y al custodio cuando aprueba el catálogo <span class="ref">art. 12</span>.</p></div>
+<div class="pregunta" id="p-C1">
+<span class="pregunta-num" aria-hidden="true">7</span>
+<div class="pregunta-cuerpo">
+<div class="pregunta-meta"><span class="estado por-confirmar">Acepta «por confirmar»</span><span class="ref codigo">C1</span></div>
+<h3 class="pregunta-texto"><span class="visualmente-oculto">Pregunta 7. </span>¿Qué área decide qué entra y qué sale de esta lista, y con qué reglas? <span class="termino">(propietario)</span></h3>
+<p class="ayuda"><span class="ico" data-icono="info"></span><span>Es el área administrativa con autoridad sobre el contenido, aunque no sea la que captura.</span></p>
+<p class="nota-pregunta">Si es su propia área, anótela. Si no sabe cuál es, responda «Por confirmar»; si deja el campo vacío, se registra «Por confirmar». Si el contenido deriva de la función jurisdiccional, el propietario es el área administrativa competente, que recaba la opinión de los órganos jurisdiccionales involucrados <span class="ref">art. 4 fr. XVII</span>.</p>
+<div class="lineas" aria-hidden="true"><span></span><span></span></div>
+<p class="casilla">Por confirmar</p>
+</div></div>
+</div>
+<div class="pregunta" id="p-C2">
+<span class="pregunta-num" aria-hidden="true">8</span>
+<div class="pregunta-cuerpo">
+<div class="pregunta-meta"><span class="estado por-confirmar">Acepta «por confirmar»</span><span class="ref codigo">C2</span></div>
+<h3 class="pregunta-texto"><span class="visualmente-oculto">Pregunta 8. </span>¿Qué área mantiene la lista al día en la práctica: da de alta, corrige y da de baja? <span class="termino">(custodio)</span></h3>
+<p class="ayuda"><span class="ico" data-icono="info"></span><span>Indique el área y una persona de contacto.</span></p>
+<div class="campos"><p class="campo ancho">Área</p><p class="campo ancho">Persona de contacto <span class="campo-pista">(nombre, puesto, correo y extensión)</span></p></div>
+<p class="casilla">Por confirmar</p>
+</div></div>
+<div class="pregunta" id="p-C2b">
+<span class="pregunta-num" aria-hidden="true">9</span>
+<div class="pregunta-cuerpo">
+<div class="pregunta-meta"><span class="estado opcional">Opcional</span><span class="marque">Marque una</span><span class="ref codigo">C2b</span></div>
+<h3 class="pregunta-texto"><span class="visualmente-oculto">Pregunta 9. </span>¿Le interesaría que la DGETD se encargue del mantenimiento operativo de esta lista?</h3>
+<p class="ayuda"><span class="ico" data-icono="info"></span><span>Solo registra su interés.</span></p>
+<p class="nota-pregunta">Lo decide el Comité <span class="ref">arts. 12 y 17</span>. Según el art. 17, la DGETD es preferentemente custodio cuando la lista es transversal, se integra en la arquitectura institucional de datos o se administra mediante la Plataforma. Su área seguiría decidiendo las reglas.</p>
+<ul class="opciones unica tres"><li>Sí</li><li>No</li><li>No sé</li></ul>
+</div></div>
+<div class="pregunta" id="p-C3">
+<span class="pregunta-num" aria-hidden="true">10</span>
+<div class="pregunta-cuerpo">
+<div class="pregunta-meta"><span class="estado por-confirmar">Acepta «por confirmar»</span><span class="marque">Marque una</span><span class="ref codigo">C3</span></div>
+<h3 class="pregunta-texto"><span class="visualmente-oculto">Pregunta 10. </span>¿A qué se parece más su lista?</h3>
+<p class="ayuda"><span class="ico" data-icono="info"></span><span>Elija la opción más parecida.</span></p>
+<p class="nota-pregunta">No se preocupe por acertar: la DGETD revisa su respuesta y registra una clasificación propuesta, que se formaliza cuando se aprueba el catálogo. Las cuatro opciones son los tipos del art. 5.</p>
+<ul class="opciones unica dos"><li>Una lista de personas, lugares o cosas de la institución <span class="termino">(entidades)</span><small>Por ejemplo: órganos jurisdiccionales, inmuebles, cargos.</small></li><li>Una lista de opciones para clasificar información <span class="termino">(clasificación)</span><small>Por ejemplo: tipos de documento, sentidos de resolución, entidades federativas.</small></li><li>Valores de configuración que usa un sistema <span class="termino">(parámetros)</span><small>Por ejemplo: plazos, montos, porcentajes, umbrales.</small></li><li>Una tabla que une dos listas <span class="termino">(relación)</span><small>Por ejemplo: qué órgano pertenece a qué circuito.</small></li><li>No estoy seguro<small>Por confirmar</small></li></ul>
+</div></div>
+</section>
+<section class="parte" aria-labelledby="sec-D" id="seccion-D">
+<div class="parte-inicio">
+<header class="parte-cabeza"><span class="parte-num" aria-hidden="true">4</span><div><p class="parte-de">Parte 4 de 6 <span class="ref codigo">Sección D</span></p><h2 id="sec-D"><span class="visualmente-oculto">Parte 4. </span>Quién la usa y cada cuánto cambia</h2><p class="parte-resumen">4 preguntas: 4 aceptan «por confirmar»</p></div></header>
+<div class="pregunta" id="p-D1">
+<span class="pregunta-num" aria-hidden="true">11</span>
+<div class="pregunta-cuerpo">
+<div class="pregunta-meta"><span class="estado por-confirmar">Acepta «por confirmar»</span><span class="ref codigo">D1</span></div>
+<h3 class="pregunta-texto"><span class="visualmente-oculto">Pregunta 11. </span>¿Qué sistemas, aplicaciones, archivos o reportes usan esta lista?</h3>
+<p class="ayuda"><span class="ico" data-icono="info"></span><span>Anote los que conozca, uno por línea, dentro y fuera de su área.</span></p>
+<p class="nota-pregunta">Incluya hojas de cálculo o tableros de otras áreas que la copian. Lo preguntamos para poder avisarles antes de un cambio de estructura <span class="ref">art. 13</span>. Si no los conoce todos, marque la casilla y la DGETD completa la lista con las áreas de sistemas.</p>
+<div class="lineas" aria-hidden="true"><span></span><span></span><span></span></div>
+<p class="casilla">No conozco todos. Que la DGETD complete la lista.</p>
+</div></div>
+</div>
+<div class="pregunta" id="p-D2">
+<span class="pregunta-num" aria-hidden="true">12</span>
+<div class="pregunta-cuerpo">
+<div class="pregunta-meta"><span class="estado por-confirmar">Acepta «por confirmar»</span><span class="marque">Marque una</span><span class="ref codigo">D2</span></div>
+<h3 class="pregunta-texto"><span class="visualmente-oculto">Pregunta 12. </span>En la práctica, ¿cada cuánto se agrega, quita o corrige algo en esta lista?</h3>
+<p class="ayuda"><span class="ico" data-icono="info"></span><span>Responda con lo que pasa hoy, no con lo ideal.</span></p>
+<p class="nota-pregunta">Si cambia cuando ocurre algo (por ejemplo, cuando se crea o se readscribe un órgano), elija «Cada vez que ocurre un cambio» y diga qué lo dispara.</p>
+<ul class="opciones unica tres"><li>Cada vez que ocurre un cambio</li><li>Diaria</li><li>Semanal</li><li>Mensual</li><li>Trimestral</li><li>Semestral</li><li>Anual</li><li>Casi nunca cambia</li><li>No hay una periodicidad definida</li><li>Por confirmar</li></ul>
+<div class="campos"><p class="campo ancho">Si eligió «Cada vez que ocurre un cambio», ¿qué hecho dispara el cambio?</p></div>
+</div></div>
+<div class="pregunta" id="p-D3">
+<span class="pregunta-num" aria-hidden="true">13</span>
+<div class="pregunta-cuerpo">
+<div class="pregunta-meta"><span class="estado por-confirmar">Acepta «por confirmar»</span><span class="marque">Marque una</span><span class="ref codigo">D3</span></div>
+<h3 class="pregunta-texto"><span class="visualmente-oculto">Pregunta 13. </span>¿Su lista maneja versiones numeradas (por ejemplo, v2.3)?</h3>
+<p class="ayuda"><span class="ico" data-icono="info"></span><span>Lo más común es que no.</span></p>
+<p class="nota-pregunta">Si responde «No», la DGETD registra la versión inicial 1.0 con la fecha de su registro. No tiene que crear un esquema de versiones.</p>
+<ul class="opciones unica tres"><li>Sí (indique cuál es la actual)</li><li>No</li><li>Por confirmar</li></ul>
+<div class="campos"><p class="campo ancho">Si respondió «Sí», ¿cuál es la versión actual?</p></div>
+</div></div>
+<div class="pregunta" id="p-D4">
+<span class="pregunta-num" aria-hidden="true">14</span>
+<div class="pregunta-cuerpo">
+<div class="pregunta-meta"><span class="estado por-confirmar">Acepta «por confirmar»</span><span class="ref codigo">D4</span></div>
+<h3 class="pregunta-texto"><span class="visualmente-oculto">Pregunta 14. </span>¿Cuándo fue la última vez que se agregó, quitó o corrigió algo en esta lista?</h3>
+<p class="ayuda"><span class="ico" data-icono="info"></span><span>Basta mes y año aproximados.</span></p>
+<p class="nota-pregunta">Si la lista vive en un sistema, marque «Está en un sistema» y la DGETD obtiene la fecha exacta.</p>
+<div class="campos fecha"><p class="campo">Mes</p><p class="campo">Año</p></div>
+<p class="casilla">Está en un sistema; que la DGETD obtenga la fecha.</p>
+</div></div>
+</section>
+<section class="parte" aria-labelledby="sec-E" id="seccion-E">
+<div class="parte-inicio">
+<header class="parte-cabeza"><span class="parte-num" aria-hidden="true">5</span><div><p class="parte-de">Parte 5 de 6 <span class="ref codigo">Sección E</span></p><h2 id="sec-E"><span class="visualmente-oculto">Parte 5. </span>Quién puede verla</h2><p class="parte-resumen">2 preguntas: 1 obligatoria y 1 acepta «por confirmar»</p></div></header>
+<div class="pregunta" id="p-E1">
+<span class="pregunta-num" aria-hidden="true">15</span>
+<div class="pregunta-cuerpo">
+<div class="pregunta-meta"><span class="estado por-confirmar">Acepta «por confirmar»</span><span class="marque">Marque una</span><span class="ref codigo">E1</span></div>
+<h3 class="pregunta-texto"><span class="visualmente-oculto">Pregunta 15. </span>¿Quién debería poder consultar esta lista?</h3>
+<p class="ayuda"><span class="ico" data-icono="info"></span><span>Registrar no publica su lista.</span></p>
+<p class="nota-pregunta">Si contiene información reservada o confidencial, márquela como «Clasificada»: la clasificación se rige por la normativa de transparencia y la DGETD la usa para proteger la ficha y aplicar controles de acceso <span class="ref">art. 23</span>. Si duda, elija la opción más restrictiva.</p>
+<ul class="opciones unica dos"><li><b>Pública</b><small>Cualquier persona puede consultarla.</small></li><li><b>Interna</b><small>Todo el personal del OAJ puede consultarla.</small></li><li><b>Restringida</b><small>Solo ciertas áreas o personas pueden consultarla.</small></li><li><b>Clasificada</b><small>Contiene información reservada o confidencial conforme a la normativa de transparencia.</small></li><li><b>Por confirmar</b><small>No estoy seguro.</small></li></ul>
+</div></div>
+</div>
+<div class="pregunta" id="p-E2">
+<span class="pregunta-num" aria-hidden="true">16</span>
+<div class="pregunta-cuerpo">
+<div class="pregunta-meta"><span class="estado obligatorio">Obligatoria</span><span class="marque">Marque una</span><span class="ref codigo">E2</span></div>
+<h3 class="pregunta-texto"><span class="visualmente-oculto">Pregunta 16. </span>¿La lista contiene datos personales, como nombres, RFC, CURP, domicilios particulares o teléfonos?</h3>
+<p class="ayuda"><span class="ico" data-icono="info"></span><span>No necesitamos verlos; solo saber si existen para proteger la lista.</span></p>
+<ul class="opciones unica tres"><li>Sí</li><li>No</li><li>No sé</li></ul>
+</div></div>
+</section>
+<section class="parte" aria-labelledby="sec-F" id="seccion-F">
+<div class="parte-inicio">
+<header class="parte-cabeza"><span class="parte-num" aria-hidden="true">6</span><div><p class="parte-de">Parte 6 de 6 <span class="ref codigo">Sección F</span></p><h2 id="sec-F"><span class="visualmente-oculto">Parte 6. </span>Para entender mejor su lista <span class="termino">(opcional)</span></h2><p class="parte-resumen">5 preguntas, las 5 opcionales</p></div></header>
+<div class="recuadro nota"><p class="recuadro-titulo"><span class="ico" data-icono="info"></span>Estas preguntas no son obligatorias.</p><p>Nos ayudan a preparar el plan de adecuación <span class="ref">Transitorio QUINTO</span>. La DGETD no le volverá a pedir lo que ya entregó.</p></div>
+<div class="pregunta" id="p-F1">
+<span class="pregunta-num" aria-hidden="true">17</span>
+<div class="pregunta-cuerpo">
+<div class="pregunta-meta"><span class="estado opcional">Opcional</span><span class="marque">Marque una</span><span class="ref codigo">F1</span></div>
+<h3 class="pregunta-texto"><span class="visualmente-oculto">Pregunta 17. </span>¿Dónde está hoy la lista?</h3>
+<ul class="opciones unica dos"><li>En un sistema o base de datos</li><li>En una hoja de cálculo en carpeta compartida</li><li>En una hoja de cálculo en el equipo de una persona</li><li>En papel</li><li class="otro">Otro</li></ul>
+</div></div>
+</div>
+<div class="pregunta" id="p-F2">
+<span class="pregunta-num" aria-hidden="true">18</span>
+<div class="pregunta-cuerpo">
+<div class="pregunta-meta"><span class="estado opcional">Opcional</span><span class="marque">Marque una</span><span class="ref codigo">F2</span></div>
+<h3 class="pregunta-texto"><span class="visualmente-oculto">Pregunta 18. </span>¿Cuántos renglones (elementos) tiene, aproximadamente?</h3>
+<ul class="opciones unica cuatro"><li>Menos de 50</li><li>De 50 a 500</li><li>De 501 a 5,000</li><li>Más de 5,000</li><li>No sé</li></ul>
+</div></div>
+<div class="pregunta" id="p-F3">
+<span class="pregunta-num" aria-hidden="true">19</span>
+<div class="pregunta-cuerpo">
+<div class="pregunta-meta"><span class="estado opcional">Opcional</span><span class="marque">Marque una</span><span class="ref codigo">F3</span></div>
+<h3 class="pregunta-texto"><span class="visualmente-oculto">Pregunta 19. </span>¿Cada renglón de la lista tiene una clave?</h3>
+<p class="ayuda"><span class="ico" data-icono="info"></span><span>Por ejemplo, si un juzgado tiene la clave «0901-P-01», esa clave «dice» circuito y materia.</span></p>
+<p class="nota-pregunta">Nos sirve para planear la transición a claves que no cambien <span class="ref">art. 7</span>.</p>
+<ul class="opciones unica"><li>Sí, y la clave tiene significado (incluye año, lugar, materia u otro dato)</li><li>Sí, y es un número sin significado</li><li>No tiene clave</li><li>No sé</li></ul>
+</div></div>
+<div class="pregunta" id="p-F4">
+<span class="pregunta-num" aria-hidden="true">20</span>
+<div class="pregunta-cuerpo">
+<div class="pregunta-meta"><span class="estado opcional">Opcional</span><span class="ref codigo">F4</span></div>
+<h3 class="pregunta-texto"><span class="visualmente-oculto">Pregunta 20. </span>¿Sabe de otra área que lleve una lista parecida?</h3>
+<div class="lineas" aria-hidden="true"><span></span></div>
+</div></div>
+<div class="pregunta" id="p-F5">
+<span class="pregunta-num" aria-hidden="true">21</span>
+<div class="pregunta-cuerpo">
+<div class="pregunta-meta"><span class="estado opcional">Opcional</span><span class="ref codigo">F5</span></div>
+<h3 class="pregunta-texto"><span class="visualmente-oculto">Pregunta 21. </span>¿Qué problema le causa hoy esta lista?</h3>
+<p class="ayuda"><span class="ico" data-icono="info"></span><span>Por ejemplo: la recapturan en varios sistemas, otras áreas tienen versiones distintas, depende de una sola persona.</span></p>
+<p class="nota-pregunta">Nos ayuda a priorizar.</p>
+<div class="lineas" aria-hidden="true"><span></span><span></span></div>
+</div></div>
+</section>
+<section class="revision banda" aria-labelledby="revise"><div class="revision-cabeza"><span class="ico-insignia"><span class="ico" data-icono="check-circulo"></span></span><h2 id="revise">Antes de capturar sus respuestas</h2></div><ul class="opciones"><li>Respondió las 6 preguntas obligatorias: 1, 2, 3, 5, 6 y 16.</li><li>En las que aceptan «por confirmar», anotó el dato o marcó «Por confirmar».</li><li>La persona titular de la pregunta 3 conoce este registro.</li><li>Capture sus respuestas en el formulario: <span class="ph">[liga al formulario de registro]</span>, o pida el registro acompañado: <span class="ph">[correo, extensión y horario de la asesoría DGETD]</span>.</li></ul></section>
+<section class="ficha-dgetd salto-antes" aria-labelledby="sec-G" id="seccion-G">
+<header class="ficha-dgetd-cabeza">
+<span class="ico-insignia gris"><span class="ico" data-icono="lapiz"></span></span>
+<div>
+<div class="pregunta-meta"><span class="estado dgetd">Lo llena la DGETD</span><span class="ref codigo">Sección G</span></div>
+<h2 id="sec-G">Para uso de la DGETD <span class="termino">(ficha de confirmación)</span></h2>
+<p class="ficha-dgetd-entrada">Esta sección la llena la DGETD. El área la revisa y la confirma.</p>
+</div></header>
+<div class="ficha-dgetd-cuerpo">
+<div class="campos cuatro"><p class="campo g-campo"><span class="g-nombre">Folio de registro</span><span class="ref codigo">G1</span><span class="forma-clave">RC-AAAA-NNNN</span></p><p class="campo g-campo"><span class="g-nombre">Clave de catálogo asignada</span><span class="ref codigo">G2</span><span class="forma-clave">CAT-NNNN</span></p><p class="campo g-campo"><span class="g-nombre">Fecha de recepción</span><span class="ref codigo">G3</span></p><p class="campo g-campo"><span class="g-nombre">Versión inicial registrada</span><span class="ref codigo">G7</span></p></div>
+<div class="g-bloque" id="p-G4">
+<p class="g-etiqueta"><span class="g-nombre">Clasificación propuesta <span class="ref">art. 5 fr. I–IV</span></span><span class="ref codigo">G4</span></p>
+<ul class="opciones unica cinco"><li>Entidades</li><li>Clasificación</li><li>Parámetros</li><li>Relación</li><li>Por confirmar</li></ul>
+</div>
+<div class="g-bloque" id="p-G5">
+<p class="g-etiqueta"><span class="g-nombre">Alcance propuesto (estratégico u operativo) <span class="g-nota">Lo determina el Comité al aprobar <span class="ref">art. 5</span>.</span></span><span class="ref codigo">G5</span></p>
+<ul class="opciones unica tres"><li>Estratégico</li><li>Operativo o de alcance acotado</li><li>Por determinar</li></ul>
+</div>
+<div class="g-bloque" id="p-G6">
+<p class="g-etiqueta"><span class="g-nombre">Sistemas consumidores detectados por la DGETD</span><span class="ref codigo">G6</span></p>
+<div class="lineas" aria-hidden="true"><span></span><span></span></div>
+</div>
+<div class="g-bloque" id="p-G8">
+<p class="g-etiqueta"><span class="g-nombre">Estatus del registro</span><span class="ref codigo">G8</span></p>
+<ul class="opciones unica cuatro"><li>Recibido</li><li>En revisión</li><li>Ficha enviada</li><li>Confirmado</li></ul>
+</div>
+<div class="g-bloque" id="p-G9">
+<p class="g-etiqueta"><span class="g-nombre">Estatus en el inventario</span><span class="ref codigo">G9</span></p>
+<ul class="opciones unica cuatro"><li>Registrado</li><li>En dictamen</li><li>Autorizado</li><li>En adecuación</li><li>Uso local</li><li>Duplicado</li><li>Retirado</li></ul>
+</div>
+<div class="g-bloque" id="p-G10">
+<p class="g-etiqueta"><span class="g-nombre">Observaciones</span><span class="ref codigo">G10</span></p>
+<div class="lineas" aria-hidden="true"><span></span><span></span></div>
+</div>
+</div>
+<div class="confirma-area" id="p-G11"><div class="confirma-cabeza"><span class="ico" data-icono="check-circulo"></span><p><b>Confirmación de su área</b> Lo llena su área cuando revisa la ficha y está de acuerdo.</p><span class="ref codigo">G11</span></div><div class="campos tres"><p class="campo ancho-2">Nombre de quien confirma</p><p class="campo">Fecha</p></div></div>
+</section>
+<section class="despues salto-antes" aria-labelledby="despues">
+<header class="titulo-bloque"><span class="etiqueta">Cuando termine</span><h2 id="despues">Qué pasa después</h2><p class="entrada">Capture sus respuestas en el formulario en línea o pídanos que las capturemos con usted. A partir de ahí, esto es lo que sigue.</p></header>
+<ol class="pasos">
+<li><b>Recibe su acuse</b>Con folio, fecha y la clave de su lista, por ejemplo <span class="clave">CAT-0042</span>. La persona titular recibe copia.<br><span class="ref">Estatus: Recibido</span></li>
+<li><b>Revisamos y prellenamos</b>Completamos lo que la DGETD ya conoce, como los sistemas que usan la lista. Si falta algo que solo su área sabe, su persona de contacto le llama.<br><span class="ref">Estatus: En revisión</span></li>
+<li><b>Le enviamos su ficha</b>Con lo que usted registró y lo que prellenamos. Plazo: <span class="ph">[plazo por definir según capacidad de la DGETD]</span>.<br><span class="ref">Estatus: Ficha enviada</span></li>
+<li><b>Usted la confirma</b>La revisa, corrige lo necesario y la confirma con su nombre y la fecha. Con eso, el registro queda completo.<br><span class="ref">Estatus: Confirmado</span></li>
+</ol>
+<div class="rejilla estirar">
+<div class="recuadro compromiso"><p class="recuadro-titulo"><span class="ico" data-icono="escudo-check"></span>Compromiso DGETD</p><ul class="marcas-si"><li>Acuse con folio y fecha.</li><li>Clave de su lista asignada por la DGETD.</li><li>Prellenado de lo que la DGETD ya conoce.</li><li>Una persona de contacto con nombre.</li><li>No volver a pedirle lo que ya entregó.</li><li>Correcciones sin costo hasta el dictamen.</li></ul><p>El registro no es una auditoría: los errores se corrigen sin costo hasta el dictamen.</p><dl class="compromiso-plazos"><dt>Plazo para enviarle la ficha</dt><dd><span class="ph">[plazo por definir según capacidad de la DGETD]</span></dd><dt>Plazo para responder sus dudas</dt><dd><span class="ph">[plazo por definir según capacidad de la DGETD]</span></dd></dl></div>
+<div class="cierre"><div><h3>Le acompañamos en el registro</h3><p>Si prefiere, registramos juntos su lista por Teams o por teléfono. Usted responde y nosotros capturamos.</p></div><ul class="contacto"><li><span class="ico-insignia"><span class="ico" data-icono="correo"></span></span><span><b>Asesoría DGETD</b><span class="ph">[correo, extensión y horario de la asesoría DGETD]</span></span></li><li><span class="ico-insignia"><span class="ico" data-icono="enlace"></span></span><span><b>Formulario de registro</b><span class="ph">[liga al formulario de registro]</span></span></li><li><span class="ico-insignia"><span class="ico" data-icono="carpeta"></span></span><span><b>Plantilla de Excel, más de 5 listas</b><span class="ph">[liga a la carpeta de SharePoint para plantillas de Excel]</span></span></li></ul></div>
+</div>
+</section>
+<section class="para-saber-mas salto-antes" aria-labelledby="saber-mas">
+<h2 id="saber-mas">Para saber más</h2>
+<div class="recuadro pendiente"><p class="recuadro-titulo"><span class="ico" data-icono="alerta"></span>Por confirmar: registros con datos pendientes</p><p>La DGETD recibe y da trámite a todo registro que traiga el área, el nombre y la descripción de la lista (preguntas 1, 5 y 6) y completa con el área los demás datos que lleguen «por confirmar». El registro queda completo cuando el área confirma la ficha. Si un registro con datos «por confirmar» se tiene por presentado en tiempo para el Transitorio CUARTO lo decide el Comité de Gobernanza Digital; está pendiente.</p></div>
+<div class="recuadro oj"><p class="recuadro-titulo">Órganos jurisdiccionales</p><p>Este formato les llega por el conducto institucional del Órgano de Administración Judicial (OAJ). Si su órgano no lleva listas propias, no tiene que hacer nada más. No se piden expedientes, contenidos ni datos personales.</p></div>
+<h3>Lo que conviene saber</h3><ul>
+<li><b>Niveles de acceso (pregunta 15).</b> Valores propuestos por la DGETD. Deben alinearse con el Acuerdo General del Pleno del Órgano de Administración Judicial que establece las disposiciones en materia de transparencia, acceso a la información pública y protección de datos personales <span class="ref">art. 23</span>, con la unidad de transparencia competente, antes de la versión 1.0.</li>
+<li><b>Aviso de privacidad.</b> Sobre los datos de las personas que anota en las preguntas 2, 3 y 8: <span class="ph">[liga al aviso de privacidad simplificado, por definir con la unidad de transparencia]</span>.</li>
+<li><b>Ejemplos y fechas.</b> Los ejemplos de listas, claves y folios son ilustrativos. Las fechas están por confirmar.</li>
+</ul>
+<h3>Fundamento</h3>
+<p>Lineamientos Generales de Catálogos Institucionales (LGCI), Transitorio CUARTO: las áreas y los órganos jurisdiccionales registran ante la Dirección General de Estrategia y Transformación Digital (DGETD) los catálogos que ya administran, con los datos mínimos del artículo 8. La DGETD emite los formatos <span class="ref">art. 14 fr. IX</span>. El Comité formaliza propietario y custodio al aprobar el catálogo <span class="ref">art. 12</span> y determina si es estratégico u operativo <span class="ref">art. 5</span>. Procedimiento: PR-CAT-04 Procedimiento de registro de catálogos existentes.</p>
+<table class="tabla-art8"><caption>Cada dato del artículo 8 y dónde se pregunta</caption><thead><tr><th scope="col">Fracción</th><th scope="col">Dato</th><th scope="col">Dónde se pregunta</th><th scope="col">Código</th></tr></thead><tbody>
+<tr><th scope="row">fr. I</th><td>Identificador del catálogo</td><td>La asigna la DGETD</td><td><span class="ref codigo">B1</span></td></tr>
+<tr><th scope="row">fr. II</th><td>Nombre oficial</td><td>Pregunta 5</td><td><span class="ref codigo">B2</span></td></tr>
+<tr><th scope="row">fr. III</th><td>Descripción y propósito</td><td>Pregunta 6</td><td><span class="ref codigo">B3</span></td></tr>
+<tr><th scope="row">fr. IV</th><td>Propietario propuesto</td><td>Pregunta 7</td><td><span class="ref codigo">C1</span></td></tr>
+<tr><th scope="row">fr. V</th><td>Custodio propuesto</td><td>Pregunta 8</td><td><span class="ref codigo">C2</span></td></tr>
+<tr><th scope="row">fr. VI</th><td>Clasificación (tipo de lista)</td><td>Pregunta 10</td><td><span class="ref codigo">C3</span></td></tr>
+<tr><th scope="row">fr. VII</th><td>Sistemas consumidores</td><td>Pregunta 11</td><td><span class="ref codigo">D1</span></td></tr>
+<tr><th scope="row">fr. VIII</th><td>Frecuencia de actualización</td><td>Pregunta 12</td><td><span class="ref codigo">D2</span></td></tr>
+<tr><th scope="row">fr. IX</th><td>Versión vigente</td><td>Pregunta 13</td><td><span class="ref codigo">D3</span></td></tr>
+<tr><th scope="row">fr. X</th><td>Fecha de última actualización</td><td>Pregunta 14</td><td><span class="ref codigo">D4</span></td></tr>
+<tr><th scope="row">fr. XI</th><td>Nivel de acceso</td><td>Pregunta 15</td><td><span class="ref codigo">E1</span></td></tr>
+<tr><th scope="row">fr. XI</th><td>Datos personales</td><td>Pregunta 16</td><td><span class="ref codigo">E2</span></td></tr>
+</tbody></table>
+<p class="identificacion">F-CAT-01 Registro de catálogo existente · Versión imprimible · Versión 0.1 · Noviembre de 2026 · Borrador para revisión · no vigente · Responsable: DGETD · Generada desde spec/registro.yaml.</p>
+</section>
+</main>
+<script src="diseno/iconos.js"></script>
+</body>
+</html>

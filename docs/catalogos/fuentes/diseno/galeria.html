@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<title>Galería de componentes · kit.css</title>
+<meta name="author" content="Dirección General de Estrategia y Transformación Digital (DGETD)">
+<meta name="description" content="Muestra interna de todos los componentes del sistema de diseño de las piezas impresas del registro de catálogos.">
+<meta name="pdf-encabezado" content="Galería · kit.css">
+<meta name="pdf-pie" content="Muestra interna del sistema de diseño · no se distribuye">
+<link rel="stylesheet" href="kit.css">
+<style>
+  /* CSS particular de la galería (las piezas nunca editan kit.css) */
+  .muestra { font-family: var(--mono); font-size: var(--t-min); color: var(--ink-2); letter-spacing: .02em; }
+  .muestra::before { content: "Clases: "; font-family: var(--sans); font-weight: 600; }
+  .fila-chips { display: flex; flex-wrap: wrap; gap: 2mm 3mm; align-items: center; }
+  .catalogo-iconos { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 3mm 2mm; }
+  .catalogo-iconos li { margin: 0; display: grid; justify-items: center; gap: 1.4mm; padding: 3mm 1mm 2.4mm; border: var(--borde); border-radius: var(--radio); }
+  .catalogo-iconos .ico { width: 6.5mm; height: 6.5mm; color: var(--ink); }
+  .catalogo-iconos span { font-family: var(--mono); font-size: var(--t-min); color: var(--ink-2); }
+  .diagrama { width: 100%; height: auto; display: block; }
+</style>
+</head>
+<body>
+
+<!-- ============ MODELO A · PÁGINA FIJA ============ -->
+<article class="page" aria-label="Página 1: muestra del modelo de página fija">
+  <header class="cabecera">
+    <span class="marca">Órgano de Administración Judicial · DGETD</span>
+    <span class="etiqueta simple">Registro de catálogos · Transitorio CUARTO</span>
+  </header>
+
+  <section class="portada">
+    <div>
+      <span class="etiqueta">Galería · modelo A · página fija</span>
+      <h1>¿Su área lleva una lista que <em>otros también usan</em>?</h1>
+      <p class="entrada">Órganos, cargos, inmuebles, tipos de documento. Si otra área o un sistema consulta o copia esa lista, regístrela. Le pedimos una ficha con datos sobre la lista, no la lista.</p>
+    </div>
+    <figure class="variantes" aria-label="Ejemplo ilustrativo de un mismo juzgado escrito de tres formas en tres sistemas">
+      <div class="fila"><span class="sistema">Sistema A</span><span class="valor">Juzgado Primero de Distrito en Materia Penal en la Ciudad de México</span></div>
+      <div class="fila"><span class="sistema">Sistema B</span><span class="valor">Jdo. 1o. Dto. Penal CDMX</span></div>
+      <div class="fila"><span class="sistema">Hoja de cálculo</span><span class="valor">JUZ 1 DIST PEN</span></div>
+      <div class="fila buena"><span class="sistema">Una sola lista</span><span class="valor">Juzgado Primero de Distrito en Materia Penal en la Ciudad de México</span></div>
+      <figcaption>Ejemplo ilustrativo. Así nacen los reportes que no coinciden entre áreas.</figcaption>
+    </figure>
+  </section>
+
+  <div class="cuerpo">
+    <div class="rejilla estirar">
+      <section class="tarjeta si">
+        <h2><span class="ico" data-icono="check-circulo"></span>Qué le pedimos</h2>
+        <ul class="marcas-si">
+          <li>Una ficha por cada lista.</li>
+          <li>Datos sobre la lista que usted ya conoce: nombre, para qué sirve, quién la mantiene, quién la usa.</li>
+          <li>Si no sabe un dato, márquelo «por confirmar».</li>
+        </ul>
+      </section>
+      <section class="tarjeta no">
+        <h2><span class="ico" data-icono="cruz"></span>Qué no le pedimos</h2>
+        <ul class="marcas-no">
+          <li>El contenido de la lista.</li>
+          <li>Datos personales.</li>
+          <li>Cambiar sus sistemas o su forma de trabajar.</li>
+        </ul>
+      </section>
+    </div>
+
+    <section class="banda">
+      <h2>Cómo funciona</h2>
+      <ol class="pasos">
+        <li><b>Registra</b>En línea, con la plantilla de Excel si son más de 5 listas, o con nosotros por Teams.</li>
+        <li><b>Recibe acuse</b>Con folio y la clave de su lista, por ejemplo <span class="clave">CAT-0042</span>.</li>
+        <li><b>Prellenamos</b>Completamos lo que la DGETD ya sabe, como los sistemas que la usan.</li>
+        <li><b>Confirma</b>Revisa su ficha y nos dice si está correcta.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2 class="visualmente-oculto">Por qué vale la pena</h2>
+      <ul class="razones">
+        <li><b>No depende de una persona</b>Su lista queda documentada a nombre del área. Si alguien cambia de puesto, no se pierde.</li>
+        <li><b>Avisos antes de un cambio</b>Sabremos qué sistemas dependen de su lista y a quién avisar antes de un cambio de estructura.</li>
+        <li><b>Primer paso, no la solución</b>Es la condición para que dos áreas dejen de llegar con cifras distintas. No lo resuelve hoy.</li>
+      </ul>
+    </section>
+
+    <p class="muestra">.page · .cabecera · .marca · .portada · .variantes · .tarjeta.si/.no · .marcas-si/no · .banda · .pasos · .razones · .pie</p>
+  </div>
+
+  <footer class="pie">
+    <span>Fecha límite: <span class="ph">[viernes 15 de enero de 2027, por confirmar]</span></span>
+    <span><strong>Regístrela aquí:</strong> <span class="ph">[liga al formulario de registro]</span></span>
+  </footer>
+</article>
+
+<!-- ============ MODELO B · FLUJO CONTINUO ============ -->
+<main class="flujo">
+
+  <header class="portada-flujo">
+    <span class="etiqueta">Galería · modelo B · flujo continuo</span>
+    <h2 class="titulo">Componentes para documentos de <em>varias páginas</em></h2>
+    <p class="entrada">Las páginas siguientes muestran cada componente de kit.css con contenido de ejemplo. Copie la estructura HTML y cambie el texto. Las reglas de voz y fidelidad están en las convenciones.</p>
+    <p class="muestra">.portada-flujo · .titulo · .entrada · dl.datos</p>
+    <dl class="datos">
+      <dt>Documento</dt><dd>Galería del sistema de diseño (uso interno)</dd>
+      <dt>Versión</dt><dd>0.1 · noviembre de 2026</dd>
+      <dt>Responsable</dt><dd>Dirección General de Estrategia y Transformación Digital (DGETD)</dd>
+      <dt>Estatus</dt><dd>Muestra interna · no se distribuye</dd>
+    </dl>
+  </header>
+
+  <!-- 1. Texto -->
+  <section>
+    <header class="titulo-bloque">
+      <span class="etiqueta">1 · Texto y referencias</span>
+      <h2>Primero la palabra de todos los días</h2>
+      <p class="entrada">El término normativo va después y en pequeño. Los artículos y los códigos de campo van como referencia discreta, nunca al inicio de una frase.</p>
+    </header>
+    <p>Díganos qué área mantiene la lista al día <span class="termino">(custodio)</span> y qué área decide qué entra y qué sale <span class="termino">(propietario)</span>. Lo que anote es una propuesta; la formaliza el Comité al aprobar el catálogo. <span class="ref">art. 12</span> <span class="ref">C1</span> <span class="ref">C2</span></p>
+    <p>Al recibir su registro le enviamos un acuse con folio <span class="clave">RC-2027-0118</span> y la clave de su lista <span class="clave">CAT-0042</span>. La fecha límite es el <span class="ph">[viernes 15 de enero de 2027, por confirmar]</span>.</p>
+    <p class="muestra">.termino · .ref · .clave · .ph (texto literal de registro.yaml &gt; marcadores)</p>
+
+    <h3>Estado de cada pregunta: texto y forma, nunca solo color</h3>
+    <div class="fila-chips">
+      <span class="estado obligatorio">Obligatorio</span>
+      <span class="estado por-confirmar">Acepta «por confirmar»</span>
+      <span class="estado opcional">Opcional</span>
+      <span class="estado dgetd">Lo llena la DGETD</span>
+      <span class="estado listo">Confirmado</span>
+    </div>
+    <p class="muestra">.estado.obligatorio · .estado.por-confirmar · .estado.opcional · .estado.dgetd · .estado.listo</p>
+
+    <h3>Cifras que se entienden de un vistazo</h3>
+    <div class="rejilla cuatro">
+      <div class="cifra"><b>1</b><span>ficha por cada lista</span></div>
+      <div class="cifra"><b>11</b><span>datos sobre la lista, los del art. 8</span></div>
+      <div class="cifra"><b>3</b><span>caminos: en línea, Excel o acompañado</span></div>
+      <div class="cifra"><b>0</b><span>cambios a sus sistemas</span></div>
+    </div>
+    <p class="muestra">.rejilla.cuatro · .cifra</p>
+  </section>
+
+  <!-- 2. Tarjetas -->
+  <section>
+    <header class="titulo-bloque">
+      <span class="etiqueta">2 · Tarjetas</span>
+      <h2>Una idea por tarjeta</h2>
+    </header>
+    <div class="rejilla tres estirar">
+      <div class="tarjeta">
+        <span class="tarjeta-etiqueta">Neutra</span>
+        <h3><span class="ico" data-icono="lista"></span>Una ficha por lista</h3>
+        <p>Si su área lleva varias listas, haga un registro por cada una o use la plantilla de Excel.</p>
+      </div>
+      <div class="tarjeta neutra">
+        <span class="tarjeta-etiqueta">Neutra sobre panel</span>
+        <h3><span class="ico" data-icono="pregunta"></span>Ante la duda</h3>
+        <p>Regístrela. Después revisamos con usted si es catálogo institucional o de uso local.</p>
+      </div>
+      <div class="tarjeta si">
+        <span class="tarjeta-etiqueta">Sí</span>
+        <h3><span class="ico" data-icono="escudo"></span>Registrar no publica</h3>
+        <p>Registrar no publica la lista, no cambia quién la administra ni modifica ningún sistema.</p>
+      </div>
+    </div>
+    <p class="muestra">.rejilla.tres.estirar · .tarjeta · .tarjeta.neutra · .tarjeta.si · .tarjeta-etiqueta · h3 con .ico</p>
+
+    <div class="trio">
+      <section class="tarjeta firme">
+        <span class="tarjeta-etiqueta">Lo que obligan los Lineamientos</span>
+        <h3><span class="ico" data-icono="libro"></span>Firme</h3>
+        <ul>
+          <li>Registrar las listas que administra su área. <span class="ref">Transitorio CUARTO</span></li>
+          <li>Se piden datos sobre la lista, no su contenido. <span class="ref">art. 8</span></li>
+          <li>Antes de un cambio de estructura se avisa a los sistemas que la usan. <span class="ref">art. 13</span></li>
+        </ul>
+      </section>
+      <section class="tarjeta posible">
+        <span class="tarjeta-etiqueta">Lo que permiten, sin asegurarlo</span>
+        <h3><span class="ico" data-icono="foco"></span>Posible</h3>
+        <ul>
+          <li>Un trámite más corto para listas pequeñas, si lo aprueba el Comité. <span class="ref">art. 5</span></li>
+          <li>Que la DGETD mantenga las listas transversales; lo decide el Comité. <span class="ref">art. 17</span></li>
+        </ul>
+      </section>
+      <section class="tarjeta compromiso">
+        <span class="tarjeta-etiqueta">Lo que la DGETD firma</span>
+        <h3><span class="ico" data-icono="escudo-check"></span>Compromiso</h3>
+        <ul>
+          <li>Acuse con folio y fecha.</li>
+          <li>Clave de su lista asignada por nosotros.</li>
+          <li>Una persona de contacto con nombre.</li>
+        </ul>
+      </section>
+    </div>
+    <p class="muestra">.trio &gt; .tarjeta.firme / .posible / .compromiso</p>
+  </section>
+
+  <!-- 3. Pasos y tiempos -->
+  <section>
+    <header class="titulo-bloque">
+      <span class="etiqueta">3 · Pasos y fechas</span>
+      <h2>Mostrar el camino en vez de explicarlo</h2>
+    </header>
+    <div class="rejilla">
+      <div>
+        <h3>Pasos verticales</h3>
+        <ol class="pasos vertical" style="margin-top:3mm">
+          <li><b>Abra el formulario</b>Elija su área de la lista oficial; no la escriba a mano.</li>
+          <li><b>Responda lo que sabe</b>Lo que no sepa, márquelo «por confirmar».</li>
+          <li><b>Envíe y guarde el acuse</b>Llega con folio, fecha y la clave de su lista.</li>
+          <li><b>Confirme su ficha</b>La revisamos, prellenamos lo que conocemos y se la enviamos.</li>
+        </ol>
+      </div>
+      <div>
+        <h3>Línea de tiempo vertical</h3>
+        <ol class="linea-tiempo vertical" style="margin-top:3mm">
+          <li class="hecho"><span class="fecha"><span class="ph">[segunda quincena de noviembre de 2026, por confirmar]</span></span><div><b>Piloto</b>Probamos el formulario con algunas áreas.</div></li>
+          <li><span class="fecha"><span class="ph">[fines de noviembre de 2026, por confirmar]</span></span><div><b>Publicación</b>Formato y procedimiento de registro.</div></li>
+          <li class="limite"><span class="fecha"><span class="ph">[viernes 15 de enero de 2027, por confirmar]</span></span><div><b>Fecha límite</b>Registro de listas existentes.</div></li>
+        </ol>
+      </div>
+    </div>
+
+    <h3>Línea de tiempo horizontal</h3>
+    <ol class="linea-tiempo">
+      <li class="hecho"><span class="fecha"><span class="ph">[segunda quincena de noviembre de 2026, por confirmar]</span></span><div><b>Piloto</b>Con algunas áreas.</div></li>
+      <li><span class="fecha"><span class="ph">[fines de noviembre de 2026, por confirmar]</span></span><div><b>Publicamos el formato</b>Abre el registro.</div></li>
+      <li><span class="fecha"><span class="ph">[miércoles 16 de diciembre de 2026, por confirmar]</span></span><div><b>Formatos</b>Transitorio TERCERO.</div></li>
+      <li class="limite"><span class="fecha"><span class="ph">[viernes 15 de enero de 2027, por confirmar]</span></span><div><b>Fecha límite</b>Transitorio CUARTO.</div></li>
+      <li><span class="fecha"><span class="ph">[domingo 14 de febrero de 2027, por confirmar]</span></span><div><b>Plan de adecuación</b>Transitorio QUINTO.</div></li>
+    </ol>
+    <p class="atenuado pequeno">Los círculos llenos marcan lo ya iniciado; el rombo marca la fecha límite. Cada fecha lleva además su texto.</p>
+    <p class="muestra">ol.pasos · ol.pasos.vertical · ol.linea-tiempo · .vertical · li.hecho · li.limite · .fecha</p>
+  </section>
+
+  <!-- 4. Recuadros -->
+  <section>
+    <header class="titulo-bloque">
+      <span class="etiqueta">4 · Recuadros</span>
+      <h2>Cada tipo de afirmación con su recuadro</h2>
+      <p class="entrada">El título del recuadro dice qué tipo de afirmación es. El color acompaña, no sustituye.</p>
+    </header>
+    <div class="rejilla estirar">
+      <div class="recuadro norma">
+        <p class="recuadro-titulo"><span class="ico" data-icono="libro"></span>Lo que dice la norma</p>
+        <p>Se piden datos sobre la lista, no su contenido. <span class="ref">Transitorio CUARTO</span> <span class="ref">art. 8</span></p>
+      </div>
+      <div class="recuadro nota">
+        <p class="recuadro-titulo"><span class="ico" data-icono="info"></span>Nota</p>
+        <p>Lo que anote sobre quién decide y quién mantiene la lista es una propuesta. El Comité la formaliza al aprobar el catálogo. <span class="ref">art. 12</span></p>
+      </div>
+      <div class="recuadro pendiente">
+        <p class="recuadro-titulo"><span class="ico" data-icono="reloj"></span>Por confirmar</p>
+        <p>La DGETD recibe y da trámite a todo registro con el área, el nombre y la descripción de la lista, y completa el resto con su área. Si eso cuenta en tiempo para el Transitorio CUARTO está pendiente de decisión del Comité.</p>
+      </div>
+      <div class="recuadro alerta">
+        <p class="recuadro-titulo"><span class="ico" data-icono="alerta"></span>Atención</p>
+        <p>No adjunte la lista ni datos personales. Solo le pedimos datos sobre la lista.</p>
+      </div>
+    </div>
+    <div class="recuadro compromiso">
+      <p class="recuadro-titulo"><span class="ico" data-icono="escudo-check"></span>Compromiso DGETD</p>
+      <ul class="marcas-si">
+        <li>Acuse con folio y fecha, y la clave de su lista asignada por nosotros.</li>
+        <li>Prellenamos lo que la DGETD ya conoce y le enviamos la ficha para confirmar en <span class="ph">[plazo por definir según capacidad de la DGETD]</span>.</li>
+        <li>Una persona de contacto con nombre. No le volveremos a pedir lo que ya entregó.</li>
+        <li>Correcciones sin costo hasta el dictamen.</li>
+      </ul>
+    </div>
+    <div class="recuadro oj">
+      <p class="recuadro-titulo"><span class="ico" data-icono="edificio"></span>Órganos jurisdiccionales</p>
+      <p>Esto no toca la función jurisdiccional ni la independencia judicial. No se piden expedientes, contenidos ni datos personales. Si su órgano no lleva listas propias, no tiene que hacer nada más.</p>
+    </div>
+    <p class="muestra">.recuadro.norma · .nota · .pendiente · .alerta · .compromiso · .oj · .recuadro-titulo</p>
+  </section>
+
+  <!-- 5. Mostrar -->
+  <section>
+    <header class="titulo-bloque">
+      <span class="etiqueta">5 · Mostrar</span>
+      <h2>Antes y después, caminos y diagramas</h2>
+    </header>
+    <div class="antes-despues">
+      <div class="antes">
+        <span class="tarjeta-etiqueta">Antes</span>
+        <p>«Custodio: área responsable de su mantenimiento operativo».</p>
+      </div>
+      <div class="flecha"><span class="ico" data-icono="flecha-derecha"></span></div>
+      <div class="despues">
+        <span class="tarjeta-etiqueta">Después</span>
+        <p>¿Qué área mantiene la lista al día: da de alta, corrige y da de baja? <span class="termino">(custodio)</span></p>
+      </div>
+    </div>
+    <p class="muestra">.antes-despues &gt; .antes · .flecha · .despues</p>
+
+    <h3>Lista con íconos</h3>
+    <ul class="lista-iconos">
+      <li><span class="ico-insignia"><span class="ico" data-icono="pantalla"></span></span><div><b>En línea</b>Un envío por lista. Acuse automático con folio y clave. <span class="ph">[liga al formulario de registro]</span></div></li>
+      <li><span class="ico-insignia"><span class="ico" data-icono="hoja-calculo"></span></span><div><b>Plantilla de Excel</b>Para más de 5 listas. Se sube a una carpeta de SharePoint, no por correo. <span class="ph">[liga a la carpeta de SharePoint para plantillas de Excel]</span></div></li>
+      <li><span class="ico-insignia"><span class="ico" data-icono="videollamada"></span></span><div><b>Registro acompañado</b>Por Teams o teléfono. Usted responde y nosotros capturamos.</div></li>
+    </ul>
+    <p class="muestra">ul.lista-iconos · .ico-insignia (y .ambar · .coral · .verde · .gris)</p>
+
+    <figure class="figura">
+      <div class="lienzo">
+        <svg class="diagrama" viewBox="0 0 640 120" role="img" aria-label="Diagrama del recorrido de un registro: su área registra, la DGETD acusa y asigna clave, la DGETD prellena la ficha y su área confirma.">
+          <g font-size="13" fill="#161A1D">
+            <rect x="2" y="30" width="130" height="60" rx="8" fill="#E8F5F4" stroke="#49B6B2" stroke-width="1.5"/>
+            <text x="67" y="56" text-anchor="middle" font-weight="700">Su área</text>
+            <text x="67" y="74" text-anchor="middle" fill="#575F71">registra</text>
+            <rect x="171" y="30" width="130" height="60" rx="8" fill="#fff" stroke="#E6EAEF" stroke-width="1.5"/>
+            <text x="236" y="56" text-anchor="middle" font-weight="700">DGETD</text>
+            <text x="236" y="74" text-anchor="middle" fill="#575F71">acuse y clave</text>
+            <rect x="340" y="30" width="130" height="60" rx="8" fill="#fff" stroke="#E6EAEF" stroke-width="1.5"/>
+            <text x="405" y="56" text-anchor="middle" font-weight="700">DGETD</text>
+            <text x="405" y="74" text-anchor="middle" fill="#575F71">prellena la ficha</text>
+            <rect x="509" y="30" width="129" height="60" rx="8" fill="#E8F5F4" stroke="#49B6B2" stroke-width="1.5"/>
+            <text x="573" y="56" text-anchor="middle" font-weight="700">Su área</text>
+            <text x="573" y="74" text-anchor="middle" fill="#575F71">confirma</text>
+          </g>
+          <g stroke="#2A7370" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M138 60h26M158 54l6 6-6 6"/><path d="M307 60h26M327 54l6 6-6 6"/><path d="M476 60h26M496 54l6 6-6 6"/>
+          </g>
+        </svg>
+      </div>
+      <ol class="pasos-texto">
+        <li>Su área registra la lista.</li>
+        <li>La DGETD envía acuse con folio y asigna la clave.</li>
+        <li>La DGETD prellena la ficha con lo que conoce.</li>
+        <li>Su área revisa la ficha y la confirma.</li>
+      </ol>
+      <figcaption>Figura en SVG en línea con role="img" y aria-label; debajo, los mismos pasos en texto.</figcaption>
+    </figure>
+    <p class="muestra">figure.figura &gt; .lienzo · .pasos-texto · figcaption</p>
+
+    <h3>Ficha de ejemplo</h3>
+    <div class="ficha">
+      <div class="ficha-cabeza"><span class="clave">CAT-0042</span><span class="estado listo">Confirmado</span></div>
+      <dl>
+        <dt>Nombre</dt><dd>Catálogo de inmuebles del OAJ</dd>
+        <dt>Para qué sirve</dt><dd>Lista de los inmuebles que ocupa el OAJ, con domicilio y uso. Se usa para programar mantenimiento y para ubicar órganos en los reportes estadísticos.</dd>
+        <dt>Quién la mantiene <span class="termino">(custodio)</span></dt><dd>Dirección de ejemplo · propuesta</dd>
+        <dt>Quién la usa</dt><dd>Sistema de mantenimiento de inmuebles; reporte mensual de ocupación</dd>
+      </dl>
+      <div class="ficha-pie">Ejemplo ilustrativo. Los nombres de áreas y sistemas no son reales.</div>
+    </div>
+    <p class="muestra">.ficha · .ficha-cabeza · .ficha-pie</p>
+  </section>
+
+  <!-- 6. Preguntas y palabras -->
+  <section>
+    <header class="titulo-bloque">
+      <span class="etiqueta">6 · Preguntas y palabras</span>
+      <h2>Lo que más nos preguntan</h2>
+    </header>
+    <div class="faq">
+      <div><h3>¿Me van a quitar la lista?</h3><p>No. Registrar no cambia quién la administra. Lo que anote sobre quién decide y quién la mantiene es una propuesta que formaliza el Comité.</p></div>
+      <div><h3>¿Se va a publicar?</h3><p>Registrar no publica nada. Si la lista tiene información reservada o confidencial, se protege con controles de acceso.</p></div>
+      <div><h3>No sé qué sistemas la usan</h3><p>Anote los que conozca y marque la casilla para que la DGETD complete la lista con las áreas de sistemas.</p></div>
+      <div><h3>¿Y si me equivoco?</h3><p>El registro no es una auditoría. Puede corregir sin costo hasta el dictamen.</p></div>
+    </div>
+    <p class="muestra">.faq &gt; div &gt; h3 + p</p>
+
+    <h3>Glosario</h3>
+    <dl class="glosario">
+      <dt>Lista <span class="termino">(catálogo)</span></dt><dd>Conjunto de valores de referencia que otras áreas o sistemas consultan o copian, como órganos, cargos o inmuebles.</dd>
+      <dt>Quién decide <span class="termino">(propietario)</span></dt><dd>Área que decide qué entra y qué sale de la lista, y con qué reglas.</dd>
+      <dt>Quién la mantiene <span class="termino">(custodio)</span></dt><dd>Área que la mantiene al día en la práctica: da de alta, corrige y da de baja.</dd>
+      <dt>Datos sobre la lista <span class="termino">(metadatos)</span></dt><dd>Nombre, propósito, quién la mantiene, quién la usa. No es el contenido de la lista.</dd>
+    </dl>
+    <p class="muestra">dl.glosario &gt; dt (con .termino) + dd</p>
+  </section>
+
+  <!-- 7. Formato -->
+  <section class="salto-antes">
+    <header class="titulo-bloque">
+      <span class="etiqueta">7 · Componentes de formato (F-CAT-01)</span>
+      <h2>Una pregunta por bloque</h2>
+      <p class="entrada">El número ordena; el código del campo va como referencia discreta. El estado siempre dice con palabras si la pregunta es obligatoria.</p>
+    </header>
+
+    <div class="pila">
+      <div class="seccion-formato"><span class="letra" aria-hidden="true">B</span><h3>Su lista</h3></div>
+      <div class="pregunta">
+        <span class="pregunta-num" aria-hidden="true">5</span>
+        <div class="pregunta-cuerpo">
+          <div class="pregunta-meta"><span class="estado obligatorio">Obligatorio</span><span class="ref">B2 · art. 8 fr. II</span></div>
+          <h4 class="pregunta-texto">¿Cómo se llama esta lista? Escriba el nombre completo, sin siglas.</h4>
+          <p class="ayuda"><span class="ico" data-icono="info"></span><span>Ejemplo: «Catálogo de inmuebles del OAJ». Si en su área le dicen de otra forma, escríbalo entre paréntesis.</span></p>
+          <div class="renglones" style="--n:2"></div>
+        </div>
+      </div>
+
+      <div class="seccion-formato"><span class="letra" aria-hidden="true">C</span><h3>Quién decide y quién la mantiene</h3></div>
+      <div class="pregunta">
+        <span class="pregunta-num" aria-hidden="true">8</span>
+        <div class="pregunta-cuerpo">
+          <div class="pregunta-meta"><span class="estado por-confirmar">Acepta «por confirmar»</span><span class="ref">C2 · art. 8 fr. V</span></div>
+          <h4 class="pregunta-texto">¿Qué área mantiene la lista al día en la práctica: da de alta, corrige y da de baja? <span class="termino">(custodio)</span></h4>
+          <p class="ayuda"><span class="ico" data-icono="info"></span><span>Indique el área y una persona de contacto. Es una propuesta; la formaliza el Comité.</span></p>
+          <div class="campos">
+            <p class="campo">Área</p>
+            <p class="campo">Persona de contacto</p>
+          </div>
+        </div>
+      </div>
+      <div class="pregunta">
+        <span class="pregunta-num" aria-hidden="true">10</span>
+        <div class="pregunta-cuerpo">
+          <div class="pregunta-meta"><span class="estado por-confirmar">Acepta «por confirmar»</span><span class="ref">C3 · art. 5</span></div>
+          <h4 class="pregunta-texto">¿A qué se parece más su lista? <span class="termino">(clasificación)</span></h4>
+          <p class="ayuda"><span class="ico" data-icono="info"></span><span>Marque una. No se preocupe por acertar: la DGETD revisa su respuesta.</span></p>
+          <ul class="opciones unica dos">
+            <li>Una lista de personas, lugares o cosas de la institución<small>órganos jurisdiccionales, inmuebles, cargos</small></li>
+            <li>Una lista de opciones para clasificar información<small>tipos de documento, sentidos de resolución</small></li>
+            <li>Valores de configuración que usa un sistema<small>plazos, montos, porcentajes, umbrales</small></li>
+            <li>Una tabla que une dos listas<small>qué órgano pertenece a qué circuito</small></li>
+            <li>No estoy seguro <small>por confirmar</small></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="seccion-formato"><span class="letra" aria-hidden="true">D</span><h3>Quién la usa y cada cuánto cambia</h3></div>
+      <div class="pregunta">
+        <span class="pregunta-num" aria-hidden="true">11</span>
+        <div class="pregunta-cuerpo">
+          <div class="pregunta-meta"><span class="estado por-confirmar">Acepta «por confirmar»</span><span class="ref">D1 · art. 8 fr. VII</span></div>
+          <h4 class="pregunta-texto">¿Qué sistemas, aplicaciones, archivos o reportes usan esta lista?</h4>
+          <p class="ayuda"><span class="ico" data-icono="info"></span><span>Anote los que conozca, uno por renglón. Lo preguntamos para poder avisarles antes de un cambio de estructura.</span></p>
+          <div class="renglones" style="--n:3"></div>
+          <p class="casilla">No conozco todos. Que la DGETD complete la lista.</p>
+        </div>
+      </div>
+
+      <div class="seccion-formato"><span class="letra" aria-hidden="true">F</span><h3>Para entender mejor su lista</h3></div>
+      <div class="pregunta">
+        <span class="pregunta-num" aria-hidden="true">17</span>
+        <div class="pregunta-cuerpo">
+          <div class="pregunta-meta"><span class="estado opcional">Opcional</span><span class="ref">F2</span></div>
+          <h4 class="pregunta-texto">¿Cuántos renglones tiene la lista, aproximadamente?</h4>
+          <ul class="opciones unica tres">
+            <li>Menos de 50</li><li>De 50 a 500</li><li>De 501 a 5,000</li><li>Más de 5,000</li><li class="marcada">No sé</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <p class="muestra">.seccion-formato · .pregunta · .pregunta-num · .pregunta-meta · .pregunta-texto · .ayuda · .renglones (--n) · .campos/.campo · ul.opciones(.unica .dos .tres) · li.marcada · .casilla</p>
+
+    <div class="zona-dgetd">
+      <div class="zona-dgetd-titulo"><span><span class="ico" data-icono="lapiz"></span>Lo llena la DGETD</span><small>Su área solo la revisa y la confirma.</small></div>
+      <div class="campos tres">
+        <p class="campo">Folio de registro<span class="respuesta"><span class="clave">RC-2027-0118</span></span></p>
+        <p class="campo">Clave de catálogo asignada<span class="respuesta"><span class="clave">CAT-0042</span></span></p>
+        <p class="campo">Fecha de recepción</p>
+      </div>
+      <p class="pequeno"><b>Estatus del registro</b></p>
+      <ul class="opciones unica cuatro">
+        <li class="marcada">Recibido</li><li>En revisión</li><li>Ficha enviada</li><li>Confirmado</li>
+      </ul>
+    </div>
+    <p class="muestra">.zona-dgetd · .zona-dgetd-titulo · .campos.tres · .campo .respuesta</p>
+  </section>
+
+  <!-- 8. Íconos -->
+  <section>
+    <header class="titulo-bloque">
+      <span class="etiqueta">8 · Íconos</span>
+      <h2>Íconos de línea</h2>
+      <p class="entrada">Trazo de 2 px, esquinas redondeadas, color heredado del texto. Se escriben como &lt;span class="ico" data-icono="nombre"&gt;&lt;/span&gt;.</p>
+    </header>
+    <ul class="catalogo-iconos">
+      <li><span class="ico" data-icono="acuse"></span><span>acuse</span></li>
+      <li><span class="ico" data-icono="alerta"></span><span>alerta</span></li>
+      <li><span class="ico" data-icono="bandera"></span><span>bandera</span></li>
+      <li><span class="ico" data-icono="base-datos"></span><span>base-datos</span></li>
+      <li><span class="ico" data-icono="buscar"></span><span>buscar</span></li>
+      <li><span class="ico" data-icono="calendario"></span><span>calendario</span></li>
+      <li><span class="ico" data-icono="candado"></span><span>candado</span></li>
+      <li><span class="ico" data-icono="carpeta"></span><span>carpeta</span></li>
+      <li><span class="ico" data-icono="check"></span><span>check</span></li>
+      <li><span class="ico" data-icono="check-circulo"></span><span>check-circulo</span></li>
+      <li><span class="ico" data-icono="ciclo"></span><span>ciclo</span></li>
+      <li><span class="ico" data-icono="correo"></span><span>correo</span></li>
+      <li><span class="ico" data-icono="cruz"></span><span>cruz</span></li>
+      <li><span class="ico" data-icono="documento"></span><span>documento</span></li>
+      <li><span class="ico" data-icono="edificio"></span><span>edificio</span></li>
+      <li><span class="ico" data-icono="enlace"></span><span>enlace</span></li>
+      <li><span class="ico" data-icono="escudo"></span><span>escudo</span></li>
+      <li><span class="ico" data-icono="escudo-check"></span><span>escudo-check</span></li>
+      <li><span class="ico" data-icono="etiqueta"></span><span>etiqueta</span></li>
+      <li><span class="ico" data-icono="flecha-abajo"></span><span>flecha-abajo</span></li>
+      <li><span class="ico" data-icono="flecha-arriba"></span><span>flecha-arriba</span></li>
+      <li><span class="ico" data-icono="flecha-derecha"></span><span>flecha-derecha</span></li>
+      <li><span class="ico" data-icono="flecha-izquierda"></span><span>flecha-izquierda</span></li>
+      <li><span class="ico" data-icono="foco"></span><span>foco</span></li>
+      <li><span class="ico" data-icono="grupo"></span><span>grupo</span></li>
+      <li><span class="ico" data-icono="hoja-calculo"></span><span>hoja-calculo</span></li>
+      <li><span class="ico" data-icono="info"></span><span>info</span></li>
+      <li><span class="ico" data-icono="lapiz"></span><span>lapiz</span></li>
+      <li><span class="ico" data-icono="libro"></span><span>libro</span></li>
+      <li><span class="ico" data-icono="lista"></span><span>lista</span></li>
+      <li><span class="ico" data-icono="mas"></span><span>mas</span></li>
+      <li><span class="ico" data-icono="mensaje"></span><span>mensaje</span></li>
+      <li><span class="ico" data-icono="nodos"></span><span>nodos</span></li>
+      <li><span class="ico" data-icono="ojo"></span><span>ojo</span></li>
+      <li><span class="ico" data-icono="pantalla"></span><span>pantalla</span></li>
+      <li><span class="ico" data-icono="persona"></span><span>persona</span></li>
+      <li><span class="ico" data-icono="pregunta"></span><span>pregunta</span></li>
+      <li><span class="ico" data-icono="reloj"></span><span>reloj</span></li>
+      <li><span class="ico" data-icono="telefono"></span><span>telefono</span></li>
+      <li><span class="ico" data-icono="videollamada"></span><span>videollamada</span></li>
+    </ul>
+  </section>
+
+  <!-- 9. Cierre -->
+  <section>
+    <div class="cierre">
+      <div>
+        <span class="etiqueta">9 · Cierre y contacto</span>
+        <h2 style="margin-top:2mm">Le acompañamos en el registro</h2>
+        <p>Si prefiere, registramos juntos su lista por Teams o por teléfono. Usted responde y nosotros capturamos.</p>
+      </div>
+      <ul class="contacto">
+        <li><span class="ico-insignia"><span class="ico" data-icono="correo"></span></span><span><b>Asesoría DGETD</b><span class="ph">[correo, extensión y horario de la asesoría DGETD]</span></span></li>
+        <li><span class="ico-insignia"><span class="ico" data-icono="enlace"></span></span><span><b>Formulario de registro</b><span class="ph">[liga al formulario de registro]</span></span></li>
+        <li><span class="ico-insignia"><span class="ico" data-icono="carpeta"></span></span><span><b>Plantilla de Excel</b><span class="ph">[liga a la carpeta de SharePoint para plantillas de Excel]</span></span></li>
+      </ul>
+    </div>
+    <p class="muestra">.cierre · ul.contacto · .ico-insignia</p>
+  </section>
+
+  <section class="para-saber-mas">
+    <h2>Para saber más</h2>
+    <p>Lo que no ayuda a actuar va aquí, al final y en tamaño menor.</p>
+    <ul>
+      <li>Fundamento: Lineamientos Generales de Catálogos Institucionales, artículos 5, 8, 12, 13, 17 y Transitorio CUARTO.</li>
+      <li>Las fechas están por confirmar. Los ejemplos con nombres de áreas o sistemas son ilustrativos.</li>
+    </ul>
+    <p class="muestra">.para-saber-mas · .nota-pie · .fuente</p>
+    <p class="fuente">Fuente: spec/registro.yaml, versión 0.1.</p>
+  </section>
+</main>
+
+<script src="iconos.js"></script>
+</body>
+</html>
