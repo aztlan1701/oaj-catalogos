@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<title>PR-CAT-04 en una mirada · Registro de catálogos existentes</title>
+<meta name="author" content="Dirección General de Estrategia y Transformación Digital (DGETD)">
+<meta name="description" content="Resumen visual de dos páginas del Procedimiento de registro de catálogos existentes (PR-CAT-04), Transitorio CUARTO de los Lineamientos Generales de Catálogos Institucionales. En caso de diferencia, manda el procedimiento.">
+<link rel="stylesheet" href="diseno/kit.css">
+<style>
+  /* =========================================================================
+     PR-CAT-04 en una mirada · CSS particular de la pieza (usa tokens del kit)
+     ========================================================================= */
+  .resumen .cabecera { padding-top: 9mm; }
+  .resumen .cuerpo { gap: 3.4mm; padding-bottom: 3.2mm; }
+  .resumen .pie { padding: 3.6mm var(--pagina-x) 7mm; }
+
+  /* Encabezado de bloque: h2 a la izquierda, nota breve a la derecha */
+  .bloque-titulo { display: flex; align-items: baseline; justify-content: space-between; gap: 6mm; margin-bottom: 2.2mm; }
+  .bloque-titulo h2 { font-size: 13.5pt; flex: none; }
+  .bloque-titulo p { font-size: var(--t-nota); color: var(--ink-2); text-align: right; line-height: 1.3; }
+
+  /* ---------- Portada ---------- */
+  .portada.res-portada { padding: 5.5mm var(--pagina-x) 4mm; grid-template-columns: 1.55fr 1fr; gap: 7mm; align-items: center; }
+  .res-portada h1 { font-size: 23pt; margin-top: 2.2mm; }
+  .res-portada .entrada { margin-top: 3mm; font-size: 10.5pt; line-height: 1.42; }
+
+  /* Ficha de resultado (ejemplo ilustrativo) */
+  .resultado { margin: 0; }
+  .resultado .ficha-cabeza { padding: 2.2mm 3.6mm; }
+  .resultado dl { grid-template-columns: 15mm minmax(0, 1fr); }
+  .resultado dt, .resultado dd { padding: 1.7mm 3.4mm; }
+  .resultado dt { padding-right: 0; }
+  .resultado dd { font-size: 9.5pt; line-height: 1.3; }
+  .resultado .ficha-pie { font-size: var(--t-min); color: var(--ink-2); line-height: 1.35; padding: 1.8mm 3.4mm; background: var(--panel); }
+
+  /* ---------- Qué es / qué no es ---------- */
+  .es-no { gap: 4mm; }
+  .es-no .tarjeta { padding: 3.2mm 4.4mm 3.6mm; gap: 1.6mm; }
+  .es-no .tarjeta h2 { font-size: 12pt; }
+  .es-no ul { gap: .8mm; }
+  .es-no li { font-size: var(--t-chico) !important; line-height: 1.33; }
+
+  /* ---------- Recorrido de una lista ---------- */
+  .recorrido-banda { background: var(--panel); border: var(--borde); border-radius: var(--radio); padding: 3.8mm 4.4mm 4mm; }
+  .leyenda { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 1.2mm 3.2mm; align-items: center; font-size: var(--t-nota); color: var(--ink-2); margin: 0; padding: 0; list-style: none; }
+  .leyenda li { margin: 0; display: inline-flex; align-items: center; gap: 1.2mm; }
+  ol.recorrido { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 3.4mm; }
+  ol.recorrido > li { position: relative; margin: 0; border-radius: var(--radio); padding: 2.6mm 2.6mm 3mm; display: flex; flex-direction: column; gap: 1.4mm;
+    background: #fff; border: var(--borde); border-top: 1.2mm solid var(--ink); }
+  ol.recorrido > li.dgetd { background: var(--mint-tint); border-color: transparent; border-top-color: var(--mint); }
+  ol.recorrido > li.comite { background: #fff; border: .35mm dashed var(--ink-2); border-top: 1.2mm dashed var(--ink-2); }
+  ol.recorrido > li:not(:last-child)::after { content: ""; position: absolute; top: 3mm; right: -3.4mm; width: 3.4mm; height: 3.4mm; z-index: 2;
+    background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232A7370' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 5l7 7-7 7'/%3E%3C/svg%3E"); }
+  .r-cabeza { display: flex; align-items: center; justify-content: space-between; gap: 1mm; }
+  .r-num { font-family: var(--serif); font-weight: 700; font-size: 15pt; line-height: 1; color: var(--ink); }
+  li.dgetd .r-num { color: var(--mint-ink); }
+  li.comite .r-num { color: var(--ink-2); }
+  ol.recorrido h3 { font-family: var(--serif); font-weight: 700; font-size: 10.5pt; line-height: 1.15; }
+  ol.recorrido p { font-size: var(--t-chico); line-height: 1.3; color: var(--ink-2); }
+  ol.recorrido p + p { margin-top: 0; }
+  ol.recorrido .extra { font-size: var(--t-nota); line-height: 1.3; color: var(--ink); font-weight: 700; margin-top: auto; padding-top: 1.2mm; border-top: .25mm solid rgba(22,26,29,.12); }
+  li.dgetd .extra { border-top-color: rgba(42,115,112,.28); }
+  ol.recorrido .extra .clave { font-weight: 500; font-size: 8pt; background: #fff; }
+
+  /* Chip de actor: texto + ícono + forma de borde; el color nunca va solo */
+  .actor { display: inline-flex; align-items: center; gap: 1mm; font-family: var(--sans); font-weight: 700; font-size: 7.8pt; line-height: 1;
+    padding: .9mm 1.8mm .9mm 1.4mm; border-radius: 10mm; white-space: nowrap; border: .25mm solid transparent; }
+  .actor .ico { width: 3.2mm; height: 3.2mm; vertical-align: 0; }
+  .actor.area { background: var(--ink); color: #fff; }
+  .actor.dgetd { background: #fff; color: var(--mint-ink); border-color: var(--mint); }
+  .actor.comite { background: var(--panel); color: var(--ink-2); border: .25mm dashed var(--ink-2); }
+
+  /* Desvíos del recorrido */
+  ul.desvios { list-style: none; margin: 3.2mm 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4mm; }
+  ul.desvios > li { margin: 0; display: grid; grid-template-columns: 7mm 1fr; gap: 2.2mm; align-items: start; font-size: var(--t-nota); line-height: 1.33; color: var(--ink-2); }
+  ul.desvios .ico-insignia { width: 7mm; height: 7mm; background: #fff; border: var(--borde); }
+  ul.desvios .ico-insignia.ambar { background: var(--amber-tint); border-color: transparent; }
+  ul.desvios .ico-insignia .ico { width: 4mm; height: 4mm; }
+  ul.desvios b { display: block; color: var(--ink); font-size: var(--t-chico); line-height: 1.25; margin-bottom: .3mm; }
+
+  /* ---------- Calendario ---------- */
+  ol.calendario { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0; }
+  ol.calendario > li { position: relative; margin: 0; padding: 0 3.4mm 0 0; display: flex; flex-direction: column; gap: .8mm; font-size: var(--t-chico); line-height: 1.3; }
+  ol.calendario .tramo { display: block; height: 3.8mm; font-family: var(--mono); font-size: var(--t-min); font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); padding-left: 6.4mm; white-space: nowrap; }
+  ol.calendario .eje { display: block; position: relative; height: 5mm; margin-bottom: 1mm; }
+  ol.calendario .eje::before { content: ""; position: absolute; left: 0; top: .2mm; width: 4.6mm; height: 4.6mm; border-radius: 50%; background: #fff; border: .7mm solid var(--mint-ink); z-index: 1; }
+  ol.calendario > li:not(:last-child) .eje::after { content: ""; position: absolute; left: 4.6mm; right: 0; top: 2.1mm; height: .8mm; border-radius: .4mm; background: var(--line); }
+  ol.calendario > li.t-prep .eje::after { background: repeating-linear-gradient(90deg, var(--mint-2) 0 2.2mm, transparent 2.2mm 3.6mm); }
+  ol.calendario > li.t-abierto .eje::after { background: var(--mint); height: 1.4mm; top: 1.8mm; }
+  ol.calendario > li.t-conting .eje::after { background: repeating-linear-gradient(135deg, var(--mint) 0 1.2mm, var(--amber) 1.2mm 2.4mm); height: 1.4mm; top: 1.8mm; }
+  ol.calendario > li.t-informe .eje::after { background: var(--trazo); }
+  ol.calendario > li.limite .eje::before { background: var(--amber); border-color: var(--amber-ink); border-radius: .8mm; transform: rotate(45deg) scale(.9); }
+  ol.calendario > li.final .eje::before { background: var(--mint); }
+  ol.calendario .dia { font-family: var(--serif); font-weight: 700; font-size: 14pt; line-height: 1; color: var(--mint-ink); }
+  ol.calendario b { display: block; font-size: var(--t-chico); line-height: 1.22; color: var(--ink); }
+  ol.calendario .ph { font-size: 8pt; line-height: 1.5; }
+  ol.calendario .ojo { display: grid; grid-template-columns: auto 1fr; gap: 1.1mm; font-size: var(--t-nota); line-height: 1.28; color: var(--coral-ink); margin-top: .4mm; }
+  ol.calendario .ojo .ico { width: 3.4mm; height: 3.4mm; margin-top: .2mm; }
+
+  .otras-fechas { margin-top: 3mm; background: var(--panel); border: var(--borde); border-radius: var(--radio); padding: 2.4mm 3.4mm 2.8mm; }
+  .otras-fechas .rotulo { font-family: var(--mono); font-size: var(--t-min); font-weight: 500; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-2); display: block; margin-bottom: 1.6mm; }
+  .otras-fechas ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 3.4mm; }
+  .otras-fechas li { margin: 0; font-size: var(--t-nota); line-height: 1.3; color: var(--ink-2); }
+  .otras-fechas li b { display: block; color: var(--ink); font-size: var(--t-nota); line-height: 1.22; margin-bottom: .6mm; }
+  .otras-fechas .ph { font-size: 7.8pt; line-height: 1.5; }
+
+  /* ---------- Página 2 ---------- */
+  .p2 .cuerpo { padding-top: 4mm; }
+
+  /* Actores */
+  .actores { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3mm; }
+  .actor-tarjeta { border: var(--borde); border-radius: var(--radio); padding: 2.4mm 3.2mm 2.8mm; display: flex; flex-direction: column; gap: 1.3mm; background: #fff; }
+  .actor-tarjeta.area { border-top: 1.2mm solid var(--ink); }
+  .actor-tarjeta.dgetd { background: var(--mint-tint); border-color: transparent; border-top: 1.2mm solid var(--mint); }
+  .actor-tarjeta.ti { border-top: 1.2mm solid var(--ink-2); }
+  .actor-tarjeta.comite { border: .35mm dashed var(--ink-2); border-top: 1.2mm dashed var(--ink-2); }
+  .actor-cabeza { display: grid; grid-template-columns: 7mm 1fr; gap: 2mm; align-items: center; }
+  .actor-cabeza .ico-insignia { width: 7mm; height: 7mm; }
+  .actor-cabeza .ico-insignia .ico { width: 4mm; height: 4mm; }
+  .actor-tarjeta.area .ico-insignia { background: var(--ink); color: #fff; }
+  .actor-tarjeta.dgetd .ico-insignia { background: #fff; }
+  .actor-tarjeta.ti .ico-insignia, .actor-tarjeta.comite .ico-insignia { background: var(--panel); color: var(--ink-2); border: var(--borde); }
+  .actor-tarjeta h3 { font-family: var(--serif); font-weight: 700; font-size: 10.2pt; line-height: 1.15; }
+  .actor-tarjeta h3 small { display: block; font-family: var(--sans); font-weight: 600; font-size: var(--t-min); color: var(--ink-2); letter-spacing: .02em; margin-top: .4mm; }
+  .actor-tarjeta ul { margin: 0; padding-left: 3.6mm; font-size: var(--t-chico); line-height: 1.28; display: grid; gap: .6mm; }
+  .actor-tarjeta li + li { margin-top: 0; }
+  .actor-tarjeta .ref { margin-left: .4mm; }
+
+  /* Canales */
+  ul.canales { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3.2mm; list-style: none; margin: 0; padding: 0; }
+  ul.canales > li { margin: 0; display: grid; grid-template-columns: 8mm 1fr; gap: 2.4mm; align-items: start; border: var(--borde); border-radius: var(--radio); padding: 2.6mm 3.2mm 2.8mm; background: #fff; }
+  ul.canales .ico-insignia { width: 8mm; height: 8mm; }
+  ul.canales .ico-insignia .ico { width: 4.4mm; height: 4.4mm; }
+  ul.canales b { display: block; font-size: 10pt; line-height: 1.2; }
+  ul.canales .para { display: block; font-family: var(--mono); font-size: var(--t-min); font-weight: 500; letter-spacing: .05em; text-transform: uppercase; color: var(--mint-ink); margin: .4mm 0 .6mm; }
+  ul.canales p { font-size: var(--t-nota); line-height: 1.32; color: var(--ink-2); }
+  ul.canales .ph { font-size: 7.8pt; line-height: 1.5; }
+
+  /* Qué gana / qué firma */
+  .gana-firma { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 3.6mm; align-items: stretch; }
+  .caja { border-radius: var(--radio); padding: 3.2mm 4.2mm 3.4mm; display: flex; flex-direction: column; gap: 2mm; }
+  .caja h2 { font-size: 12pt; }
+  .caja h2 .ico { width: 4.8mm; height: 4.8mm; margin-right: 1.6mm; vertical-align: -.2em; }
+  .caja.gana { background: var(--mint-tint); }
+  .caja.gana h2 .ico { color: var(--mint-ink); }
+  .caja.firma { background: var(--green-tint); }
+  .caja.firma h2 .ico { color: var(--green-ink); }
+  ul.mini { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.2mm; }
+  ul.mini > li { margin: 0; display: grid; grid-template-columns: 4.2mm 1fr; gap: 1.8mm; font-size: var(--t-chico); line-height: 1.28; }
+  ul.mini > li > .ico { width: 4.2mm; height: 4.2mm; margin-top: 0; }
+  .caja.gana ul.mini .ico { color: var(--mint-ink); }
+  .caja.firma ul.mini .ico { color: var(--green-ink); }
+  ul.mini.dos { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 3.6mm; }
+  .plazos { font-size: var(--t-nota); line-height: 1.38; color: var(--ink-2); border-top: .3mm solid rgba(74,122,60,.25); padding-top: 1.8mm; margin-top: auto; }
+  .plazos .ph { font-size: 7.8pt; }
+
+  /* Indicadores */
+  .indicadores { display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr); gap: 0; border: var(--borde); border-radius: var(--radio); }
+  .ind-grupo { padding: 2.2mm 3.6mm 2.6mm; }
+  .ind-grupo + .ind-grupo { border-left: var(--borde); }
+  .ind-grupo .rotulo { display: flex; align-items: center; gap: 1.4mm; font-family: var(--mono); font-size: var(--t-min); font-weight: 500; letter-spacing: .07em; text-transform: uppercase; color: var(--mint-ink); margin-bottom: 1.3mm; }
+  .ind-grupo .rotulo .ico { width: 3.6mm; height: 3.6mm; }
+  .ind-grupo ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .9mm; }
+  .ind-grupo li { margin: 0; display: grid; grid-template-columns: 4.2mm 1fr; gap: 1.8mm; font-size: var(--t-chico); line-height: 1.26; }
+  .ind-grupo li .ico { width: 4mm; height: 4mm; color: var(--ink-2); }
+
+  /* Decisiones pendientes */
+  .pendientes { background: var(--amber-tint); border-radius: var(--radio); border-left: var(--barra) solid var(--amber); padding: 3.2mm 4.4mm 3.6mm; }
+  .pendientes .bloque-titulo { margin-bottom: 2.2mm; }
+  .pendientes h2 { font-size: 12.5pt; }
+  .pendientes h2 .ico { color: var(--amber-ink); width: 4.8mm; height: 4.8mm; margin-right: 1.6mm; vertical-align: -.2em; }
+  .pendientes .bloque-titulo p { color: var(--amber-ink); font-weight: 700; }
+  ol.decisiones { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.4mm 4.4mm; }
+  ol.decisiones > li { margin: 0; position: relative; padding-left: 6.4mm; font-size: var(--t-nota); line-height: 1.32; color: var(--ink); }
+  ol.decisiones > li::before { content: ""; position: absolute; left: .5mm; top: .5mm; width: 3.8mm; height: 3.8mm; border-radius: .7mm; transform: rotate(45deg);
+    background: #fff; border: .35mm solid var(--amber-ink); }
+  ol.decisiones > li > .n { position: absolute; left: .5mm; top: .5mm; width: 3.8mm; height: 3.8mm; display: grid; place-items: center; font-family: var(--mono); font-weight: 500; font-size: 7.5pt; line-height: 1; color: var(--amber-ink); }
+  ol.decisiones b { display: block; font-size: var(--t-chico); line-height: 1.22; margin-bottom: .4mm; }
+  ol.decisiones .ph { font-size: 7.8pt; line-height: 1.5; }
+
+  .fundamento { font-size: var(--t-min); color: var(--ink-2); line-height: 1.4; }
+</style>
+</head>
+<body class="resumen">
+
+<!-- =============================== PÁGINA 1 =============================== -->
+<article class="page" aria-label="Página 1">
+  <header class="cabecera">
+    <span class="marca">Órgano de Administración Judicial · DGETD</span>
+    <span class="etiqueta simple">PR-CAT-04 en una mirada</span>
+  </header>
+
+  <section class="portada res-portada">
+    <div>
+      <span class="etiqueta">Para titulares, el Comité y las áreas</span>
+      <h1>Cómo se registran las listas <em>que ya existen</em></h1>
+      <p class="entrada">Quién hace qué y cuándo para registrar cada lista ante la Dirección General de Estrategia y Transformación Digital (DGETD), como pide el Transitorio CUARTO de los Lineamientos Generales de Catálogos Institucionales (LGCI).</p>
+    </div>
+    <figure class="ficha resultado" aria-label="Ejemplo ilustrativo del resultado: la lista de inmuebles institucionales con clave CAT-0042, ficha confirmada por el área y estatus Registrado en el inventario.">
+      <div class="ficha-cabeza"><span class="tarjeta-etiqueta">Al terminar, cada lista tiene</span><span class="clave">CAT-0042</span></div>
+      <dl>
+        <dt>Lista</dt><dd>Inmuebles institucionales</dd>
+        <dt>Ficha</dt><dd><span class="estado listo">Confirmada por el área</span></dd>
+        <dt>Estatus</dt><dd><span class="estado dgetd">Registrado</span> <span class="atenuado pequeno">en el inventario</span></dd>
+      </dl>
+      <figcaption class="ficha-pie">Ejemplo ilustrativo. Con estas fichas se arma el inventario.</figcaption>
+    </figure>
+  </section>
+
+  <div class="cuerpo">
+
+    <div class="rejilla estirar es-no">
+      <section class="tarjeta si">
+        <h2><span class="ico" data-icono="check-circulo"></span>Qué es</h2>
+        <ul class="marcas-si">
+          <li>Registrar las listas que cada área ya lleva.</li>
+          <li>Datos sobre cada lista <span class="termino">(metadatos)</span>, no su contenido.</li>
+          <li>La base del plan de adecuación del Comité.</li>
+        </ul>
+      </section>
+      <section class="tarjeta no">
+        <h2><span class="ico" data-icono="cruz"></span>Qué no es</h2>
+        <ul class="marcas-no">
+          <li>No autoriza catálogos ni decide quién los mantiene.</li>
+          <li>No publica listas ni cambia sus sistemas.</li>
+          <li>No es una auditoría: se corrige sin costo.</li>
+        </ul>
+      </section>
+    </div>
+
+    <section class="recorrido-banda" aria-labelledby="t-recorrido">
+      <div class="bloque-titulo">
+        <h2 id="t-recorrido">El recorrido de una lista</h2>
+        <ul class="leyenda" aria-label="Quién actúa en cada paso">
+          <li><span class="actor area"><span class="ico" data-icono="edificio"></span>Área</span> área u órgano</li>
+          <li><span class="actor dgetd"><span class="ico" data-icono="nodos"></span>DGETD</span></li>
+          <li><span class="actor comite"><span class="ico" data-icono="grupo"></span>Comité</span> fuera de este procedimiento</li>
+        </ul>
+      </div>
+      <ol class="recorrido">
+        <li class="area">
+          <div class="r-cabeza"><span class="r-num" aria-hidden="true">1</span><span class="actor area"><span class="ico" data-icono="edificio"></span><span class="visualmente-oculto">Quién actúa: </span>Área</span></div>
+          <h3>Registra cada lista</h3>
+          <p>Una ficha por lista, por el canal que elija.</p>
+          <p class="extra">Ante la duda, se registra.</p>
+        </li>
+        <li class="dgetd">
+          <div class="r-cabeza"><span class="r-num" aria-hidden="true">2</span><span class="actor dgetd"><span class="ico" data-icono="nodos"></span><span class="visualmente-oculto">Quién actúa: </span>DGETD</span></div>
+          <h3>Envía el acuse</h3>
+          <p>Con folio, clave de la lista y fecha.</p>
+          <p class="extra"><span class="clave">CAT-0042</span></p>
+        </li>
+        <li class="dgetd">
+          <div class="r-cabeza"><span class="r-num" aria-hidden="true">3</span><span class="actor dgetd"><span class="ico" data-icono="nodos"></span><span class="visualmente-oculto">Quién actúa: </span>DGETD</span></div>
+          <h3>Revisa y prellena</h3>
+          <p>Completa lo que ya sabe, como los sistemas.</p>
+          <p class="extra">Si falta algo, llama al área.</p>
+        </li>
+        <li class="area">
+          <div class="r-cabeza"><span class="r-num" aria-hidden="true">4</span><span class="actor area"><span class="ico" data-icono="edificio"></span><span class="visualmente-oculto">Quién actúa: </span>Área</span></div>
+          <h3>Confirma su ficha</h3>
+          <p>Revisa lo registrado y lo prellenado.</p>
+          <p class="extra">Se corrige con el mismo folio.</p>
+        </li>
+        <li class="dgetd">
+          <div class="r-cabeza"><span class="r-num" aria-hidden="true">5</span><span class="actor dgetd"><span class="ico" data-icono="nodos"></span><span class="visualmente-oculto">Quién actúa: </span>DGETD</span></div>
+          <h3>Propone un estatus</h3>
+          <p>Aplica los criterios de los Lineamientos.</p>
+          <p class="extra">Propone; no aprueba. Avisa al área.</p>
+        </li>
+        <li class="comite">
+          <div class="r-cabeza"><span class="r-num" aria-hidden="true">6</span><span class="actor comite"><span class="ico" data-icono="grupo"></span><span class="visualmente-oculto">Quién actúa: </span>Comité</span></div>
+          <h3>Decide</h3>
+          <p>Recibe el informe de cierre y aprueba el plan.</p>
+          <p class="extra">Fuera de este procedimiento.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section aria-labelledby="t-calendario">
+      <div class="bloque-titulo">
+        <h2 id="t-calendario">Cuándo pasa cada cosa</h2>
+        <p>Días naturales desde la entrada en vigor.<br>Todas las fechas están por confirmar.</p>
+      </div>
+      <ol class="calendario">
+        <li class="t-prep">
+          <span class="tramo">Preparación</span>
+          <span class="eje" aria-hidden="true"></span>
+          <span class="dia">Día 0</span>
+          <b>Entran en vigor los Lineamientos</b>
+          <span><span class="ph">[sábado 17 de octubre de 2026, por confirmar]</span></span>
+        </li>
+        <li class="t-abierto">
+          <span class="tramo">Registro abierto</span>
+          <span class="eje" aria-hidden="true"></span>
+          <span class="dia">Día 60</span>
+          <b>Límite para publicar los formatos</b>
+          <span><span class="ph">[miércoles 16 de diciembre de 2026, por confirmar]</span></span>
+        </li>
+        <li class="t-conting">
+          <span class="tramo">Contingencia</span>
+          <span class="eje" aria-hidden="true"></span>
+          <span class="dia">Día 75</span>
+          <b>Empiezan las fichas prellenadas</b>
+          <span><span class="ph">[jueves 31 de diciembre de 2026, por confirmar]</span></span>
+        </li>
+        <li class="t-informe limite">
+          <span class="tramo">Informe y plan</span>
+          <span class="eje" aria-hidden="true"></span>
+          <span class="dia">Día 90</span>
+          <b>Cierra el registro</b>
+          <span><span class="ph">[viernes 15 de enero de 2027, por confirmar]</span></span>
+        </li>
+        <li class="final">
+          <span class="tramo" aria-hidden="true"></span>
+          <span class="eje" aria-hidden="true"></span>
+          <span class="dia">Día 120</span>
+          <b>Plan de adecuación aprobado</b>
+          <span><span class="ph">[domingo 14 de febrero de 2027, por confirmar]</span></span>
+          <span class="ojo"><span class="ico" data-icono="alerta"></span><span>Es domingo: se aprueba antes.</span></span>
+        </li>
+      </ol>
+      <div class="otras-fechas">
+        <span class="rotulo">Otras fechas del calendario</span>
+        <ul>
+          <li><b>Piloto con 3 perfiles</b><span class="ph">[segunda quincena de noviembre de 2026, por confirmar]</span></li>
+          <li><b>Publicación anticipada (propuesta)</b><span class="ph">[fines de noviembre de 2026, por confirmar]</span></li>
+          <li><b>Reuniones con titulares y oficio</b><span class="ph">[primera semana de diciembre de 2026, por confirmar]</span></li>
+          <li><b>Personas enlace designadas</b><span class="ph">[fecha por definir]</span></li>
+          <li><b>Informe de cierre al Comité</b><span class="ph">[fecha de sesión del Comité por confirmar]</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <p class="fundamento">Resume PR-CAT-04, versión 0.1. Fundamento: LGCI, arts. 5, 6, 12, 14 y 17, y Transitorios TERCERO, CUARTO, QUINTO y SÉPTIMO. Ejemplos ilustrativos.</p>
+  </div>
+
+  <footer class="pie">
+    <span><strong>Borrador para revisión · no vigente</strong></span>
+    <span>Si este resumen y PR-CAT-04 difieren, manda el procedimiento.</span>
+  </footer>
+</article>
+
+<!-- =============================== PÁGINA 2 =============================== -->
+<article class="page p2" aria-label="Página 2">
+  <header class="cabecera">
+    <span class="marca">Órgano de Administración Judicial · DGETD</span>
+    <span class="etiqueta simple">PR-CAT-04 en una mirada · 2 de 2</span>
+  </header>
+
+  <div class="cuerpo">
+
+    <section aria-labelledby="t-quien">
+      <div class="bloque-titulo">
+        <h2 id="t-quien">Quién hace qué</h2>
+        <p>Borde punteado: actúa fuera de este procedimiento.</p>
+      </div>
+      <div class="actores">
+        <section class="actor-tarjeta area">
+          <div class="actor-cabeza"><span class="ico-insignia"><span class="ico" data-icono="persona"></span></span><h3>Persona titular</h3></div>
+          <ul>
+            <li>Designa a la persona enlace.</li>
+            <li>Valida los registros y recibe copia del acuse.</li>
+          </ul>
+        </section>
+        <section class="actor-tarjeta area">
+          <div class="actor-cabeza"><span class="ico-insignia"><span class="ico" data-icono="lapiz"></span></span><h3>Persona enlace</h3></div>
+          <ul>
+            <li>Registra cada lista del área.</li>
+            <li>Atiende a la DGETD y confirma la ficha.</li>
+          </ul>
+        </section>
+        <section class="actor-tarjeta area">
+          <div class="actor-cabeza"><span class="ico-insignia"><span class="ico" data-icono="edificio"></span></span><h3>Órganos jurisdiccionales</h3></div>
+          <ul>
+            <li>Reciben la invitación por el conducto institucional.</li>
+            <li>Sin listas propias, no tienen que hacer nada más.</li>
+          </ul>
+        </section>
+        <section class="actor-tarjeta dgetd">
+          <div class="actor-cabeza"><span class="ico-insignia"><span class="ico" data-icono="nodos"></span></span><h3>DGETD</h3></div>
+          <ul>
+            <li>Acusa, prellena y envía la ficha.</li>
+            <li>Propone el estatus de cada lista.</li>
+            <li>Informa al Comité y a cada área.</li>
+          </ul>
+        </section>
+        <section class="actor-tarjeta ti">
+          <div class="actor-cabeza"><span class="ico-insignia"><span class="ico" data-icono="pantalla"></span></span><h3>Áreas de sistemas <small>Responsabilidad por validar</small></h3></div>
+          <ul>
+            <li>Informan a la DGETD qué sistemas leen cada lista.</li>
+          </ul>
+        </section>
+        <section class="actor-tarjeta comite">
+          <div class="actor-cabeza"><span class="ico-insignia"><span class="ico" data-icono="grupo"></span></span><h3>Comité de Gobernanza Digital <small>Fuera del procedimiento</small></h3></div>
+          <ul>
+            <li>Formaliza quién decide y quién mantiene cada catálogo. <span class="ref">art. 12</span></li>
+            <li>Aprueba el plan.</li>
+          </ul>
+        </section>
+      </div>
+    </section>
+
+    <section aria-labelledby="t-canales">
+      <div class="bloque-titulo">
+        <h2 id="t-canales">Tres canales, una sola base</h2>
+        <p>Los tres llegan a la lista de SharePoint «Inventario de catálogos».</p>
+      </div>
+      <ul class="canales">
+        <li><span class="ico-insignia"><span class="ico" data-icono="pantalla"></span></span>
+          <div><b>Formulario en línea</b><span class="para">Canal principal</span><p>Un envío por lista. <span class="ph">[liga al formulario de registro]</span></p></div></li>
+        <li><span class="ico-insignia"><span class="ico" data-icono="hoja-calculo"></span></span>
+          <div><b>Plantilla de Excel</b><span class="para">Más de 5 listas</span><p>A SharePoint, no por correo. <span class="ph">[liga a la carpeta de SharePoint para plantillas de Excel]</span></p></div></li>
+        <li><span class="ico-insignia"><span class="ico" data-icono="videollamada"></span></span>
+          <div><b>Registro acompañado</b><span class="para">Quien lo pida</span><p>Por Teams o teléfono; la DGETD captura. Prioritario para órganos jurisdiccionales.</p></div></li>
+      </ul>
+    </section>
+
+    <div class="gana-firma">
+      <section class="caja gana" aria-labelledby="t-gana">
+        <h2 id="t-gana"><span class="ico" data-icono="foco"></span>Qué gana el área</h2>
+        <ul class="mini">
+          <li><span class="ico" data-icono="carpeta"></span><span>Su lista queda documentada a nombre del área, no de una persona.</span></li>
+          <li><span class="ico" data-icono="nodos"></span><span>Se sabe qué sistemas la usan y a quién avisar antes de un cambio de estructura.</span></li>
+          <li><span class="ico" data-icono="mensaje"></span><span>Asesoría técnica de la DGETD durante todo el registro. <span class="ref">art. 14 fr. V</span></span></li>
+        </ul>
+      </section>
+      <section class="caja firma" aria-labelledby="t-firma">
+        <h2 id="t-firma"><span class="ico" data-icono="escudo-check"></span>Lo que la DGETD firma</h2>
+        <ul class="mini dos">
+          <li><span class="ico" data-icono="acuse"></span><span>Acuse con folio y fecha.</span></li>
+          <li><span class="ico" data-icono="persona"></span><span>Contacto con nombre.</span></li>
+          <li><span class="ico" data-icono="etiqueta"></span><span>Clave asignada por la DGETD.</span></li>
+          <li><span class="ico" data-icono="check-circulo"></span><span>No volver a pedir lo entregado.</span></li>
+          <li><span class="ico" data-icono="lapiz"></span><span>Prellenado de lo que sabe.</span></li>
+          <li><span class="ico" data-icono="ciclo"></span><span>Correcciones sin costo hasta el dictamen.</span></li>
+        </ul>
+        <p class="plazos">Plazos de ficha, dudas y devolución: <span class="ph">[plazo por definir según capacidad de la DGETD]</span></p>
+      </section>
+    </div>
+
+    <section aria-labelledby="t-indicadores">
+      <div class="bloque-titulo">
+        <h2 id="t-indicadores">Cómo sabremos si funciona</h2>
+        <p>Miden el trámite, no la calidad de las listas. Metas: después del piloto.</p>
+      </div>
+      <div class="indicadores">
+        <div class="ind-grupo">
+          <span class="rotulo"><span class="ico" data-icono="calendario"></span>Cada semana</span>
+          <ul>
+            <li><span class="ico" data-icono="grupo"></span><span>¿Cuántas áreas administrativas ya tienen enlace?</span></li>
+            <li><span class="ico" data-icono="check-circulo"></span><span>¿Cuántos registros ya están confirmados?</span></li>
+            <li><span class="ico" data-icono="reloj"></span><span>¿Cuántos días van de la recepción a la ficha?</span></li>
+            <li><span class="ico" data-icono="reloj"></span><span>¿Cuántos días tarda el área en confirmarla?</span></li>
+          </ul>
+        </div>
+        <div class="ind-grupo">
+          <span class="rotulo"><span class="ico" data-icono="bandera"></span>Al cierre</span>
+          <ul>
+            <li><span class="ico" data-icono="pregunta"></span><span>¿Cuántos datos llegaron «por confirmar»?</span></li>
+            <li><span class="ico" data-icono="lista"></span><span>¿Por qué canal llegó cada registro?</span></li>
+            <li><span class="ico" data-icono="buscar"></span><span>¿Cuántas listas ya tienen estatus propuesto?</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="pendientes" aria-labelledby="t-pendientes">
+      <div class="bloque-titulo">
+        <h2 id="t-pendientes"><span class="ico" data-icono="alerta"></span>Decisiones pendientes</h2>
+        <p>Por confirmar antes de publicar</p>
+      </div>
+      <ol class="decisiones">
+        <li><span class="n" aria-hidden="true">1</span><b>¿Cuenta en tiempo?</b>Si un registro con solo área, nombre y descripción cuenta en tiempo. Lo decide el Comité.</li>
+        <li><span class="n" aria-hidden="true">2</span><b>Publicar antes del día 60</b>Si no, quedan unos 10 días hábiles de enero para registrar.</li>
+        <li><span class="n" aria-hidden="true">3</span><b>Calendario</b>Depende de la <span class="ph">[fecha de entrada en vigor por confirmar]</span></li>
+        <li><span class="n" aria-hidden="true">4</span><b>Día 75 en vacaciones</b>Adelantar la contingencia o aplicarla el primer día hábil de enero.</li>
+        <li><span class="n" aria-hidden="true">5</span><b>«Uso local»</b>Si la DGETD puede asignarlo o requiere conocimiento del Comité.</li>
+        <li><span class="n" aria-hidden="true">6</span><b>Nivel de acceso</b>Los valores propuestos se alinean con la normativa de transparencia.</li>
+      </ol>
+    </section>
+
+  </div>
+
+  <footer class="pie">
+    <span><strong>¿Dudas?</strong> Asesoría DGETD · <span class="ph">[correo, extensión y horario de la asesoría DGETD]</span></span>
+    <span>Si difieren, manda PR-CAT-04.</span>
+  </footer>
+</article>
+
+<script src="diseno/iconos.js"></script>
+</body>
+</html>
