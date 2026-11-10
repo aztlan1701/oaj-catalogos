@@ -4,21 +4,26 @@ Uso:
     python3 construir.py ../fuentes/PR-CAT-04.md            # escribe ../entregables/PR-CAT-04.docx
     python3 construir.py ../fuentes/PR-CAT-04.md --pdf      # además, vista previa PDF en ../vista-previa/
 
-Posproceso (python-docx): portada según `portada`, número de capítulo de cada H1 en mint-ink,
-etiqueta inicial de cada recuadro («**Por confirmar.**») convertida en chip en su propia línea,
-viñetas en mint y números en mint-ink, cebra suave en tablas, filas que no se parten, encabezado y
-pie finos, fuentes incrustadas, idioma es-MX y modo de compatibilidad de Word 2013+.
+Posproceso (python-docx): portada clara de la familia de la Hoja de valor (sin tablas de maquetación;
+el título es un encabezado real), número de capítulo de cada H1 en mint-ink, etiqueta de cada recuadro
+(«**Por confirmar.**») como chip en su propio párrafo dentro de la caja, corchetes literales en los
+marcadores, guion no separable en códigos (F-CAT-01, CAT-0042, RC-2027-0118) de títulos y celdas,
+figuras a lo ancho de la columna con su pie arriba, viñetas en mint, cebra suave en tablas, filas que no
+se parten, encabezado y pie finos, fuentes incrustadas, idioma es-MX y compatibilidad de Word 2013+.
 
 Front matter reconocido:
     codigo, titulo, subtitulo, tipo, version, fecha, estatus, responsable, fundamento,
+    acento (opcional: palabras del título que van en mint-ink; si falta, se usa la tabla ACENTOS),
     portada: completa | breve | sin-ficha
-        completa  = página propia: franja de tinta a sangre, ficha ligera y pie institucional
-        breve     = franja mint-tint a lo ancho de la página y ficha ligera; el texto sigue en la misma página
+        completa  = página propia: marca, etiqueta, título, subtítulo, ficha ligera, índice
+                    «En este documento» con vínculos a cada capítulo y pie institucional
+        breve     = la misma cabecera y ficha en la primera página; el texto sigue en la misma página
         sin-ficha = encabezado tipo oficio (circular): membrete con barra mint, estatus, título y caja de datos
 
 Convenciones de Markdown (Pandoc):
     ::: {custom-style="Compromiso"}   bloques: Nota, Norma, Compromiso, Pendiente, Alerta, Etiqueta, Firma, Pequeno
     [texto]{custom-style="Marcador"}  marcador por confirmar; también Clave, Obligatorio, Dgetd
+    Un párrafo Pequeno «Figura N. …» justo después de una imagen se vuelve su pie (arriba de la figura).
 """
 import argparse
 import copy
@@ -53,6 +58,9 @@ MARGEN_LADO = 1361            # 2.4 cm
 COLUMNA = PAGINA_ANCHO - 2 * MARGEN_LADO
 
 RECUADROS = ("Nota", "Norma", "Compromiso", "Pendiente", "Alerta")
+
+SERIF, SANS = "Source Serif 4", "Source Sans 3"
+MONO, MONO_MED = "Source Code Pro", "Source Code Pro Medium"
 
 # (familia en Word, tipo de incrustación, archivo)
 EMBEBIDAS = [
@@ -122,7 +130,7 @@ def tab_run(p_el):
 
 
 def parrafo_xml(style=None, before=None, after=None, line=None, ind_left=None, ind_right=None,
-                tabs=(), borders=None, keep_next=False, jc=None, fill=None):
+                tabs=(), borders=None, keep_next=False, jc=None, fill=None, hanging=None):
     """Crea un w:p con pPr en el orden que exige el esquema."""
     p = el("w:p")
     ppr = sub(p, "w:pPr")
@@ -150,57 +158,17 @@ def parrafo_xml(style=None, before=None, after=None, line=None, ind_left=None, i
             sp.set(qn("w:after"), str(after))
         if line is not None:
             sp.set(qn("w:line"), str(line)); sp.set(qn("w:lineRule"), "auto")
-    if ind_left is not None or ind_right is not None:
+    if ind_left is not None or ind_right is not None or hanging is not None:
         ind = sub(ppr, "w:ind")
         if ind_left is not None:
             ind.set(qn("w:left"), str(ind_left))
         if ind_right is not None:
             ind.set(qn("w:right"), str(ind_right))
+        if hanging is not None:
+            ind.set(qn("w:hanging"), str(hanging))
     if jc:
         sub(ppr, "w:jc", val=jc)
     return p
-
-
-def tabla_xml(anchos, ind=0, mar=(0, 0, 0, 0), bordes=None):
-    """Tabla de maquetación sin estilo: anchos en twips, márgenes de celda (arriba, izq, abajo, der)."""
-    tbl = el("w:tbl")
-    tblPr = sub(tbl, "w:tblPr")
-    sub(tblPr, "w:tblW", w=sum(anchos), type="dxa")
-    sub(tblPr, "w:tblInd", w=ind, type="dxa")
-    b = sub(tblPr, "w:tblBorders")
-    for lado in ("top", "left", "bottom", "right", "insideH", "insideV"):
-        if bordes and lado in bordes:
-            color, sz = bordes[lado]
-            sub(b, "w:" + lado, val="single", sz=sz, space=0, color=color)
-        else:
-            sub(b, "w:" + lado, val="nil")
-    sub(tblPr, "w:tblLayout", type="fixed")
-    cm = sub(tblPr, "w:tblCellMar")
-    for lado, v in zip(("top", "left", "bottom", "right"), mar):
-        sub(cm, "w:" + lado, w=v, type="dxa")
-    sub(tblPr, "w:tblLook", val="0000", firstRow=0, lastRow=0, firstColumn=0, lastColumn=0, noHBand=1, noVBand=1)
-    grid = sub(tbl, "w:tblGrid")
-    for a in anchos:
-        sub(grid, "w:gridCol", w=a)
-    return tbl
-
-
-def fila_xml(tbl, anchos, fill=None, borde_inf=None):
-    tr = sub(tbl, "w:tr")
-    trPr = sub(tr, "w:trPr"); sub(trPr, "w:cantSplit")
-    celdas = []
-    for a in anchos:
-        tc = sub(tr, "w:tc")
-        tcPr = sub(tc, "w:tcPr")
-        sub(tcPr, "w:tcW", w=a, type="dxa")
-        if borde_inf:
-            bd = sub(tcPr, "w:tcBorders")
-            color, sz = borde_inf
-            sub(bd, "w:bottom", val="single", sz=sz, space=0, color=color)
-        if fill:
-            sub(tcPr, "w:shd", val="clear", color="auto", fill=fill)
-        celdas.append(tc)
-    return celdas
 
 
 # --- Encabezado y pie ------------------------------------------------------------
@@ -224,18 +192,20 @@ def limpiar(parte):
     return raiz
 
 
-def encabezado_normal(parte, meta, ind=0):
+def encabezado_normal(parte, meta):
     codigo = meta.get("codigo", "")
     version = meta.get("version", "")
     raiz = limpiar(parte)
-    p = parrafo_xml(after=0, line=240, tabs=[(COLUMNA + ind, "right")], ind_left=ind,
-                    borders={"left": (H_MINT, 24, 5)})
-    run(p, "Órgano de Administración Judicial · DGETD", size=8, bold=True, color=H_INK)
-    tab_run(p)
-    if codigo:
-        run(p, f"{codigo}  ·  v{version}", size=7.5, color=H_INK2, font="Source Code Pro")
+    p = parrafo_xml(after=0, line=240, tabs=[(COLUMNA, "right")], borders={"left": (H_MINT, 24, 5)})
+    if meta.get("portada") == "sin-ficha":
+        # Circular: quien la emite sigue por confirmar, así que el encabezado no nombra a la DGETD.
+        run(p, f"Órgano de Administración Judicial · {codigo or meta.get('tipo', '')}", size=8, bold=True, color=H_INK)
+        tab_run(p)
+        run(p, f"v{version}", size=7.5, color=H_INK2, font=MONO)
     else:
-        run(p, f"{meta.get('tipo', '')}  ·  v{version}", size=8, color=H_INK2)
+        run(p, "Órgano de Administración Judicial · DGETD", size=8, bold=True, color=H_INK)
+        tab_run(p)
+        run(p, f"{codigo or meta.get('tipo', '')}  ·  v{version}", size=7.5, color=H_INK2, font=MONO)
     raiz.append(p)
 
 
@@ -253,14 +223,13 @@ def pie_normal(parte, meta):
 
 
 def pie_portada(parte, meta):
-    """Pie institucional de la portada completa (la sección de portada no tiene márgenes laterales)."""
+    """Pie institucional de la portada completa."""
     raiz = limpiar(parte)
-    p1 = parrafo_xml(after=0, line=260, ind_left=MARGEN_LADO, ind_right=MARGEN_LADO,
-                     tabs=[(PAGINA_ANCHO - MARGEN_LADO, "right")], borders={"top": (H_MINT, 12, 10)})
+    p1 = parrafo_xml(after=0, line=260, tabs=[(COLUMNA, "right")], borders={"top": (H_MINT, 12, 10)})
     run(p1, "Dirección General de Estrategia y Transformación Digital", size=9.5, bold=True, color=H_INK)
     tab_run(p1)
-    run(p1, str(meta.get("fecha", "")), size=8.5, color=H_INK2, font="Source Code Pro")
-    p2 = parrafo_xml(before=20, after=0, line=260, ind_left=MARGEN_LADO, ind_right=MARGEN_LADO)
+    run(p1, str(meta.get("fecha", "")), size=8.5, color=H_INK2, font=MONO)
+    p2 = parrafo_xml(before=20, after=0, line=260)
     run(p2, "Órgano de Administración Judicial", size=9, color=H_INK2)
     raiz.append(p1); raiz.append(p2)
 
@@ -281,20 +250,40 @@ def preparar_secciones(doc, meta):
     pie_normal(cuerpo.footer, meta)
 
     if tipo_portada == "completa" and len(secciones) > 1:
+        # Portada clara dentro de los márgenes de impresión (nada a sangre).
         port = secciones[0]
-        port.left_margin = port.right_margin = Cm(0)
-        port.top_margin, port.bottom_margin = Cm(0), Cm(3.6)
-        port.header_distance, port.footer_distance = Cm(0), Cm(1.6)
+        port.left_margin = port.right_margin = Cm(2.4)
+        port.top_margin, port.bottom_margin = Cm(2.0), Cm(3.1)
+        port.header_distance, port.footer_distance = Cm(1.0), Cm(1.5)
+        port.header.is_linked_to_previous = False
+        limpiar(port.header).append(parrafo_xml(after=0))
         port.footer.is_linked_to_previous = False
         pie_portada(port.footer, meta)
-    elif tipo_portada == "sin-ficha":
-        # La primera página lleva el encabezado de oficio en el cuerpo: sin encabezado repetido.
+    else:
+        if tipo_portada == "sin-ficha":
+            # Oficio: márgenes de arriba y abajo un poco menores.
+            cuerpo.top_margin, cuerpo.bottom_margin = Cm(2.0), Cm(2.0)
+            cuerpo.header_distance, cuerpo.footer_distance = Cm(1.0), Cm(1.0)
+        # La primera página ya lleva la marca o el membrete en el cuerpo: sin encabezado repetido.
         cuerpo.different_first_page_header_footer = True
         limpiar(cuerpo.first_page_header).append(parrafo_xml(after=0))
         pie_normal(cuerpo.first_page_footer, meta)
 
 
 # --- Portadas ----------------------------------------------------------------------
+# Misma familia que la Hoja de valor y la Guía: página blanca, cuadro menta con la marca, etiqueta mono
+# en mint-ink con raya menta, título serif en tinta con una o dos palabras en mint-ink, ficha ligera.
+# Todo en párrafos (sin tablas de maquetación): el título es un encabezado real para la navegación.
+
+# Palabras del título que van en mint-ink (como «mi área» en la Guía). Se puede fijar con `acento:`.
+ACENTOS = {
+    "ET-CAT-01": "catálogos institucionales",
+    "PR-CAT-04": "catálogos existentes",
+    "F-CAT-01": "catálogo existente",
+    "Circular-registro": "su área",
+    "implementacion-registro": "registro de catálogos",
+}
+
 
 def etiqueta_portada(meta):
     tipo = meta.get("tipo", "")
@@ -304,122 +293,183 @@ def etiqueta_portada(meta):
     return " · ".join(x for x in (tipo, codigo) if x)
 
 
-def ficha_xml(meta, ind=0):
-    """Ficha ligera: rejilla de 3 columnas con etiqueta pequeña sobre cada dato."""
-    filas = [
-        ("Código", meta.get("codigo", "")),
-        ("Versión", str(meta.get("version", ""))),
-        ("Fecha", str(meta.get("fecha", ""))),
-        ("Estatus", meta.get("estatus", "")),
-        ("Área responsable", meta.get("responsable", "")),
-        ("Fundamento", meta.get("fundamento", "")),
-    ]
-    filas = [f for f in filas if f[1]]
-    ancho = COLUMNA // 3
-    anchos = [ancho, ancho, COLUMNA - 2 * ancho]
-    tbl = tabla_xml(anchos, ind=ind, mar=(150, 0, 190, 280), bordes={"top": (H_LINE, 6), "insideH": (H_LINE, 6)})
-    for i in range(0, len(filas), 3):
-        celdas = fila_xml(tbl, anchos)
-        for j, tc in enumerate(celdas):
-            if i + j >= len(filas):
-                sub(tc, "w:p")
-                continue
-            etq, val = filas[i + j]
-            p1 = parrafo_xml(before=0, after=50, line=240)
-            run(p1, etq, size=7.5, color=H_INK2, font="Source Code Pro Medium", caps=True, spacing=12)
-            tc.append(p1)
-            p2 = parrafo_xml(before=0, after=0, line=264)
-            if etq in ("Código", "Versión"):
-                run(p2, val, size=10, color=H_INK, font="Source Code Pro")
-            elif etq == "Estatus":
-                run(p2, val, size=10, color=H_AMBER_INK, bold=True, fill=H_AMBER_TINT)
-            else:
-                run(p2, val, size=10, color=H_INK)
-            tc.append(p2)
-    return tbl
-
-
-def portada_completa(meta, antes):
-    """Franja de tinta a sangre (sección propia sin márgenes), ficha ligera y pie institucional."""
-    ins = antes.addprevious
-    tbl = tabla_xml([PAGINA_ANCHO], mar=(0, MARGEN_LADO, 0, MARGEN_LADO))
-    (tc,) = fila_xml(tbl, [PAGINA_ANCHO], fill=H_INK)
-    p = parrafo_xml(before=820, after=0, line=240, tabs=[(COLUMNA, "right")], borders={"left": (H_MINT, 48, 7)})
-    run(p, "Órgano de Administración Judicial · DGETD", size=9, bold=True, color="FFFFFF")
+def p_marca(before=0):
+    """Cuadro menta + «Órgano de Administración Judicial · DGETD», y a la derecha la colección."""
+    p = parrafo_xml(before=before, after=0, line=240, tabs=[(COLUMNA, "right")])
+    # Cuadro menta: espacios duros con fondo menta (adorno; no se lee como texto).
+    run(p, "\u2003", size=10, fill=H_MINT)
+    run(p, "\u2002\u2002Órgano de Administración Judicial · DGETD", size=9, bold=True, color=H_INK)
     tab_run(p)
-    run(p, "Catálogos institucionales", size=7.5, color=H_MINT2, font="Source Code Pro Medium", caps=True, spacing=14)
-    tc.append(p)
-    # Segunda fila de altura fija con el texto abajo: la franja mide lo mismo en todos los documentos.
-    (tc,) = fila_xml(tbl, [PAGINA_ANCHO], fill=H_INK, borde_inf=(H_MINT, 48))
-    tr = tc.getparent()
-    tr.find(qn("w:trPr")).append(el("w:trHeight", val=7600, hRule="atLeast"))
-    tc.find(qn("w:tcPr")).append(el("w:vAlign", val="bottom"))
-    p = parrafo_xml(style="Etiqueta", before=600, after=160, keep_next=True)
-    run(p, etiqueta_portada(meta), color=H_MINT2, size=9)
-    tc.append(p)
-    p = parrafo_xml(style="Title", after=260, line=245)
-    run(p, meta.get("titulo", ""), color="FFFFFF", size=31)
-    tc.append(p)
-    if meta.get("subtitulo"):
-        p = parrafo_xml(style="Subtitle", after=0, line=300)
-        run(p, meta["subtitulo"], color=H_LINE, size=13)
-        tc.append(p)
-    tc.append(parrafo_xml(before=0, after=900, line=240))
-    ins(tbl)
-
-    p = parrafo_xml(style="Etiqueta", before=960, after=120, ind_left=MARGEN_LADO, keep_next=True)
-    run(p, "Ficha del documento", color=H_INK2)
-    ins(p)
-    ins(ficha_xml(meta, ind=MARGEN_LADO))
+    run(p, "Catálogos institucionales", size=7.5, color=H_MINT_INK, font=MONO_MED, caps=True, spacing=14)
+    return p
 
 
-def portada_breve(meta, antes):
-    """Franja clara a lo ancho de la página, seguida de la ficha ligera."""
+def p_etiqueta(texto, before):
+    p = parrafo_xml(style="Etiqueta", before=before, after=140, keep_next=True)
+    run(p, "\u2014\u2014", color=H_MINT, font=SANS, bold=True, size=9, spacing=-20)
+    run(p, "\u2002" + texto)
+    return p
+
+
+def p_titulo(meta, base, size, after=220):
+    titulo = guiones_no_separables(meta.get("titulo", ""))
+    acento = meta.get("acento") or ACENTOS.get(meta.get("codigo", "")) or ACENTOS.get(base)
+    p = parrafo_xml(style="Title", after=after, line=240)
+    i = titulo.rfind(acento) if acento else -1
+    if i >= 0:
+        if titulo[:i]:
+            run(p, titulo[:i], size=size)
+        run(p, acento, size=size, color=H_MINT_INK)
+        if titulo[i + len(acento):]:
+            run(p, titulo[i + len(acento):], size=size)
+    else:
+        run(p, titulo, size=size)
+    return p
+
+
+def p_subtitulo(meta, size=13, after=0):
+    p = parrafo_xml(style="Subtitle", after=after, line=290)
+    run(p, meta["subtitulo"], size=size)
+    return p
+
+
+# Posiciones de la ficha (twips): etiqueta, dato; en la primera fila, tres pares.
+FICHA_DATO = 2200
+FICHA_PARES = [(0, 2200), (3900, 4900), (5900, 6700)]
+
+
+def ficha_parrafos(meta, before):
+    """Ficha ligera en párrafos con tabulaciones: filete menta arriba, filete gris abajo, sin tabla."""
+    def etq(p, texto):
+        run(p, texto, size=7.5, color=H_INK2, font=MONO_MED, caps=True, spacing=12)
+
+    def dato(p, etiqueta, valor):
+        if etiqueta in ("Código", "Versión"):
+            run(p, valor, size=10, color=H_INK, font=MONO)
+        elif etiqueta == "Estatus":
+            run(p, "\u00a0" + valor + "\u00a0", rstyle="ChipEstatus")
+        else:
+            run(p, valor, size=10, color=H_INK)
+
+    cortos = [(e, v) for e, v in (("Código", meta.get("codigo", "")), ("Versión", str(meta.get("version", ""))),
+                                  ("Fecha", str(meta.get("fecha", "")))) if v]
+    largos = [(e, v) for e, v in (("Estatus", meta.get("estatus", "")), ("Área responsable", meta.get("responsable", "")),
+                                  ("Fundamento", meta.get("fundamento", ""))) if v]
+    parrafos = []
+    if cortos:
+        tabs = []
+        for i, _ in enumerate(cortos):
+            x_etq, x_dato = FICHA_PARES[i]
+            if x_etq:
+                tabs.append((x_etq, "left"))
+            tabs.append((x_dato, "left"))
+        p = parrafo_xml(style="FichaDato", tabs=tabs)
+        for i, (e, v) in enumerate(cortos):
+            if i:
+                tab_run(p)
+            etq(p, e); tab_run(p); dato(p, e, v)
+        parrafos.append(p)
+    for e, v in largos:
+        p = parrafo_xml(style="FichaDato", tabs=[(FICHA_DATO, "left")], ind_left=FICHA_DATO, hanging=FICHA_DATO)
+        etq(p, e); tab_run(p); dato(p, e, v)
+        parrafos.append(p)
+    # Aire arriba del primer renglón (el estilo da 0).
+    ppr = parrafos[0].find(qn("w:pPr"))
+    sp = ppr.find(qn("w:spacing"))
+    if sp is None:
+        sp = el("w:spacing")
+        ind = ppr.find(qn("w:ind"))
+        (ind.addprevious if ind is not None else ppr.append)(sp)
+    sp.set(qn("w:before"), str(before))
+    return parrafos
+
+
+def capitulos(doc):
+    """Lista de H1 del cuerpo: (número para mostrar, título, marcador de Word)."""
+    lista = []
+    for p in doc.element.body.iter(qn("w:p")):
+        if estilo_de(p) != "Heading1":
+            continue
+        texto = "".join(t.text or "" for t in p.iter(qn("w:t"))).strip()
+        previo = p.getprevious()
+        ancla = previo.get(qn("w:name")) if previo is not None and previo.tag == qn("w:bookmarkStart") else None
+        m = re.match(r"^(\d+|Anexo ([A-Z]))\.\s+(.*)$", texto)
+        if m:
+            num = m.group(2) or f"{int(m.group(1)):02d}"
+            lista.append((num, m.group(3), ancla))
+        else:
+            lista.append(("—", texto, ancla))
+    return lista
+
+
+def indice_parrafos(doc):
+    """«En este documento»: capítulos numerados en mono, cada uno con vínculo a su capítulo."""
+    caps = capitulos(doc)
+    if not caps:
+        return []
+    out = []
+    p = parrafo_xml(style="Etiqueta", before=340, after=60, keep_next=True)
+    run(p, "\u2014\u2014", color=H_LINE, font=SANS, bold=True, size=9, spacing=-20)
+    run(p, "\u2002En este documento", color=H_INK2)
+    out.append(p)
+    for n, (num, titulo, ancla) in enumerate(caps):
+        # Sangría derecha alterna para que Word y LibreOffice no fundan los filetes de renglones seguidos.
+        p = parrafo_xml(style="IndiceEntrada", ind_right=0 if n % 2 else 20)
+        cont = p
+        if ancla:
+            cont = sub(p, "w:hyperlink", anchor=ancla)
+        run(cont, num, size=8.5, color=H_MINT_INK, font=MONO_MED)
+        tab_run(cont)
+        run(cont, guiones_no_separables(titulo), size=10, color=H_INK)
+        out.append(p)
+    return out
+
+
+def portada_completa(doc, meta, base, antes):
+    """Página propia, clara: marca, etiqueta, título, subtítulo, ficha e índice; pie institucional."""
     ins = antes.addprevious
-    tbl = tabla_xml([PAGINA_ANCHO], ind=-MARGEN_LADO, mar=(0, MARGEN_LADO, 0, MARGEN_LADO))
-    (tc,) = fila_xml(tbl, [PAGINA_ANCHO], fill=H_MINT_TINT, borde_inf=(H_MINT, 36))
-    p = parrafo_xml(style="Etiqueta", before=420, after=120, keep_next=True)
-    run(p, etiqueta_portada(meta))
-    tc.append(p)
-    p = parrafo_xml(style="Title", after=160)
-    run(p, meta.get("titulo", ""), size=28)
-    tc.append(p)
+    ins(p_marca())
+    ins(p_etiqueta(etiqueta_portada(meta), before=480))
+    ins(p_titulo(meta, base, size=31, after=240 if meta.get("subtitulo") else 0))
     if meta.get("subtitulo"):
-        p = parrafo_xml(style="Subtitle", after=0)
-        run(p, meta["subtitulo"], size=12.5)
-        tc.append(p)
-    tc.append(parrafo_xml(before=0, after=380, line=240))
-    ins(tbl)
-    ins(parrafo_xml(before=0, after=120, line=240))
-    ins(ficha_xml(meta))
-    ins(parrafo_xml(before=0, after=120, line=240))
+        ins(p_subtitulo(meta, size=13))
+    for p in ficha_parrafos(meta, before=420):
+        ins(p)
+    for p in indice_parrafos(doc):
+        ins(p)
 
 
-def portada_oficio(meta, antes):
-    """Encabezado tipo oficio: membrete con barra mint, estatus, etiqueta y título."""
+def portada_breve(doc, meta, base, antes):
+    """Encabezado claro en la primera página; el texto sigue en la misma página."""
+    ins = antes.addprevious
+    ins(p_marca())
+    ins(p_etiqueta(etiqueta_portada(meta), before=900))
+    ins(p_titulo(meta, base, size=28, after=200 if meta.get("subtitulo") else 0))
+    if meta.get("subtitulo"):
+        ins(p_subtitulo(meta, size=12.5))
+    for p in ficha_parrafos(meta, before=440):
+        ins(p)
+    ins(parrafo_xml(before=0, after=200, line=240))
+
+
+def portada_oficio(doc, meta, base, antes):
+    """Encabezado tipo oficio: membrete con barra mint, estatus, etiqueta y título (encabezado real)."""
     ins = antes.addprevious
     barra = {"left": (H_MINT, 48, 9)}
     p = parrafo_xml(before=0, after=0, line=250, tabs=[(COLUMNA, "right")], borders=barra, ind_left=200)
-    run(p, "Órgano de Administración Judicial", size=13, bold=True, color=H_INK, font="Source Serif 4")
+    run(p, "Órgano de Administración Judicial", size=13, bold=True, color=H_INK, font=SERIF)
     tab_run(p)
     if meta.get("estatus"):
-        run(p, f"\u00a0{meta['estatus']}\u00a0", size=7.5, color=H_AMBER_INK, font="Source Code Pro Medium",
-            caps=True, spacing=10, fill=H_AMBER_TINT)
+        run(p, "\u00a0" + meta["estatus"] + "\u00a0", rstyle="ChipEstatus")
     ins(p)
     p = parrafo_xml(before=30, after=0, line=250, borders=barra, ind_left=200)
     run(p, "Proyecto preparado por la Dirección General de Estrategia y Transformación Digital (DGETD)",
         size=9.5, color=H_INK2)
     ins(p)
-    p = parrafo_xml(style="Etiqueta", before=640, after=100, keep_next=True)
-    run(p, etiqueta_portada(meta))
-    ins(p)
-    p = parrafo_xml(style="Title", after=200, line=245)
-    run(p, meta.get("titulo", ""), size=27)
-    ins(p)
+    ins(p_etiqueta(etiqueta_portada(meta), before=360))
+    ins(p_titulo(meta, base, size=26, after=100))
     if meta.get("subtitulo"):
-        p = parrafo_xml(style="Subtitle")
-        run(p, meta["subtitulo"])
-        ins(p)
+        ins(p_subtitulo(meta, size=12.5, after=200))
     # El primer párrafo del cuerpo (número de circular, quién emite, a quién se dirige) va en caja de datos.
     if antes.tag == qn("w:p"):
         ppr = antes.find(qn("w:pPr"))
@@ -431,13 +481,13 @@ def portada_oficio(meta, antes):
         ps.set(qn("w:val"), "DatosOficio")
 
 
-def portada(doc, meta):
+def portada(doc, meta, base):
     cuerpo = doc.element.body
     primero = cuerpo[0]
     tipo = meta.get("portada")
     if tipo == "completa":
-        portada_completa(meta, primero)
-        # Párrafo que cierra la sección de portada (sin márgenes) y la separa del cuerpo.
+        portada_completa(doc, meta, base, primero)
+        # Párrafo que cierra la sección de portada y la separa del cuerpo.
         sect_cuerpo = cuerpo.find(qn("w:sectPr"))
         sect = copy.deepcopy(sect_cuerpo)
         for ref in sect.findall(qn("w:headerReference")) + sect.findall(qn("w:footerReference")):
@@ -450,10 +500,9 @@ def portada(doc, meta):
             tipo_sec = el("w:type"); sect_cuerpo.insert(0, tipo_sec)
         tipo_sec.set(qn("w:val"), "nextPage")
     elif tipo == "sin-ficha":
-        portada_oficio(meta, primero)
+        portada_oficio(doc, meta, base, primero)
     else:
-        portada_breve(meta, primero)
-
+        portada_breve(doc, meta, base, primero)
 
 # --- Detalles del cuerpo -------------------------------------------------------------
 
@@ -491,7 +540,11 @@ def numero_capitulo(doc):
 
 
 def recuadros(doc):
-    """Etiqueta del recuadro como chip en su propia línea y aire arriba y abajo de cada grupo."""
+    """Etiqueta del recuadro como chip en su propio párrafo (dentro de la caja) y aire arriba y abajo.
+
+    El chip va en un párrafo aparte con el mismo estilo de caja: se ve dentro del recuadro y la lectura
+    en voz alta hace la pausa entre la etiqueta y el texto.
+    """
     hijos = list(doc.element.body)
     for i, p in enumerate(hijos):
         if p.tag != qn("w:p"):
@@ -526,16 +579,194 @@ def recuadros(doc):
         rpr.append(el("w:rStyle", val="Chip" + est))
         t.text = "\u00a0" + etiqueta + "\u00a0"
         t.set(qn("xml:space"), "preserve")
-        salto = el("w:r"); sub(salto, "w:br")
-        r.addnext(salto)
+        # Párrafo propio para el chip, con el mismo estilo de caja.
+        chip_p = el("w:p")
+        chip_ppr = copy.deepcopy(ppr)
+        chip_p.append(chip_ppr)
+        chip_ppr.insert(1, el("w:keepNext"))
+        csp = chip_ppr.find(qn("w:spacing"))
+        csp.set(qn("w:before"), "280"); csp.set(qn("w:after"), "60")
+        sp.set(qn("w:before"), "0")
+        p.addprevious(chip_p)
+        chip_p.append(r)
         # Quita el espacio que separaba la etiqueta del texto.
-        for t2 in salto.itersiblings():
-            ts = t2.findall(qn("w:t"))
+        for r2 in p.findall(qn("w:r")):
+            ts = r2.findall(qn("w:t"))
             if not ts:
                 continue
             ts[0].text = (ts[0].text or "").lstrip()
             if ts[0].text:
                 break
+            r2.getparent().remove(r2)
+
+
+def marcadores(doc):
+    """Corchetes literales en cada marcador (pandoc los quita); dentro de «Pendiente», fondo blanco."""
+    for p in doc.element.body.iter(qn("w:p")):
+        grupo = []
+        grupos = []
+        for hijo in p:
+            es_marc = hijo.tag == qn("w:r") and hijo.find(qn("w:rPr") + "/" + qn("w:rStyle")) is not None and \
+                hijo.find(qn("w:rPr") + "/" + qn("w:rStyle")).get(qn("w:val")) == "Marcador"
+            if es_marc:
+                grupo.append(hijo)
+            elif grupo:
+                grupos.append(grupo); grupo = []
+        if grupo:
+            grupos.append(grupo)
+        en_pendiente = estilo_de(p) == "Pendiente"
+        for g in grupos:
+            ts = [t for r in g for t in r.findall(qn("w:t"))]
+            if not ts:
+                continue
+            if not (ts[0].text or "").startswith("["):
+                ts[0].text = "[" + (ts[0].text or "")
+            if not (ts[-1].text or "").endswith("]"):
+                ts[-1].text = (ts[-1].text or "") + "]"
+            for t in ts:
+                t.set(qn("xml:space"), "preserve")
+            if en_pendiente:
+                # Sobre el fondo ámbar del recuadro, el marcador va en blanco para seguir distinguiéndose.
+                for r in g:
+                    rpr = r.find(qn("w:rPr"))
+                    if rpr.find(qn("w:shd")) is None:
+                        rpr.append(el("w:shd", val="clear", color="auto", fill="FFFFFF"))
+
+
+CODIGO_RE = re.compile(r"(?<![\w\u2011-])(?:[A-Z]{1,3}-)?(?:CAT|RC)-[0-9A-Z]{2,4}(?:-[0-9A-Z]{2,4})?(?![\w-])")
+
+
+def guiones_no_separables(texto):
+    """F-CAT-01, CAT-0042, RC-2027-0118: guion no separable (U+2011) para que el código no se parta."""
+    return CODIGO_RE.sub(lambda m: m.group(0).replace("-", "\u2011"), texto)
+
+
+def es_mono(r):
+    rpr = r.find(qn("w:rPr"))
+    if rpr is None:
+        return False
+    rs = rpr.find(qn("w:rStyle"))
+    if rs is not None and rs.get(qn("w:val")) in ("Clave", "VerbatimChar"):
+        return True
+    rf = rpr.find(qn("w:rFonts"))
+    return rf is not None and "Code" in (rf.get(qn("w:ascii")) or "")
+
+
+def codigos_enteros(doc):
+    """Aplica el guion no separable en títulos, pies y celdas de tabla (Source Code Pro no lo tiene)."""
+    estilos = {"Heading1", "Heading2", "Heading3", "Heading4", "Title", "TableCaption", "ImageCaption"}
+    for p in doc.element.body.iter(qn("w:p")):
+        en_tabla = any(a.tag == qn("w:tc") for a in p.iterancestors())
+        if not en_tabla and estilo_de(p) not in estilos:
+            continue
+        for r in p.iter(qn("w:r")):
+            if es_mono(r):
+                continue
+            for t in r.findall(qn("w:t")):
+                if t.text:
+                    t.text = guiones_no_separables(t.text)
+
+
+def tablas_anchas(doc):
+    """En tablas de 5 o más columnas, menos relleno lateral de celda para que el texto respire."""
+    for tbl in doc.element.body.iter(qn("w:tbl")):
+        grid = tbl.find(qn("w:tblGrid"))
+        if grid is None or len(grid.findall(qn("w:gridCol"))) < 5:
+            continue
+        tblPr = tbl.find(qn("w:tblPr"))
+        if tblPr is None or tblPr.find(qn("w:tblCellMar")) is not None:
+            continue
+        cm = el("w:tblCellMar")
+        for lado, v in (("top", 110), ("left", 80), ("bottom", 80), ("right", 80)):
+            sub(cm, "w:" + lado, w=v, type="dxa")
+        look = tblPr.find(qn("w:tblLook"))
+        (look.addprevious if look is not None else tblPr.append)(cm)
+
+
+ALTO_MAX_FIGURA = int(20.6 * 360000)   # EMU: la figura, su pie y el título del capítulo caben en una página
+ANCHO_COLUMNA_EMU = COLUMNA * 635      # twips a EMU
+
+
+def figuras(doc):
+    """Pie de figura arriba, con el mismo estilo que el título de tabla, pegado a su figura."""
+    for p in list(doc.element.body.iter(qn("w:p"))):
+        dib = p.find(".//" + qn("w:drawing"))
+        if dib is None:
+            continue
+        # A lo ancho de la columna (pandoc usa un ancho de texto genérico para width=100%),
+        # sin pasar de la altura máxima y conservando la proporción.
+        ext = dib.find(".//" + qn("wp:extent"))
+        if ext is not None:
+            cx, cy = int(ext.get("cx")), int(ext.get("cy"))
+            ncx = ANCHO_COLUMNA_EMU
+            ncy = int(cy * ncx / cx)
+            if ncy > ALTO_MAX_FIGURA:
+                ncx, ncy = int(ncx * ALTO_MAX_FIGURA / ncy), ALTO_MAX_FIGURA
+            ext.set("cx", str(ncx)); ext.set("cy", str(ncy))
+            for a_ext in dib.iter("{http://schemas.openxmlformats.org/drawingml/2006/main}ext"):
+                if a_ext.get("cx"):
+                    a_ext.set("cx", str(ncx)); a_ext.set("cy", str(ncy))
+        sig = p.getnext()
+        if sig is None or sig.tag != qn("w:p") or estilo_de(sig) != "Pequeno":
+            continue
+        texto = "".join(t.text or "" for t in sig.iter(qn("w:t"))).strip()
+        if not re.match(r"^Figura \d+\.", texto):
+            continue
+        sig.find(qn("w:pPr") + "/" + qn("w:pStyle")).set(qn("w:val"), "ImageCaption")
+        p.addprevious(sig)
+        ppr = p.find(qn("w:pPr"))
+        if ppr is None:
+            ppr = el("w:pPr"); p.insert(0, ppr)
+        ps = ppr.find(qn("w:pStyle"))
+        if ps is not None:
+            ps.set(qn("w:val"), "Figure")
+        else:
+            ppr.insert(0, el("w:pStyle", val="Figure"))
+
+
+def ajustes_oficio(doc, meta):
+    """Circular: espaciado compacto (mismo cuerpo de letra) y nota interna bien separada de la firma."""
+    if meta.get("portada") != "sin-ficha":
+        return
+
+    def espacio(p, before=None, after=None):
+        ppr = p.find(qn("w:pPr"))
+        if ppr is None:
+            ppr = el("w:pPr"); p.insert(0, ppr)
+        sp = ppr.find(qn("w:spacing"))
+        if sp is None:
+            sp = el("w:spacing")
+            despues = [h for h in ppr if h.tag in (qn("w:ind"), qn("w:jc"), qn("w:outlineLvl"), qn("w:rPr"), qn("w:sectPr"))]
+            (despues[0].addprevious if despues else ppr.append)(sp)
+        if before is not None:
+            sp.set(qn("w:before"), str(before))
+        if after is not None:
+            sp.set(qn("w:after"), str(after))
+
+    hijos = doc.element.body.findall(qn("w:p"))
+    vio_firma = False
+    for i, p in enumerate(hijos):
+        est = estilo_de(p)
+        if est == "Heading2":
+            espacio(p, 220, 40)
+        elif est in ("BodyText", "FirstParagraph"):
+            espacio(p, after=110)
+        elif est == "Compact":
+            espacio(p, 0, 40)
+        elif est == "Firma":
+            if not vio_firma:
+                espacio(p, before=260)
+            vio_firma = True
+        elif est == "Compromiso":
+            ppr = p.find(qn("w:pPr")); sp = ppr.find(qn("w:spacing"))
+            if sp.get(qn("w:before")) == "280":
+                sp.set(qn("w:before"), "200")
+            if sp.get(qn("w:after")) == "280":
+                sp.set(qn("w:after"), "200")
+        elif est == "Pendiente" and vio_firma:
+            # Nota interna después de la firma: bien separada del texto que se firma.
+            espacio(p, before=720)
+            vio_firma = False
 
 
 def listas(doc):
@@ -672,6 +903,26 @@ def cebra(doc):
                     tcPr.append(el("w:shd", val="clear", color="auto", fill=H_PANEL))
 
 
+def aire_tras_tablas(doc):
+    """Separa de la tabla el párrafo de texto que la sigue (pandoc lo pega al filete inferior)."""
+    for tbl in doc.element.body.findall(qn("w:tbl")):
+        sig = tbl.getnext()
+        if sig is None or sig.tag != qn("w:p"):
+            continue
+        if estilo_de(sig) not in (None, "BodyText", "FirstParagraph", "Compact", "Pequeno"):
+            continue
+        ppr = sig.find(qn("w:pPr"))
+        if ppr is None:
+            ppr = el("w:pPr"); sig.insert(0, ppr)
+        sp = ppr.find(qn("w:spacing"))
+        if sp is None:
+            sp = el("w:spacing")
+            despues = [h for h in ppr if h.tag in (qn("w:ind"), qn("w:jc"), qn("w:outlineLvl"), qn("w:rPr"))]
+            (despues[0].addprevious if despues else ppr.append)(sp)
+        if sp.get(qn("w:before")) in (None, "0"):
+            sp.set(qn("w:before"), "200")
+
+
 def filas_enteras(doc):
     """Evita que una fila de tabla se parta entre dos páginas (w:cantSplit)."""
     for fila in doc.element.body.iter(qn("w:tr")):
@@ -695,11 +946,17 @@ def construir(ruta_md, pdf=False):
                     "-o", destino], check=True)
 
     doc = Document(destino)
-    portada(doc, meta)
+    figuras(doc)
+    portada(doc, meta, base)
     numero_capitulo(doc)
     recuadros(doc)
+    ajustes_oficio(doc, meta)
+    marcadores(doc)
+    codigos_enteros(doc)
     listas(doc)
     cebra(doc)
+    tablas_anchas(doc)
+    aire_tras_tablas(doc)
     filas_enteras(doc)
     preparar_secciones(doc, meta)
     propiedades(doc, meta)

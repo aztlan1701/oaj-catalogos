@@ -106,7 +106,7 @@ Figura 1. Componentes del registro y su relación. Abajo, los mismos pasos en te
 En la columna «Oblig.» (obligatoria): **Sí** es obligatorio; **Sí o PC** es obligatorio pero acepta «Por confirmar»; **No** es opcional; **DGETD** lo llena la DGETD; **Flujo** lo escribe un flujo. Entre paréntesis, junto al nombre visible, va el campo de `registro.yaml` que guarda la columna. Las columnas se crean en el orden de las cuatro tablas, que siguen las secciones de `registro.yaml`.
 
 | Nombre interno | Nombre visible (campo) | Tipo | Oblig. | Valores de elección |
-|:------------------------------------------------|:---------------------------|:----------------------|:---------------|:---------------------------------|
+|:------------------------------------------|:---------------------------------|:--------------------|:-------------|:----------------------------------------|
 | `Title` | Clave de catálogo (`B1` · `G2`) | Una línea de texto, valores únicos | Flujo | `CAT-NNNN` (sección 4) |
 | `area_registra` | Área que registra (`A1`) | Búsqueda en «Áreas y órganos» | Sí | Lista oficial |
 | `enlace_nombre` | Persona enlace: nombre completo (`A2`) | Una línea de texto (150) | Sí | — |
@@ -122,7 +122,7 @@ En la columna «Oblig.» (obligatoria): **Sí** es obligatorio; **Sí o PC** es 
 : Columnas del inventario, secciones A y B (quién registra y su lista)
 
 | Nombre interno | Nombre visible (campo) | Tipo | Oblig. | Valores de elección |
-|:------------------------------------------------|:---------------------------|:----------------------|:---------------|:---------------------------------|
+|:------------------------------------------|:---------------------------------|:--------------------|:-------------|:----------------------------------------|
 | `propietario` | Propietario propuesto (`C1`) | Búsqueda en «Áreas y órganos» | Sí o PC | Lista oficial y el elemento «Por confirmar» |
 | `custodio` | Custodio propuesto (`C2`) | Búsqueda en «Áreas y órganos» | Sí o PC | Lista oficial y el elemento «Por confirmar» |
 | `custodio_contacto` | Custodio propuesto: persona de contacto (`C2` (subcampo)) | Una línea de texto (255) | No | — |
@@ -140,7 +140,7 @@ En la columna «Oblig.» (obligatoria): **Sí** es obligatorio; **Sí o PC** es 
 : Columnas del inventario, secciones C y D (propietario, custodio, uso y cambios)
 
 | Nombre interno | Nombre visible (campo) | Tipo | Oblig. | Valores de elección |
-|:------------------------------------------------|:---------------------------|:----------------------|:---------------|:---------------------------------|
+|:------------------------------------------|:---------------------------------|:--------------------|:-------------|:----------------------------------------|
 | `nivel_acceso` | Nivel de acceso (`E1`) | Elección | Sí o PC | Pública · Interna · Restringida · Clasificada · Por confirmar |
 | `datos_personales` | Datos personales (`E2`) | Elección | Sí | Sí · No · No sé |
 | `ubicacion_lista` | Dónde vive la lista (`F1`) | Elección | No | En un sistema o base de datos · En una hoja de cálculo en carpeta compartida · En una hoja de cálculo en el equipo de una persona · En papel · Otro |
@@ -152,7 +152,7 @@ En la columna «Oblig.» (obligatoria): **Sí** es obligatorio; **Sí o PC** es 
 : Columnas del inventario, secciones E y F (acceso y diagnóstico opcional)
 
 | Nombre interno | Nombre visible (campo) | Tipo | Oblig. | Valores de elección |
-|:------------------------------------------------|:---------------------------|:----------------------|:---------------|:---------------------------------|
+|:------------------------------------------|:---------------------------------|:--------------------|:-------------|:----------------------------------------|
 | `folio_registro` | Folio de registro (`G1`) | Una línea de texto (13) | Flujo | `RC-AAAA-NNNN` del trámite vigente |
 | `fecha_recepcion` | Fecha de recepción (`G3`) | Fecha y hora, solo fecha | Flujo | — |
 | `clasificacion` | Clasificación propuesta (art. 5 fr. I–IV) (`G4`) | Elección | DGETD | Entidades · Clasificación · Parámetros · Relación · Por confirmar |
@@ -224,7 +224,7 @@ La DGETD trabaja solo en el inventario. «Registros» lo escriben los flujos; la
 ## 3.3 Columnas
 
 | Nombre interno | Nombre visible | Tipo y valores | Oblig. | Campo o fuente |
-|:----------------------------------------------|:------------------------|:----------------------------------|:---------------|:----------------------------|
+|:----------------------------------------|:-------------------------------|:-------------------------------------|:-------------|:---------------------------|
 | `Title` | Folio de registro | Una línea de texto, valores únicos: `RC-AAAA-NNNN` (sección 4) | Flujo | `G1` |
 | `inventario` | Catálogo | Búsqueda en «Inventario de catálogos» (`Title`) | Flujo | `B1` · `G2` |
 | `anio_folio` | Año del folio | Número, sin decimales | Flujo | `G1` (año de recepción) |
@@ -256,7 +256,7 @@ La DGETD trabaja solo en el inventario. «Registros» lo escriben los flujos; la
 Es la lista oficial de áreas y órganos que alimenta `A1`, `C1` y `C2` en los tres canales. ET-CAT-01, sección 5.5, deja pendiente de qué fuente sale y quién la mantiene.
 
 | Nombre interno | Nombre visible | Tipo | Notas |
-|:----------------------------------------------|:------------------------|:------------------------|:------------------------------------|
+|:------------------------------------------------|:------------------------|:----------------------------|:------------------------------------------|
 | `Title` | Área u órgano (nombre oficial completo) | Una línea de texto, valores únicos | El mismo texto que la opción de Forms y que la hoja «Áreas» de la plantilla. |
 | `tipo_area` | Tipo | Elección: Área administrativa · Órgano jurisdiccional · Valor de control | «Valor de control» solo para el elemento «Por confirmar». |
 | `activa` | Activa | Sí o no | Las inactivas no se ofrecen en el formulario. |
@@ -1010,4 +1010,4 @@ Las dos primeras conviene resolverlas antes del piloto, porque el piloto se hace
 11. Cuenta de servicio para los flujos (sección 9.1).
 12. Conservación de respuestas de Forms y plantillas (sección 9.2).
 13. Umbral de la plantilla si no hay vínculos prellenados (sección 10, plan B 4).
-14. Marcadores de este documento que no están en `registro.yaml` > `marcadores`: [liga al aviso de privacidad simplificado, por definir con la unidad de transparencia]{custom-style="Marcador"}, [liga para confirmar, por definir]{custom-style="Marcador"}, [plazo de conservación por definir con la unidad de transparencia y el área de archivo]{custom-style="Marcador"}, [dominio institucional]{custom-style="Marcador"} y [segunda quincena de noviembre de 2026, por confirmar]{custom-style="Marcador"}. Conviene darlos de alta para que la plantilla y los flujos los detecten.
+14. Marcadores: los de este documento ya están dados de alta en `registro.yaml` > `marcadores` (entre ellos, el aviso de privacidad, la liga para confirmar de los órganos jurisdiccionales, el plazo de conservación, el dominio institucional y la fecha del piloto). Un marcador nuevo se da de alta ahí antes de usarlo, para que la plantilla y los flujos lo detecten.

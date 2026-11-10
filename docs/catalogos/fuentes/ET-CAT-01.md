@@ -1,7 +1,7 @@
 ---
 codigo: ET-CAT-01
 titulo: Estándar técnico de estructura, identificación, versionamiento y publicación de catálogos institucionales
-subtitulo: Artículo 14, fracción II, y Transitorio TERCERO de los Lineamientos Generales de Catálogos Institucionales
+subtitulo: Reglas comunes para describir, identificar, versionar y publicar las listas institucionales del Órgano de Administración Judicial
 tipo: Estándar técnico
 version: "0.1"
 fecha: "Noviembre de 2026"
@@ -673,7 +673,7 @@ Los Lineamientos obligan a publicar este estándar (artículo 14, fracción II, 
 # Anexo A. Correspondencia entre la ficha y F-CAT-01
 
 | Fr. | Metadato y nombre técnico | Campos | Pregunta en F-CAT-01 |
-|------|--------------------------------|------------|--------------------------------------------------|
+|---------|-----------------------------|------------|--------------------------------------------------|
 | I | Identificador del catálogo [id_catalogo]{custom-style="Clave"} | [B1]{custom-style="Clave"} · [G2]{custom-style="Clave"} | No se pregunta: la DGETD asigna la clave al recibir el registro. |
 | II | Nombre oficial [nombre_oficial]{custom-style="Clave"} | [B2]{custom-style="Clave"} | ¿Cómo se llama esta lista? Escriba el nombre completo, sin siglas. |
 | III | Descripción y propósito [descripcion]{custom-style="Clave"} | [B3]{custom-style="Clave"} | ¿Qué contiene esta lista y para qué la usan? |

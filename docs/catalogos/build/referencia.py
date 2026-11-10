@@ -9,7 +9,9 @@ Lo principal: cuerpo de 11.5 pt con interlineado 1.32; Heading 1–4 integrados 
 etiquetado) con H1 grande y filete, H2 en mint-ink, H4 como etiqueta mono; recuadros (Nota, Norma,
 Compromiso, Pendiente, Alerta) con barra gruesa, fondo tintado y relleno interior, y su estilo de
 carácter Chip* para la etiqueta; tablas con encabezado mint-tint y filetes finos; Marcador con fondo
-amber-tint, borde ámbar y negritas; bloque de código en panel.
+amber-tint y negritas (sin borde: construir.py agrega los corchetes); ChipEstatus neutro para el estatus
+del documento; Title con nivel de esquema 0 (encabezado real); FichaDato e IndiceEntrada para la portada;
+ImageCaption con el mismo aspecto que Table Caption; bloque de código en panel.
 """
 import os
 import shutil
@@ -125,7 +127,7 @@ STYLES = f'''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 {pstyle("FirstParagraph", "First Paragraph", based="BodyText", nxt="BodyText")}
 {pstyle("Compact", "Compact", '<w:spacing w:before="20" w:after="80" w:line="300" w:lineRule="auto"/>', based="BodyText")}
 
-{pstyle("Title", "Title", '<w:keepNext/><w:spacing w:before="0" w:after="200" w:line="250" w:lineRule="auto"/>',
+{pstyle("Title", "Title", '<w:keepNext/><w:spacing w:before="0" w:after="200" w:line="250" w:lineRule="auto"/><w:outlineLvl w:val="0"/>',
         TITULO_RPR, based="Normal", nxt="Subtitle", custom=False)}
 {pstyle("Subtitle", "Subtitle", '<w:keepNext/><w:spacing w:before="0" w:after="280" w:line="300" w:lineRule="auto"/>',
         f'<w:color w:val="{INK2}"/><w:sz w:val="27"/><w:szCs w:val="27"/>', based="Normal", nxt="BodyText", custom=False)}
@@ -167,7 +169,10 @@ STYLES = f'''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
         f'<w:keepNext/><w:pBdr><w:left w:val="single" w:sz="18" w:space="6" w:color="{MINT}"/></w:pBdr>'
         '<w:spacing w:before="300" w:after="120" w:line="260" w:lineRule="auto"/><w:ind w:left="160"/>',
         f'<w:b/><w:bCs/><w:color w:val="{INK2}"/><w:sz w:val="20"/><w:szCs w:val="20"/>', based="Caption")}
-{pstyle("ImageCaption", "Image Caption", "", "", based="Caption")}
+{pstyle("ImageCaption", "Image Caption",
+        f'<w:keepNext/><w:pBdr><w:left w:val="single" w:sz="18" w:space="6" w:color="{MINT}"/></w:pBdr>'
+        '<w:spacing w:before="300" w:after="140" w:line="260" w:lineRule="auto"/><w:ind w:left="160"/>',
+        f'<w:b/><w:bCs/><w:color w:val="{INK2}"/><w:sz w:val="20"/><w:szCs w:val="20"/>', based="Caption")}
 {pstyle("Figure", "Figure", '<w:jc w:val="center"/><w:spacing w:before="160" w:after="80"/>', "")}
 {pstyle("CaptionedFigure", "Captioned Figure", '<w:keepNext/>', "", based="Figure")}
 {pstyle("TOCHeading", "TOC Heading", "", "", based="Heading1", nxt="BodyText")}
@@ -175,6 +180,15 @@ STYLES = f'''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 {"".join(callout(sid, sid, fill, bar) for sid, fill, bar, _ in RECUADROS)}
 {pstyle("Etiqueta", "Etiqueta", '<w:keepNext/><w:spacing w:before="240" w:after="60"/>',
         fonts(MONO_MED) + f'<w:caps/><w:color w:val="{MINT_INK}"/><w:spacing w:val="14"/><w:sz w:val="17"/><w:szCs w:val="17"/>', based="Normal", nxt="BodyText")}
+{pstyle("FichaDato", "Ficha de datos",
+        f'<w:keepNext/><w:keepLines/><w:pBdr><w:top w:val="single" w:sz="12" w:space="8" w:color="{MINT}"/>'
+        f'<w:bottom w:val="single" w:sz="6" w:space="8" w:color="{LINE}"/></w:pBdr>'
+        '<w:spacing w:before="0" w:after="70" w:line="264" w:lineRule="auto"/>',
+        '<w:sz w:val="20"/><w:szCs w:val="20"/>', based="Normal")}
+{pstyle("IndiceEntrada", "Indice de portada",
+        f'<w:pBdr><w:bottom w:val="single" w:sz="4" w:space="2" w:color="{LINE}"/></w:pBdr>'
+        '<w:spacing w:before="0" w:after="24" w:line="240" w:lineRule="auto"/><w:ind w:left="680" w:hanging="680"/>',
+        '<w:sz w:val="20"/><w:szCs w:val="20"/>', based="Normal")}
 {pstyle("Firma", "Firma", '<w:keepLines/><w:spacing w:before="560" w:after="0"/>', "", based="BodyText")}
 {pstyle("Pequeno", "Pequeno", '<w:spacing w:before="0" w:after="80" w:line="264" w:lineRule="auto"/>', f'<w:color w:val="{INK2}"/><w:sz w:val="19"/><w:szCs w:val="19"/>', based="BodyText")}
 {pstyle("DatosOficio", "Datos de oficio",
@@ -185,7 +199,9 @@ STYLES = f'''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <w:style w:type="character" w:customStyle="1" w:styleId="VerbatimChar"><w:name w:val="Verbatim Char"/><w:basedOn w:val="DefaultParagraphFont"/>
   <w:rPr>{fonts(MONO)}<w:sz w:val="19"/><w:szCs w:val="19"/></w:rPr></w:style>
 {cstyle("Clave", "Clave", fonts(MONO) + f'<w:color w:val="{INK}"/><w:sz w:val="19"/><w:szCs w:val="19"/>')}
-{cstyle("Marcador", "Marcador", f'<w:b/><w:color w:val="{AMBER_INK}"/><w:bdr w:val="single" w:sz="4" w:space="0" w:color="{AMBER}"/><w:shd w:val="clear" w:color="auto" w:fill="{AMBER_TINT}"/>')}
+{cstyle("Marcador", "Marcador", f'<w:b/><w:color w:val="{AMBER_INK}"/><w:shd w:val="clear" w:color="auto" w:fill="{AMBER_TINT}"/>')}
+{cstyle("ChipEstatus", "Chip de estatus", fonts(MONO_MED) + f'<w:caps/><w:color w:val="{INK2}"/><w:spacing w:val="10"/><w:sz w:val="15"/><w:szCs w:val="15"/>'
+        f'<w:bdr w:val="single" w:sz="4" w:space="1" w:color="{LINE}"/><w:shd w:val="clear" w:color="auto" w:fill="{PANEL}"/>')}
 {cstyle("Obligatorio", "Obligatorio", f'<w:b/><w:color w:val="{CORAL_INK}"/>')}
 {cstyle("Dgetd", "Dgetd", f'<w:b/><w:color w:val="{MINT_INK}"/>')}
 {cstyle("NumeroCapitulo", "Numero de capitulo", f'<w:color w:val="{MINT_INK}"/>')}

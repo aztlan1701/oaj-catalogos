@@ -119,11 +119,10 @@ Lo que anote aquí son propuestas. El Comité formaliza al propietario y al cust
 | **Acepta «por confirmar»**. Es el área con autoridad sobre   |                                                        |
 | el contenido, aunque no sea la que captura. Si es su propia  |                                                        |
 | área, escríbala. Si no sabe cuál es, escriba «Por            |                                                        |
-| confirmar». Si el contenido deriva de la función             |                                                        |
-| jurisdiccional, el propietario es el área administrativa     |                                                        |
-| competente, que recaba la opinión de los órganos             |                                                        |
-| jurisdiccionales involucrados (art. 4 fr. XVII). En los      |                                                        |
-| Lineamientos se llama «propietario».                         |                                                        |
+| confirmar». Si la lista nace del trabajo jurisdiccional,     |                                                        |
+| anote el área administrativa que la atiende; esa área        |                                                        |
+| consulta a los órganos involucrados. En los Lineamientos se  |                                                        |
+| llama «propietario» (art. 4 fr. XVII).                       |                                                        |
 | :::                                                          |                                                        |
 +--------------------------------------------------------------+--------------------------------------------------------+
 | [C2]{custom-style="Clave"} **¿Qué área mantiene la lista al  | Área:\                                                 |
@@ -139,12 +138,9 @@ Lo que anote aquí son propuestas. El Comité formaliza al propietario y al cust
 | lista?**                                                     | ☐ No sé                                                |
 |                                                              |                                                        |
 | ::: {custom-style="Pequeno"}                                 |                                                        |
-| **Opcional**. Solo registra su interés. Lo decide el Comité. |                                                        |
-| Los Lineamientos lo prevén, preferentemente, para listas     |                                                        |
-| transversales, integradas en la arquitectura institucional   |                                                        |
-| de datos o administradas en la Plataforma de Acceso a la     |                                                        |
-| Información Institucional (art. 17). Su área seguiría        |                                                        |
-| decidiendo las reglas.                                       |                                                        |
+| **Opcional**. Solo nos dice si le interesaría; lo decide el  |                                                        |
+| Comité. Su área seguiría decidiendo las reglas de la lista   |                                                        |
+| (arts. 12 y 17).                                             |                                                        |
 | :::                                                          |                                                        |
 +--------------------------------------------------------------+--------------------------------------------------------+
 | [C3]{custom-style="Clave"} **¿A qué se parece más su         | ☐ Una lista de personas, lugares o cosas de la         |

@@ -10,14 +10,17 @@
   /* ===== Página ===== */
   .resumen .cabecera { padding-top: 9mm; }
   .resumen > .portada, .resumen > .cuerpo, .resumen > .cabecera { flex-shrink: 0; }
-  .resumen .cuerpo { gap: 7mm; padding-bottom: 4mm; }
-  .resumen .cuerpo.pagina-2 { padding-top: 6mm; gap: 6mm; }
+  .resumen .cuerpo { gap: 7.5mm; padding-bottom: 3mm; }
+  .resumen .cuerpo.pagina-2 { padding-top: 5mm; gap: 5mm; padding-bottom: 2.5mm; }
   .resumen .pie { padding: 3.4mm var(--pagina-x) 5.6mm; font-size: 8.5pt; gap: 1mm 6mm; flex-wrap: nowrap; }
   .pie .num-pagina { font-family: var(--mono); font-size: var(--t-min); letter-spacing: .06em; color: var(--ink-2); white-space: nowrap; }
+  .pie .ph { white-space: nowrap; }
+  .resumen .pie.doble { flex-wrap: wrap; padding-top: 2.6mm; padding-bottom: 5mm; row-gap: 1.4mm; }
+  .pie.doble .pie-saber { flex: 1 0 100%; line-height: 1.4; padding-bottom: 1.4mm; border-bottom: .25mm solid var(--line); }
 
   /* ===== Portada ===== */
   .portada.compacta { padding: 7mm var(--pagina-x) 7mm; grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr); gap: 9mm; align-items: end; }
-  .portada.compacta h1 { font-size: 29pt; line-height: 1.04; margin-top: 2.6mm; }
+  .portada.compacta h1 { font-size: 27pt; line-height: 1.04; margin-top: 2.6mm; }
   .portada.compacta .entrada { margin: 0; font-size: 10.5pt; line-height: 1.42; }
   .aviso-manda { display: flex; gap: 1.8mm; align-items: flex-start; margin-top: 2.4mm; font-size: 9.5pt; line-height: 1.35; color: var(--ink); font-weight: 700; }
   .aviso-manda .ico { color: var(--mint-ink); width: 4.2mm; height: 4.2mm; margin-top: .2mm; }
@@ -30,8 +33,8 @@
   .sec-cabeza .ref { margin-left: 1mm; }
 
   /* ===== Anatomía: clave y folio ===== */
-  .anatomia { display: grid; grid-template-columns: minmax(0, 1.72fr) minmax(0, 1fr); gap: 4mm; align-items: stretch; }
-  .panel-id { border: var(--borde); border-radius: var(--radio); padding: 3.6mm 4.4mm 4mm; display: flex; flex-direction: column; gap: 3mm; background: #fff; }
+  .anatomia { display: grid; grid-template-columns: minmax(0, 1.78fr) minmax(0, 1fr); gap: 4mm; align-items: stretch; }
+  .panel-id { border: var(--borde); border-radius: var(--radio); padding: 3.6mm 4.4mm 4mm; display: flex; flex-direction: column; gap: 3.2mm; background: #fff; }
   .panel-id.clave-panel { border-top: var(--barra) solid var(--mint); }
   .panel-id.folio-panel { border-top: var(--barra) solid var(--ink-2); background: var(--panel); }
   .panel-id h3 { font-size: 11.5pt; display: flex; align-items: baseline; gap: 2mm; white-space: nowrap; }
@@ -39,29 +42,37 @@
   .panel-id.folio-panel h3 .ico { color: var(--ink-2); }
   .panel-id h3 small { font-family: var(--sans); font-weight: 400; font-size: 9pt; color: var(--ink-2); margin-left: auto; }
 
-  .clave-fila { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 5mm; align-items: start; }
+  .clave-fila { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4.2mm; align-items: start; }
   ul.desarme { list-style: none; margin: 0; padding: 0; display: flex; gap: 1.4mm; align-items: start; }
   ul.desarme > li { margin: 0; display: grid; gap: 1.3mm; align-content: start; }
   ul.desarme .trozo { font-family: var(--mono); font-weight: 500; line-height: 1; color: var(--ink); text-align: center; padding: 1.7mm 1.6mm 1.4mm; border-radius: 1.2mm; background: var(--mint-tint); }
-  .clave-panel ul.desarme .trozo { font-size: 22pt; }
+  .clave-panel ul.desarme .trozo { font-size: 20pt; }
   .clave-panel ul.desarme > li.prefijo .trozo { background: var(--panel); border: var(--borde); color: var(--ink-2); }
   .folio-panel ul.desarme .trozo { font-size: 14pt; background: #fff; border: var(--borde); }
-  .folio-panel ul.desarme > li.anio .trozo { background: #fff; border: .35mm solid var(--ink-2); }
+  .folio-panel ul.desarme > li.anio .trozo { border: .35mm solid var(--ink-2); }
   ul.desarme .corchete { height: 1.6mm; border: .45mm solid var(--mint-2); border-top: 0; border-radius: 0 0 1mm 1mm; margin: 0 1mm; }
   .folio-panel ul.desarme .corchete { border-color: #C3CAD3; }
   .folio-panel ul.desarme > li.anio .corchete { border-color: var(--ink-2); }
   ul.desarme .explica { font-size: 8.5pt; line-height: 1.25; color: var(--ink-2); padding: 0 .4mm; }
   ul.desarme .explica b { display: block; color: var(--ink); font-size: 9.5pt; }
-  .clave-panel ul.desarme > li.prefijo { width: 21mm; }
-  .clave-panel ul.desarme > li.numero { width: 29mm; }
+  .clave-panel ul.desarme > li.prefijo { width: 19.5mm; }
+  .clave-panel ul.desarme > li.numero { width: 27mm; }
   .folio-panel ul.desarme > li { flex: 1 1 0; min-width: 0; }
   .folio-panel ul.desarme > li.prefijo { flex: 0 0 11.5mm; }
 
-  ul.reglas { list-style: none; margin: 0; padding: 0; display: grid; gap: 2.2mm; }
-  ul.reglas > li { margin: 0; display: grid; grid-template-columns: 6mm minmax(0, 1fr); gap: 2.2mm; align-items: start; font-size: 9.5pt; line-height: 1.3; color: var(--ink-2); }
+  ul.reglas { list-style: none; margin: 0; padding: 0; display: grid; gap: 2.4mm; }
+  ul.reglas > li { margin: 0; display: grid; grid-template-columns: 6mm minmax(0, 1fr); gap: 1.8mm; align-items: start; font-size: 9.5pt; line-height: 1.3; color: var(--ink-2); }
   ul.reglas > li b { color: var(--ink); }
   ul.reglas .ico-insignia { width: 6mm; height: 6mm; margin-top: -.3mm; }
   ul.reglas .ico-insignia .ico { width: 3.5mm; height: 3.5mm; }
+  .nota-ti { margin-top: auto; padding: 2mm 2.8mm 2.2mm; border-radius: 1.2mm; background: var(--panel); border: var(--borde); font-size: var(--t-nota); line-height: 1.36; color: var(--ink-2); display: grid; gap: 1.1mm; }
+  .nota-ti-titulo { display: inline-flex; align-items: center; gap: 1.2mm; font-weight: 700; color: var(--ink); vertical-align: -.6mm; }
+  .nota-ti-titulo .ico { width: 3.8mm; height: 3.8mm; color: var(--mint-ink); }
+  .nota-ti .clave { font-size: 8pt; }
+  .nota-ti .no-validas { display: flex; flex-wrap: wrap; align-items: center; gap: .8mm 2.4mm; }
+  .nota-ti .no-validas > span { display: inline-flex; align-items: center; gap: .8mm; white-space: nowrap; }
+  .nota-ti .no-validas .clave { background: #fff; border: .3mm solid var(--coral); }
+  .nota-ti .no-validas .ico { width: 3.2mm; height: 3.2mm; color: var(--coral-ink); }
 
   figure.uno-varios { margin: 0; display: grid; gap: 2mm; }
   .uno-varios .lienzo-mini { display: grid; grid-template-columns: auto 5mm auto; justify-content: start; align-items: center; background: #fff; border: var(--borde); border-radius: 1.2mm; padding: 2mm 2.4mm; }
@@ -78,16 +89,16 @@
   /* ===== La ficha: 11 datos ===== */
   .ficha-rejilla { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: repeat(3, auto); gap: 3mm; }
   ol.datos-ficha { list-style: none; margin: 0; padding: 0; grid-column: 1 / -1; grid-row: 1 / -1; display: grid; grid-template-columns: subgrid; grid-template-rows: subgrid; }
-  ol.datos-ficha > li { margin: 0; border: var(--borde); border-radius: var(--radio); background: #fff; padding: 2.6mm 3mm 2.8mm; display: flex; flex-direction: column; min-width: 0; }
-  .dato-cabeza { order: -1; display: flex; align-items: center; gap: 1.4mm; margin-bottom: 1.8mm; min-width: 0; }
+  ol.datos-ficha > li { margin: 0; border: var(--borde); border-radius: var(--radio); background: #fff; padding: 2.3mm 2.8mm 2.5mm; display: flex; flex-direction: column; min-width: 0; }
+  .dato-cabeza { order: -1; display: flex; align-items: center; gap: 1.4mm; margin-bottom: 1.3mm; min-width: 0; }
   .dato-cabeza .ref { vertical-align: 0; }
   .dato-cabeza .quien { margin-left: auto; }
   ol.datos-ficha .ico-insignia { width: 6.4mm; height: 6.4mm; }
   ol.datos-ficha .ico-insignia .ico { width: 3.7mm; height: 3.7mm; }
-  ol.datos-ficha h3 { font-family: var(--serif); font-weight: 600; font-size: 10.5pt; line-height: 1.16; }
-  .dato-termino { font-size: 8pt; line-height: 1.25; color: var(--ink-2); margin-top: .6mm; }
-  .dato-pista { font-size: 9.5pt; line-height: 1.28; color: var(--ink); margin-top: 1.2mm; }
-  .dato-estado { margin-top: auto; padding-top: 2mm; }
+  ol.datos-ficha h3 { font-family: var(--serif); font-weight: 600; font-size: 10.5pt; line-height: 1.12; }
+  .dato-termino { font-size: 8pt; line-height: 1.2; color: var(--ink-2); margin-top: .4mm; }
+  .dato-pista { font-size: 9.5pt; line-height: 1.22; color: var(--ink); margin-top: .9mm; }
+  .dato-estado { margin-top: auto; padding-top: 1.5mm; }
   .dato-estado .estado { font-size: 7.6pt; padding: .8mm 1.8mm; }
 
   /* «Quién lo llena»: texto + forma (aro = su área; cuadro = DGETD; aro y cuadro = ambos) */
@@ -98,102 +109,99 @@
   .quien.dgetd { background: var(--mint-tint); border-color: transparent; color: var(--mint-ink); }
   .quien.ambos { color: var(--ink); }
 
-  .ficha-leyenda { grid-column: 4; grid-row: 3; border-radius: var(--radio); background: var(--mint-tint); padding: 2.8mm 3.2mm; display: grid; gap: 1.8mm; align-content: start; font-size: 8.8pt; line-height: 1.3; color: var(--ink); }
+  .ficha-leyenda { grid-column: 4; grid-row: 3; border-radius: var(--radio); background: var(--mint-tint); padding: 2.6mm 3mm; display: grid; gap: 1.6mm; align-content: start; font-size: 8.5pt; line-height: 1.3; color: var(--ink); }
   .ficha-leyenda h3 { font-family: var(--sans); font-weight: 700; font-size: 9.5pt; }
-  .ficha-leyenda ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.3mm; }
+  .ficha-leyenda ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.6mm; }
   .ficha-leyenda li { margin: 0; }
-  .ficha-leyenda .quien { background: #fff; }
-  .ficha-leyenda .estado { font-size: 7.6pt; padding: .8mm 1.8mm; }
+  .ficha-leyenda .marca-quien { white-space: nowrap; font-weight: 700; }
+  .ficha-leyenda .marca-quien i { display: inline-block; width: 1.9mm; height: 1.9mm; margin-right: .7mm; vertical-align: .05mm; }
+  .ficha-leyenda .marca-quien i + i { margin-left: -.3mm; }
+  .ficha-leyenda i.m-area { border: .4mm solid var(--ink-2); border-radius: 50%; }
+  .ficha-leyenda i.m-dgetd { background: var(--mint); border-radius: .3mm; }
+  .ficha-leyenda .estado { font-size: 7.6pt; padding: .8mm 1.8mm; margin-bottom: .8mm; background: #fff; }
 
   /* ===== Página 2: recorridos ===== */
-  .recorrido { border: var(--borde); border-radius: var(--radio); padding: 3.2mm 4.4mm 3.6mm; display: grid; gap: 3mm; background: #fff; }
+  .recorrido { border: var(--borde); border-radius: var(--radio); padding: 2.8mm 4.4mm 3.1mm; display: grid; gap: 2.6mm; background: #fff; }
   .recorrido-cabeza { display: flex; justify-content: space-between; align-items: center; gap: 4mm; }
   .recorrido-cabeza h3 { font-size: 12pt; display: flex; align-items: center; gap: 2.2mm; }
   .recorrido-cabeza h3 .ico-insignia { width: 6.6mm; height: 6.6mm; }
   .recorrido-cabeza h3 .ico-insignia .ico { width: 3.8mm; height: 3.8mm; }
-  .recorrido-cabeza h3 .ico-insignia.gris { color: var(--ink-2); }
   .recorrido-cabeza p { font-size: 9.5pt; color: var(--ink-2); white-space: nowrap; }
   .recorrido-cabeza .clave { font-size: 8.6pt; }
+  .recorrido.lateral { grid-template-columns: 31mm minmax(0, 1fr); gap: 3mm; align-items: start; }
+  .recorrido.lateral .recorrido-cabeza { flex-direction: column; align-items: flex-start; gap: 2mm; padding-top: .6mm; }
+  .recorrido.lateral .recorrido-cabeza h3 { line-height: 1.15; }
+  .recorrido.lateral .recorrido-cabeza p { white-space: normal; line-height: 1.5; }
 
-  .quien-mini { font-family: var(--mono); font-weight: 500; font-size: var(--t-min); letter-spacing: .05em; text-transform: uppercase; color: var(--ink-2); }
-  .quien-mini.dgetd { color: var(--mint-ink); }
 
   ol.tramite { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; counter-reset: paso; }
-  ol.tramite > li { margin: 0; position: relative; padding: 4.4mm 7mm 0 0; counter-increment: paso; font-size: 9.5pt; line-height: 1.3; color: var(--ink-2); }
+  ol.tramite > li { margin: 0; position: relative; padding: 0 6.4mm 0 0; counter-increment: paso; font-size: 9.5pt; line-height: 1.3; color: var(--ink-2); }
   ol.tramite > li:last-child { padding-right: 0; }
-  ol.tramite .quien-mini { position: absolute; top: 0; left: 0; margin: 0; }
-  ol.tramite .estatus { display: flex; align-items: center; gap: 1.6mm; margin-bottom: 1.2mm; }
-  ol.tramite .estatus::before { content: counter(paso); font-family: var(--mono); font-weight: 500; font-size: 8.5pt; width: 5.8mm; height: 5.8mm; border-radius: 50%; border: .45mm solid var(--mint-ink); display: grid; place-items: center; color: var(--ink); background: #fff; flex: none; }
+  ol.tramite .estatus { display: flex; align-items: center; gap: 1.3mm; margin-bottom: 1.1mm; }
+  ol.tramite .estatus::before { content: counter(paso); font-family: var(--mono); font-weight: 500; font-size: 8pt; width: 5.2mm; height: 5.2mm; border-radius: 50%; border: .45mm solid var(--mint-ink); display: grid; place-items: center; color: var(--ink); background: #fff; flex: none; }
   ol.tramite > li.final .estatus::before { background: var(--mint-tint); }
-  ol.tramite .estatus b { font-size: 10.5pt; color: var(--ink); white-space: nowrap; }
-  ol.tramite > li:not(:last-child)::after { content: ""; position: absolute; top: 7.1mm; right: 1.6mm; width: 4.2mm; height: .45mm; background: var(--mint-2); }
-  ol.tramite > li:not(:last-child)::before { content: ""; position: absolute; top: 6.25mm; right: 1.45mm; width: 1.6mm; height: 1.6mm; border-top: .45mm solid var(--mint-2); border-right: .45mm solid var(--mint-2); transform: rotate(45deg); }
+  ol.tramite .estatus b { font-size: 9.6pt; color: var(--ink); white-space: nowrap; }
+  ol.tramite > li:not(:last-child)::after { content: ""; position: absolute; top: 2.4mm; right: 1.3mm; width: 3.8mm; height: .45mm; background: var(--mint-2); }
+  ol.tramite > li:not(:last-child)::before { content: ""; position: absolute; top: 1.55mm; right: 1.15mm; width: 1.6mm; height: 1.6mm; border-top: .45mm solid var(--mint-2); border-right: .45mm solid var(--mint-2); transform: rotate(45deg); }
 
   figure.inventario { margin: 0; display: grid; gap: 3mm; }
   figure.inventario svg { display: block; width: 100%; height: auto; }
-  .inv-texto { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 5mm; padding-top: 2.6mm; border-top: var(--borde); font-size: 9.5pt; line-height: 1.3; color: var(--ink-2); }
+  .inv-texto { display: block; padding-top: 2.6mm; border-top: var(--borde); font-size: 9.5pt; line-height: 1.3; color: var(--ink-2); }
   .inv-texto b { color: var(--ink); }
-  .inv-texto h4 { font-size: 9.5pt; color: var(--ink); margin-bottom: 1.2mm; }
-  .inv-texto ol { margin: 0; padding-left: 4.4mm; display: grid; gap: .7mm; }
-  .inv-texto ol li { margin: 0; padding-left: .6mm; }
+  .inv-texto h4 { font-size: 9.5pt; color: var(--ink); margin-bottom: 1mm; }
+  .inv-texto > ol.dos-col { display: block; columns: 2; column-gap: 8mm; }
+  .inv-texto > ol > li { break-inside: avoid; margin-bottom: .8mm; }
+  .inv-texto ol { margin: 0; padding-left: 4.4mm; display: grid; gap: .8mm; }
+  .inv-texto li { margin: 0; padding-left: .6mm; }
   .inv-texto ol li::marker { font-family: var(--mono); font-weight: 500; font-size: 8.5pt; color: var(--mint-ink); }
   .inv-texto .ref { margin-left: .6mm; }
-  .inv-texto .ademas p + p { margin-top: 1.2mm; }
-  .no-autorizar { display: flex; align-items: center; gap: 1.8mm; margin-top: 2mm; padding: 1.6mm 2.4mm; border-radius: 1mm; background: var(--mint-tint); color: var(--ink); font-weight: 700; }
+  .recorrido-cabeza .no-autorizar { display: flex; align-items: center; gap: 1.6mm; margin: 0; padding: 1.6mm 2.4mm; border-radius: 1mm; background: var(--mint-tint); color: var(--ink); font-weight: 700; }
   .no-autorizar .ico { width: 4mm; height: 4mm; color: var(--mint-ink); }
 
   /* ===== Versiones ===== */
-  ol.versiones { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3.6mm; }
-  ol.versiones > li { margin: 0; border: var(--borde); border-radius: var(--radio); padding: 3mm 3.8mm 3.4mm; display: flex; flex-direction: column; gap: 2mm; background: #fff; border-top: var(--barra) solid var(--mint-2); }
-  ol.versiones > li.menor { border-top-color: var(--mint); }
-  ol.versiones > li.mayor { border-top-color: var(--ink-2); }
+  .versiones-rejilla { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: auto auto; gap: 2.2mm 3.6mm; }
+  ol.versiones { list-style: none; margin: 0; padding: 0; grid-column: 1 / -1; grid-row: 1 / -1; display: grid; grid-template-columns: subgrid; grid-template-rows: subgrid; }
+  ol.versiones > li { margin: 0; border: var(--borde); border-radius: var(--radio); padding: 2.8mm 3.6mm 3mm; display: flex; flex-direction: column; gap: 1.7mm; background: #fff; border-top: var(--barra) solid var(--mint-2); }
+  ol.versiones > li.contenido { grid-column: 1; grid-row: 1 / span 2; }
+  ol.versiones > li.menor { grid-column: 2; grid-row: 1; border-top-color: var(--mint); }
+  ol.versiones > li.mayor { grid-column: 3; grid-row: 1; border-top-color: var(--ink-2); }
   ol.versiones h3 { font-family: var(--serif); font-weight: 600; font-size: 10.5pt; line-height: 1.18; }
   .ejemplo-cambio { font-size: 9.5pt; color: var(--ink-2); line-height: 1.3; }
-  .salto-version { display: flex; align-items: center; gap: 2mm; font-family: var(--mono); font-weight: 500; font-size: 14pt; line-height: 1; color: var(--ink); }
-  .salto-version > span:not(.flecha) { border: var(--borde); border-radius: 1.2mm; padding: 1.3mm 2mm 1.1mm; background: var(--panel); }
+  .salto-version { display: flex; align-items: center; gap: 2mm; font-family: var(--mono); font-weight: 500; font-size: 13pt; line-height: 1; color: var(--ink); }
+  .salto-version > span:not(.flecha):not(.igual) { border: var(--borde); border-radius: 1.2mm; padding: 1.1mm 1.9mm .9mm; background: var(--panel); }
   .salto-version .flecha { color: var(--ink-2); display: inline-flex; }
   .salto-version .flecha .ico { width: 4.2mm; height: 4.2mm; }
+  .salto-version .igual { font-family: var(--sans); font-weight: 700; font-size: 9.5pt; color: var(--ink); white-space: nowrap; }
   .salto-version u { text-decoration: none; padding: 0 .5mm; border-radius: .6mm; }
   li.menor .salto-version u { background: var(--mint-tint); color: var(--mint-ink); box-shadow: inset 0 -.5mm 0 var(--mint); }
   li.mayor .salto-version u { background: #fff; color: var(--ink); box-shadow: inset 0 -.6mm 0 var(--ink-2); }
   .resultado { font-size: 9.5pt; line-height: 1.3; color: var(--ink); }
-  .resultado .termino { font-size: 8pt; }
+  .resultado .termino, .versiones-nota .termino { font-size: var(--t-min); }
   .origen { margin-top: auto; display: inline-flex; align-self: flex-start; align-items: center; gap: 1.2mm; font-weight: 700; font-size: 7.6pt; line-height: 1; padding: .85mm 1.8mm; border-radius: 10mm; white-space: nowrap; }
   .origen.firme { background: var(--mint-tint); color: var(--mint-ink); }
   .origen.propuesta { background: var(--amber-tint); color: var(--amber-ink); }
   .origen .ico { width: 3.2mm; height: 3.2mm; }
-  .versiones-pie { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2mm; font-size: 9.5pt; line-height: 1.32; color: var(--ink-2); }
-  .versiones-pie .ico { width: 4.2mm; height: 4.2mm; color: var(--mint-ink); margin-top: .2mm; }
-  .versiones-pie b { color: var(--ink); }
+  .versiones-nota { grid-column: 2 / 4; grid-row: 2; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2mm; align-items: start; padding: 0 1mm; font-size: 9.5pt; line-height: 1.3; color: var(--ink-2); }
+  .versiones-nota b { color: var(--ink); }
+  .versiones-nota .ico { width: 4.6mm; height: 4.6mm; color: var(--mint-ink); }
 
   /* ===== Franjas: pendientes y compromisos ===== */
-  .franjas { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 4mm; align-items: stretch; }
-  .franja { border-radius: var(--radio); padding: 3.2mm 4.4mm 3.6mm; display: grid; gap: 2mm; align-content: start; }
+  .franjas { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.22fr); gap: 4mm; align-items: stretch; }
+  .franja { border-radius: var(--radio); padding: 2.9mm 4.4mm 3.2mm; display: flex; flex-direction: column; gap: 2.2mm; }
   .franja h2 { font-size: 12pt; display: flex; align-items: center; gap: 2mm; }
   .franja h2 .ico { width: 4.8mm; height: 4.8mm; }
-  .franja ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.4mm; }
+  .franja ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.6mm; }
   .franja li { margin: 0; position: relative; padding-left: 4.4mm; font-size: 9.5pt; line-height: 1.3; color: var(--ink); }
   .franja.pendientes { background: var(--amber-tint); border-left: var(--barra) solid var(--amber); }
   .franja.pendientes h2, .franja.pendientes h2 .ico { color: var(--amber-ink); }
   .franja.pendientes li::before { content: ""; position: absolute; left: .3mm; top: 1.5mm; width: 1.7mm; height: 1.7mm; background: var(--amber); transform: rotate(45deg); }
   .franja.compromisos { background: var(--green-tint); border-left: var(--barra) solid var(--green); }
   .franja.compromisos h2, .franja.compromisos h2 .ico { color: var(--green-ink); }
-  .franja.compromisos ul { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1.4mm 3mm; }
+  .franja.compromisos ul { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1.6mm 3mm; }
   .franja.compromisos li::before { content: ""; position: absolute; left: 0; top: 1mm; width: 3mm; height: 3mm; background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234A7A3C' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4.5 12.5l5 5L20 7'/%3E%3C/svg%3E"); }
-  .franja.compromisos .plazos { font-size: 9pt; line-height: 1.35; color: var(--ink-2); border-top: .3mm solid #D3E3CB; padding-top: 1.8mm; }
+  .franja.compromisos .plazos { margin-top: auto; font-size: 9.5pt; line-height: 1.35; color: var(--ink-2); border-top: .3mm solid #D3E3CB; padding-top: 1.8mm; }
   .franja.compromisos .plazos .ph { display: inline-block; margin-top: .6mm; white-space: nowrap; }
 
-  /* ===== Para saber más ===== */
-  .saber-mas { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 6mm; padding-top: 3mm; border-top: .5mm solid var(--line); font-size: var(--t-nota); line-height: 1.38; color: var(--ink-2); }
-  .saber-mas h2 { font-family: var(--sans); font-size: 9.5pt; font-weight: 700; color: var(--ink); display: flex; align-items: center; gap: 1.6mm; margin-bottom: 1.2mm; }
-  .saber-mas h2 .ico { width: 4mm; height: 4mm; color: var(--mint-ink); }
-  .saber-mas p + p { margin-top: 1.2mm; }
-  .saber-mas b { color: var(--ink); }
-  .saber-mas .no-validas { display: flex; flex-wrap: wrap; align-items: center; gap: 1.2mm 2.4mm; }
-  .saber-mas .no-validas > span { display: inline-flex; align-items: center; gap: 1mm; white-space: nowrap; }
-  .saber-mas .no-validas .clave { background: #fff; border: .3mm solid var(--coral); font-size: 8pt; }
-  .saber-mas .no-validas .ico { width: 3.2mm; height: 3.2mm; color: var(--coral-ink); }
-  .saber-mas .ph { white-space: nowrap; }
 </style>
 </head>
 <body>
@@ -209,11 +217,11 @@
 
   <section class="portada compacta" aria-labelledby="t-principal">
     <div>
-      <span class="etiqueta">ET-CAT-01 en una mirada · Resumen del estándar técnico</span>
+      <span class="etiqueta">ET-CAT-01 · Resumen del estándar técnico</span>
       <h1 id="t-principal">Su lista, <em>de la clave a la versión</em></h1>
     </div>
     <div>
-      <p class="entrada">Cómo se identifica, se describe y cambia cada lista que registra su área. Lo resume la Dirección General de Estrategia y Transformación Digital (DGETD) para áreas de tecnologías de la información (TI), personas enlace y titulares.</p>
+      <p class="entrada">Cómo se identifica, se describe y cambia cada lista que registra su área. Para áreas de tecnologías de la información (TI), personas enlace y titulares.</p>
       <p class="aviso-manda"><span class="ico" data-icono="info"></span><span>Si algo aquí difiere del estándar, manda el estándar.</span></p>
     </div>
   </section>
@@ -224,7 +232,7 @@
     <section class="sec" aria-labelledby="t-anatomia">
       <div class="sec-cabeza">
         <h2 id="t-anatomia">Anatomía de una clave</h2>
-        <p>Su lista recibe una clave para siempre. Cada trámite recibe, además, su folio.</p>
+        <p>Su lista recibe una clave para siempre. Cada trámite, además, su folio.</p>
       </div>
 
       <div class="anatomia">
@@ -237,10 +245,17 @@
             </ul>
             <ul class="reglas">
               <li><span class="ico-insignia"><span class="ico" data-icono="cruz"></span></span><span><b>No dice nada:</b> ni área, ni año, ni materia.</span></li>
-              <li><span class="ico-insignia"><span class="ico" data-icono="candado"></span></span><span><b>No cambia,</b> aunque la lista cambie de nombre o de área.</span></li>
-              <li><span class="ico-insignia"><span class="ico" data-icono="escudo"></span></span><span><b>No se reutiliza,</b> ni cuando la lista se retira.</span></li>
-              <li><span class="ico-insignia"><span class="ico" data-icono="hoja-calculo"></span></span><span><b>Una por lista:</b> con la plantilla de Excel, cada lista recibe su clave y su folio.</span></li>
+              <li><span class="ico-insignia"><span class="ico" data-icono="candado"></span></span><span><b>No cambia,</b> aunque cambien su nombre o su área.</span></li>
+              <li><span class="ico-insignia"><span class="ico" data-icono="escudo"></span></span><span><b>No se reutiliza,</b> ni si la lista se retira.</span></li>
             </ul>
+          </div>
+          <div class="nota-ti">
+            <p><b class="nota-ti-titulo"><span class="ico" data-icono="pantalla"></span>Para su equipo de TI:</b> guarde la clave como texto, con prefijo y ceros, y acepte 5 dígitos: después de <span class="clave">CAT-9999</span> sigue <span class="clave">CAT-10000</span>.</p>
+            <p class="no-validas"><b>Así no:</b>
+              <span><span class="ico" data-icono="cruz"></span><span class="clave">CAT-DGRH-01</span><span class="visualmente-oculto">(lleva siglas)</span></span>
+              <span><span class="ico" data-icono="cruz"></span><span class="clave">CAT-2027-0042</span><span class="visualmente-oculto">(lleva el año)</span></span>
+              <span><span class="ico" data-icono="cruz"></span><span class="clave">CAT-42</span><span class="visualmente-oculto">(le faltan ceros)</span></span>
+            </p>
           </div>
         </div>
 
@@ -252,9 +267,9 @@
             <li class="numero"><span class="trozo">0118</span><span class="corchete" aria-hidden="true"></span><span class="explica"><b>Número</b>de trámite</span></li>
           </ul>
           <figure class="uno-varios">
-            <div class="lienzo-mini">
+            <div class="lienzo-mini" role="img" aria-label="Ejemplo: la clave CAT-0042 con dos folios, RC-2027-0118 y RC-2027-0347.">
               <span class="clave">CAT-0042</span>
-              <span class="ramas" aria-hidden="true"></span>
+              <span class="ramas"></span>
               <ul>
                 <li><span class="clave">RC-2027-0118</span></li>
                 <li><span class="clave">RC-2027-0347</span></li>
@@ -269,8 +284,8 @@
     <!-- La ficha -->
     <section class="sec" aria-labelledby="t-ficha">
       <div class="sec-cabeza">
-        <h2 id="t-ficha">La ficha: 11 datos sobre cada lista</h2>
-        <p>Los 11 son obligatorios. Describen la lista; no se entrega su contenido.<span class="ref">art. 8</span></p>
+        <h2 id="t-ficha">La ficha: 11 datos</h2>
+        <p>Los 11 son obligatorios. Describen la lista, no su contenido.<span class="ref">art. 8</span></p>
       </div>
 
       <div class="ficha-rejilla">
@@ -298,22 +313,22 @@
           </li>
           <li>
             <h3>¿Qué área decide qué entra y qué sale?</h3>
-            <p class="dato-termino">(propietario)</p>
+            <p class="dato-termino">(propietario propuesto)</p>
             <p class="dato-pista">Lo formaliza el Comité.</p>
             <div class="dato-cabeza"><span class="ico-insignia"><span class="ico" data-icono="bandera"></span></span><span class="ref">fr. IV</span><span class="quien"><i class="m-area" aria-hidden="true"></i><span class="visualmente-oculto">Lo llena: </span>Su área</span></div>
             <p class="dato-estado"><span class="estado por-confirmar">Acepta «por confirmar»</span></p>
           </li>
           <li>
             <h3>¿Qué área la mantiene al día?</h3>
-            <p class="dato-termino">(custodio)</p>
+            <p class="dato-termino">(custodio propuesto)</p>
             <p class="dato-pista">Lo formaliza el Comité.</p>
             <div class="dato-cabeza"><span class="ico-insignia"><span class="ico" data-icono="lapiz"></span></span><span class="ref">fr. V</span><span class="quien"><i class="m-area" aria-hidden="true"></i><span class="visualmente-oculto">Lo llena: </span>Su área</span></div>
             <p class="dato-estado"><span class="estado por-confirmar">Acepta «por confirmar»</span></p>
           </li>
           <li>
             <h3>¿A qué se parece más su lista?</h3>
-            <p class="dato-termino">(clasificación)</p>
-            <p class="dato-pista">Usted propone; nosotros revisamos.</p>
+            <p class="dato-termino">(clasificación propuesta)</p>
+            <p class="dato-pista">La revisamos con usted.</p>
             <div class="dato-cabeza"><span class="ico-insignia"><span class="ico" data-icono="carpeta"></span></span><span class="ref">fr. VI</span><span class="quien ambos"><i class="m-area" aria-hidden="true"></i><i class="m-dgetd" aria-hidden="true"></i><span class="visualmente-oculto">Lo llenan su área y la DGETD: </span>Ambos</span></div>
             <p class="dato-estado"><span class="estado por-confirmar">Acepta «por confirmar»</span></p>
           </li>
@@ -327,14 +342,14 @@
           <li>
             <h3>¿Cada cuánto cambia?</h3>
             <p class="dato-termino">(frecuencia de actualización)</p>
-            <p class="dato-pista">Según lo que pasa hoy, no lo ideal.</p>
+            <p class="dato-pista">Lo de hoy, no lo ideal.</p>
             <div class="dato-cabeza"><span class="ico-insignia"><span class="ico" data-icono="ciclo"></span></span><span class="ref">fr. VIII</span><span class="quien"><i class="m-area" aria-hidden="true"></i><span class="visualmente-oculto">Lo llena: </span>Su área</span></div>
             <p class="dato-estado"><span class="estado por-confirmar">Acepta «por confirmar»</span></p>
           </li>
           <li>
             <h3>¿Maneja versiones?</h3>
             <p class="dato-termino">(versión vigente)</p>
-            <p class="dato-pista">Si no, anotamos la versión 1.0.</p>
+            <p class="dato-pista">Si no, anotamos la 1.0.</p>
             <div class="dato-cabeza"><span class="ico-insignia"><span class="ico" data-icono="lista"></span></span><span class="ref">fr. IX</span><span class="quien ambos"><i class="m-area" aria-hidden="true"></i><i class="m-dgetd" aria-hidden="true"></i><span class="visualmente-oculto">Lo llenan su área y la DGETD: </span>Ambos</span></div>
             <p class="dato-estado"><span class="estado por-confirmar">Acepta «por confirmar»</span></p>
           </li>
@@ -348,7 +363,7 @@
           <li>
             <h3>¿Quién puede verla?</h3>
             <p class="dato-termino">(nivel de acceso)</p>
-            <p class="dato-pista">Y si contiene datos personales (sí, no o no sé).</p>
+            <p class="dato-pista">Y si tiene datos personales: sí, no o no sé.</p>
             <div class="dato-cabeza"><span class="ico-insignia"><span class="ico" data-icono="candado"></span></span><span class="ref">fr. XI</span><span class="quien"><i class="m-area" aria-hidden="true"></i><span class="visualmente-oculto">Lo llena: </span>Su área</span></div>
             <p class="dato-estado"><span class="estado por-confirmar">Acepta «por confirmar»</span></p>
           </li>
@@ -357,8 +372,8 @@
         <aside class="ficha-leyenda" aria-labelledby="t-leyenda">
           <h3 id="t-leyenda">Cómo leer las tarjetas</h3>
           <ul>
-            <li><span class="quien"><i class="m-area" aria-hidden="true"></i>Su área</span> <span class="quien dgetd"><i class="m-dgetd" aria-hidden="true"></i>DGETD</span> <span class="quien ambos"><i class="m-area" aria-hidden="true"></i><i class="m-dgetd" aria-hidden="true"></i>Ambos</span> dicen quién lo llena.</li>
-            <li><span class="estado por-confirmar">Acepta «por confirmar»</span> Puede ir así; lo completamos con usted.</li>
+            <li>Quién lo llena: <span class="marca-quien"><i class="m-area" aria-hidden="true"></i>su área,</span> <span class="marca-quien"><i class="m-dgetd" aria-hidden="true"></i>la DGETD</span> o <span class="marca-quien"><i class="m-area" aria-hidden="true"></i><i class="m-dgetd" aria-hidden="true"></i>ambos.</span></li>
+            <li><span class="estado por-confirmar">Acepta «por confirmar»</span><br>Puede ir así; lo completamos con usted.</li>
           </ul>
         </aside>
       </div>
@@ -367,7 +382,7 @@
   </div>
 
   <footer class="pie">
-    <span><strong>ET-CAT-01 en una mirada</strong> · versión 0.1 · Borrador para revisión · no vigente</span>
+    <span><strong>ET-CAT-01 en una mirada</strong> · Dirección General de Estrategia y Transformación Digital (DGETD) · Borrador · no vigente</span>
     <span class="num-pagina">Página 1 de 2</span>
   </footer>
 </article>
@@ -387,94 +402,87 @@
     <section class="sec" aria-labelledby="t-despues">
       <div class="sec-cabeza">
         <h2 id="t-despues">Qué pasa después de registrar</h2>
-        <p>Dos caminos: el del trámite se sigue por el folio; el de su lista, por la clave.</p>
+        <p>El trámite se sigue por el folio; su lista, por la clave.</p>
       </div>
 
-      <div class="recorrido">
+      <div class="recorrido lateral">
         <div class="recorrido-cabeza">
-          <h3><span class="ico-insignia gris"><span class="ico" data-icono="acuse"></span></span>El trámite de registro</h3>
-          <p>Se sigue por el folio <span class="clave">RC-2027-0118</span></p>
+          <h3><span class="ico-insignia gris"><span class="ico" data-icono="acuse"></span></span>El trámite</h3>
+          <p>Folio <span class="clave">RC-2027-0118</span></p>
         </div>
         <ol class="tramite">
-          <li><span class="estatus"><b>Recibido</b></span><span class="quien-mini dgetd"><span class="visualmente-oculto">Lo hace: </span>La DGETD</span>Le enviamos el acuse con folio y clave.</li>
-          <li><span class="estatus"><b>En revisión</b></span><span class="quien-mini dgetd"><span class="visualmente-oculto">Lo hace: </span>La DGETD</span>Prellenamos lo que sabemos. Si falta algo, le llamamos.</li>
-          <li><span class="estatus"><b>Ficha enviada</b></span><span class="quien-mini dgetd"><span class="visualmente-oculto">Lo hace: </span>La DGETD</span>Le enviamos la ficha. Si algo no está bien, vuelve a revisión.</li>
-          <li class="final"><span class="estatus"><b>Confirmado</b></span><span class="quien-mini"><span class="visualmente-oculto">Lo hace: </span>Su área</span>Su área confirma la ficha. El registro queda completo.</li>
+          <li><span class="estatus"><b>Recibido</b></span>La DGETD le envía el acuse con folio y clave.</li>
+          <li><span class="estatus"><b>En revisión</b></span>Prellenamos lo que sabemos. Si falta algo, le llamamos.</li>
+          <li><span class="estatus"><b>Ficha enviada</b></span>Le enviamos la ficha. Si algo falla, vuelve a revisión.</li>
+          <li class="final"><span class="estatus"><b>Confirmado</b></span>Su área confirma la ficha. El registro queda completo.</li>
         </ol>
       </div>
 
       <div class="recorrido">
         <div class="recorrido-cabeza">
           <h3><span class="ico-insignia"><span class="ico" data-icono="lista"></span></span>Su lista en el inventario</h3>
-          <p>Se sigue por la clave <span class="clave">CAT-0042</span></p>
+          <p class="no-autorizar"><span class="ico" data-icono="info"></span>Registrar no es autorizar.</p>
         </div>
         <figure class="inventario">
-          <svg viewBox="0 0 169.5 38.5" role="img" aria-label="Diagrama del estatus de la lista en el inventario. De Registrado pasa a En dictamen cuando la ficha está confirmada. Del dictamen salen cuatro resultados: Autorizado, que aprueba el Comité; En adecuación, que cumple con ajustes pendientes; Uso local; o Duplicado. Una lista en adecuación pasa a Autorizado al terminar sus ajustes. Desde esos cuatro resultados la lista puede pasar a Retirado, que es final. Los pasos están en texto debajo del diagrama.">
+          <svg viewBox="0 0 169.5 30" role="img" aria-label="Diagrama del estatus de la lista en el inventario. De Registrado pasa a En dictamen cuando la ficha está confirmada; ahí la DGETD revisa si es un catálogo institucional. Del dictamen salen cuatro resultados: Autorizado, que aprueba el Comité; En adecuación, que cumple con ajustes pendientes; Uso local; o Duplicado. Una lista en adecuación pasa a Autorizado al terminar sus ajustes, y una autorizada puede volver a En adecuación. Desde esos cuatro resultados la lista puede pasar a Retirado, que es final. Los pasos están en texto debajo del diagrama.">
             <defs>
               <marker id="punta" viewBox="0 0 6 6" refX="5.2" refY="3" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0.6 0.6 L5.4 3 L0.6 5.4" fill="none" stroke="#2A7370" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></marker>
               <marker id="punta-gris" viewBox="0 0 6 6" refX="5.2" refY="3" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0.6 0.6 L5.4 3 L0.6 5.4" fill="none" stroke="#8E97A4" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></marker>
             </defs>
             <g font-family="Source Sans 3, sans-serif">
               <!-- Registrado → En dictamen -->
-              <path d="M27 19.25 H39.6" fill="none" stroke="#2A7370" stroke-width=".45" marker-end="url(#punta)"/>
-              <text x="33.3" y="23.9" font-size="2.7" fill="#575F71" text-anchor="middle">ficha</text>
-              <text x="33.3" y="26.7" font-size="2.7" fill="#575F71" text-anchor="middle">confirmada</text>
+              <path d="M24.5 15 H39.6" fill="none" stroke="#2A7370" stroke-width=".45" marker-end="url(#punta)"/>
+              <text x="32.2" y="19.6" font-size="2.7" fill="#575F71" text-anchor="middle">ficha</text>
+              <text x="32.2" y="22.4" font-size="2.7" fill="#575F71" text-anchor="middle">confirmada</text>
               <!-- En dictamen → cuatro resultados -->
-              <path d="M73.5 19.25 C79.5 19.25 79 3.75 85.3 3.75" fill="none" stroke="#2A7370" stroke-width=".45" marker-end="url(#punta)"/>
-              <path d="M73.5 19.25 C79.5 19.25 79 15.75 85.3 15.75" fill="none" stroke="#2A7370" stroke-width=".45" marker-end="url(#punta)"/>
-              <path d="M73.5 19.25 C79.5 19.25 79 25.25 85.3 25.25" fill="none" stroke="#2A7370" stroke-width=".45" marker-end="url(#punta)"/>
-              <path d="M73.5 19.25 C79.5 19.25 79 34.75 85.3 34.75" fill="none" stroke="#2A7370" stroke-width=".45" marker-end="url(#punta)"/>
+              <path d="M73.5 15 C79.5 15 79 3.05 82.6 3.05" fill="none" stroke="#2A7370" stroke-width=".45" marker-end="url(#punta)"/>
+              <path d="M73.5 15 C79.5 15 79 12.05 82.6 12.05" fill="none" stroke="#2A7370" stroke-width=".45" marker-end="url(#punta)"/>
+              <path d="M73.5 15 C79.5 15 79 19.55 82.6 19.55" fill="none" stroke="#2A7370" stroke-width=".45" marker-end="url(#punta)"/>
+              <path d="M73.5 15 C79.5 15 79 27.05 82.6 27.05" fill="none" stroke="#2A7370" stroke-width=".45" marker-end="url(#punta)"/>
               <!-- En adecuación → Autorizado -->
-              <path d="M137 12.1 V7.9" fill="none" stroke="#2A7370" stroke-width=".45" stroke-dasharray="1 .8" marker-end="url(#punta)"/>
-              <text x="135" y="10.95" font-size="2.6" fill="#2A7370" text-anchor="end" font-style="italic">al terminar los ajustes</text>
+              <path d="M141 9 V6.55" fill="none" stroke="#2A7370" stroke-width=".45" stroke-dasharray="1 .8" marker-end="url(#punta)"/>
+              <text x="139.2" y="8.5" font-size="2.7" fill="#2A7370" text-anchor="end" font-style="italic">al terminar los ajustes</text>
               <!-- Resultados → Retirado -->
-              <path d="M143.5 3.75 H150.3" fill="none" stroke="#8E97A4" stroke-width=".4" stroke-dasharray="1.1 .9" marker-end="url(#punta-gris)"/>
-              <path d="M143.5 15.75 H150.3" fill="none" stroke="#8E97A4" stroke-width=".4" stroke-dasharray="1.1 .9" marker-end="url(#punta-gris)"/>
-              <path d="M143.5 25.25 H150.3" fill="none" stroke="#8E97A4" stroke-width=".4" stroke-dasharray="1.1 .9" marker-end="url(#punta-gris)"/>
-              <path d="M143.5 34.75 H150.3" fill="none" stroke="#8E97A4" stroke-width=".4" stroke-dasharray="1.1 .9" marker-end="url(#punta-gris)"/>
+              <path d="M147.75 3.05 H151.6" fill="none" stroke="#8E97A4" stroke-width=".4" stroke-dasharray="1.1 .9" marker-end="url(#punta-gris)"/>
+              <path d="M147.75 12.05 H151.6" fill="none" stroke="#8E97A4" stroke-width=".4" stroke-dasharray="1.1 .9" marker-end="url(#punta-gris)"/>
+              <path d="M147.75 19.55 H151.6" fill="none" stroke="#8E97A4" stroke-width=".4" stroke-dasharray="1.1 .9" marker-end="url(#punta-gris)"/>
+              <path d="M147.75 27.05 H151.6" fill="none" stroke="#8E97A4" stroke-width=".4" stroke-dasharray="1.1 .9" marker-end="url(#punta-gris)"/>
 
-              <rect x=".25" y="12.5" width="26.5" height="13.5" rx="1.6" fill="#fff" stroke="#161A1D" stroke-width=".5"/>
-              <text x="2.8" y="17.55" font-size="3.4" font-weight="700" fill="#161A1D">Registrado</text>
-              <text x="2.8" y="21.25" font-size="2.7" fill="#575F71">Ya está en el</text>
-              <text x="2.8" y="24.25" font-size="2.7" fill="#575F71">inventario.</text>
+              <rect x=".25" y="8.25" width="24" height="13.5" rx="1.6" fill="#fff" stroke="#161A1D" stroke-width=".5"/>
+              <text x="2.8" y="13.3" font-size="3.4" font-weight="700" fill="#161A1D">Registrado</text>
+              <text x="2.8" y="17" font-size="2.7" fill="#575F71">Ya está en el</text>
+              <text x="2.8" y="20" font-size="2.7" fill="#575F71">inventario.</text>
 
-              <rect x="40.25" y="12.5" width="33" height="13.5" rx="1.6" fill="#E8F5F4" stroke="#2A7370" stroke-width=".5"/>
-              <text x="42.6" y="17.55" font-size="3.4" font-weight="700" fill="#161A1D">En dictamen</text>
-              <text x="42.6" y="21.25" font-size="2.7" fill="#575F71">Revisamos si es un</text>
-              <text x="42.6" y="24.25" font-size="2.7" fill="#575F71">catálogo institucional.</text>
+              <rect x="40.25" y="8.25" width="33" height="13.5" rx="1.6" fill="#E8F5F4" stroke="#2A7370" stroke-width=".5"/>
+              <text x="42.6" y="13.3" font-size="3.4" font-weight="700" fill="#161A1D">En dictamen</text>
+              <text x="42.6" y="17" font-size="2.7" fill="#575F71">Revisamos si es un</text>
+              <text x="42.6" y="20" font-size="2.7" fill="#575F71">catálogo institucional.</text>
 
-              <rect x="85.75" y=".25" width="57.5" height="7" rx="1.4" fill="#EEF5EA" stroke="#4A7A3C" stroke-width=".5"/>
-              <text x="88.5" y="4.9" font-size="3.2" fill="#161A1D"><tspan font-weight="700">Autorizado</tspan><tspan font-size="2.75" fill="#575F71" dx="1.6">lo aprueba el Comité</tspan></text>
-              <rect x="85.75" y="12.25" width="57.5" height="7" rx="1.4" fill="#fff" stroke="#2A7370" stroke-width=".4"/>
-              <text x="88.5" y="16.9" font-size="3.2" fill="#161A1D"><tspan font-weight="700">En adecuación</tspan><tspan font-size="2.75" fill="#575F71" dx="1.6">cumple, con ajustes pendientes</tspan></text>
-              <rect x="85.75" y="21.75" width="57.5" height="7" rx="1.4" fill="#F8FAFC" stroke="#8E97A4" stroke-width=".4"/>
-              <text x="88.5" y="26.4" font-size="3.2" fill="#161A1D"><tspan font-weight="700">Uso local</tspan><tspan font-size="2.75" fill="#575F71" dx="1.6">la sigue llevando su área</tspan></text>
-              <rect x="85.75" y="31.25" width="57.5" height="7" rx="1.4" fill="#F8FAFC" stroke="#8E97A4" stroke-width=".4"/>
-              <text x="88.5" y="35.9" font-size="3.2" fill="#161A1D"><tspan font-weight="700">Duplicado</tspan><tspan font-size="2.75" fill="#575F71" dx="1.6">repite otra lista</tspan></text>
+              <rect x="83" y=".25" width="64.5" height="5.6" rx="1.4" fill="#EEF5EA" stroke="#4A7A3C" stroke-width=".5"/>
+              <text x="85.75" y="4.2" font-size="3.2" fill="#161A1D"><tspan font-weight="700">Autorizado</tspan><tspan font-size="2.75" fill="#575F71" dx="1.6">lo aprueba el Comité</tspan></text>
+              <rect x="83" y="9.25" width="64.5" height="5.6" rx="1.4" fill="#fff" stroke="#2A7370" stroke-width=".4"/>
+              <text x="85.75" y="13.2" font-size="3.2" fill="#161A1D"><tspan font-weight="700">En adecuación</tspan><tspan font-size="2.75" fill="#575F71" dx="1.6">cumple, con ajustes pendientes</tspan></text>
+              <rect x="83" y="16.75" width="64.5" height="5.6" rx="1.4" fill="#F8FAFC" stroke="#8E97A4" stroke-width=".4"/>
+              <text x="85.75" y="20.7" font-size="3.2" fill="#161A1D"><tspan font-weight="700">Uso local</tspan><tspan font-size="2.75" fill="#575F71" dx="1.6">la sigue llevando su área</tspan></text>
+              <rect x="83" y="24.25" width="64.5" height="5.6" rx="1.4" fill="#F8FAFC" stroke="#8E97A4" stroke-width=".4"/>
+              <text x="85.75" y="28.2" font-size="3.2" fill="#161A1D"><tspan font-weight="700">Duplicado</tspan><tspan font-size="2.75" fill="#575F71" dx="1.6">repite otra lista</tspan></text>
 
-              <rect x="150.75" y=".25" width="18.5" height="38" rx="1.6" fill="#fff" stroke="#8E97A4" stroke-width=".4" stroke-dasharray="1.4 1"/>
-              <text x="152.9" y="15.6" font-size="3.4" font-weight="700" fill="#161A1D">Retirado</text>
-              <text x="152.9" y="19.6" font-size="2.7" fill="#575F71">Es final.</text>
-              <text x="152.9" y="22.7" font-size="2.7" fill="#575F71">Su clave no</text>
-              <text x="152.9" y="25.8" font-size="2.7" fill="#575F71">se reutiliza.</text>
+              <rect x="152.25" y=".25" width="17" height="29.6" rx="1.6" fill="#fff" stroke="#8E97A4" stroke-width=".4" stroke-dasharray="1.4 1"/>
+              <text x="154.3" y="11.4" font-size="3.4" font-weight="700" fill="#161A1D">Retirado</text>
+              <text x="154.3" y="15.4" font-size="2.7" fill="#575F71">Es final.</text>
+              <text x="154.3" y="18.5" font-size="2.7" fill="#575F71">Su clave no</text>
+              <text x="154.3" y="21.6" font-size="2.7" fill="#575F71">se reutiliza.</text>
             </g>
           </svg>
           <figcaption class="inv-texto">
-            <div>
-              <h4>En palabras</h4>
-              <ol>
-                <li>Entra como <b>Registrado</b>.</li>
-                <li>Con la ficha confirmada pasa a <b>En dictamen</b>: revisamos si es un catálogo institucional.<span class="ref">art. 6</span></li>
-                <li>Del dictamen sale <b>Autorizado</b> (lo aprueba el Comité), <b>En adecuación</b>, <b>Uso local</b> o <b>Duplicado</b>.</li>
-                <li>Si deja de usarse, pasa a <b>Retirado</b>, que es final.</li>
-              </ol>
-            </div>
-            <div class="ademas">
-              <h4>Además</h4>
-              <p>Una lista en adecuación pasa a Autorizado al terminar sus ajustes; si hace falta un nuevo acuerdo del Comité está por confirmar. Una autorizada vuelve a En adecuación si el plan le asigna ajustes.</p>
-              <p>Una lista registrada que repite otra puede ir directo a Duplicado. Una de uso local vuelve a dictamen si cambia su uso.</p>
-              <p class="no-autorizar"><span class="ico" data-icono="info"></span>Registrar no es autorizar.</p>
-            </div>
+            <h4 class="visualmente-oculto">El diagrama en palabras</h4>
+            <ol class="dos-col">
+              <li>Entra como <b>Registrado</b>.</li>
+              <li>Con la ficha confirmada pasa a <b>En dictamen</b>.<span class="ref">art. 6</span></li>
+              <li>Revisamos si es un catálogo institucional. Resulta <b>Autorizado</b> (lo aprueba el Comité), <b>En adecuación</b>, <b>Uso local</b> o <b>Duplicado</b>.</li>
+              <li>Una lista <b>En adecuación</b> pasa a Autorizado al terminar sus ajustes; una autorizada vuelve a En adecuación si el plan le asigna ajustes.</li>
+              <li>Si deja de usarse, pasa a <b>Retirado</b>, que es final.</li>
+            </ol>
           </figcaption>
         </figure>
       </div>
@@ -486,30 +494,32 @@
         <h2 id="t-versiones">¿Cambia el número de versión?</h2>
         <p>Ejemplos ilustrativos con un catálogo de inmuebles.</p>
       </div>
-      <ol class="versiones">
-        <li>
-          <h3>Cambia el contenido</h3>
-          <p class="ejemplo-cambio">Ejemplo: se da de alta un inmueble.</p>
-          <p class="salto-version"><span>1.0</span><span class="flecha"><span class="ico" data-icono="flecha-derecha"></span><span class="visualmente-oculto">sigue en</span></span><span>1.0</span></p>
-          <p class="resultado"><b>Sin número nuevo.</b> Lo anota quien la mantiene <span class="termino">(custodio)</span> en el registro de cambios <span class="termino">(bitácora)</span>. No interviene el Comité.</p>
-          <span class="origen firme"><span class="ico" data-icono="libro"></span>Lo dicen los Lineamientos · art. 13</span>
-        </li>
-        <li class="menor">
-          <h3>Cambia la estructura y los sistemas siguen igual</h3>
-          <p class="ejemplo-cambio">Ejemplo: se agrega el dato «superficie».</p>
-          <p class="salto-version"><span>1.0</span><span class="flecha"><span class="ico" data-icono="flecha-derecha"></span><span class="visualmente-oculto">pasa a</span></span><span>1.<u>1</u></span></p>
-          <p class="resultado"><b>Versión nueva:</b> sube el número de la derecha <span class="termino">(MENOR)</span>.</p>
-          <span class="origen propuesta"><span class="ico" data-icono="foco"></span>Numeración: propuesta DGETD</span>
-        </li>
-        <li class="mayor">
-          <h3>Cambia la estructura y los sistemas deben adaptarse</h3>
-          <p class="ejemplo-cambio">Ejemplo: se elimina el dato «uso».</p>
-          <p class="salto-version"><span>1.2</span><span class="flecha"><span class="ico" data-icono="flecha-derecha"></span><span class="visualmente-oculto">pasa a</span></span><span><u>2</u>.0</span></p>
-          <p class="resultado"><b>Versión nueva:</b> sube el número de la izquierda <span class="termino">(MAYOR)</span>.</p>
-          <span class="origen propuesta"><span class="ico" data-icono="foco"></span>Numeración: propuesta DGETD</span>
-        </li>
-      </ol>
-      <p class="versiones-pie"><span class="ico" data-icono="mensaje"></span><span><b>Todo cambio de estructura</b> lo pide el área que decide sobre la lista <span class="termino">(propietario)</span>, se evalúa y se avisa antes a los sistemas que la usan.<span class="ref">art. 13</span></span></p>
+      <div class="versiones-rejilla">
+        <ol class="versiones">
+          <li class="contenido">
+            <h3>Cambia el contenido</h3>
+            <p class="ejemplo-cambio">Se da de alta un inmueble.</p>
+            <p class="salto-version"><span>1.0</span><span class="igual">sigue igual</span></p>
+            <p class="resultado"><b>Sin número nuevo.</b> Lo anota quien la mantiene <span class="termino">(custodio)</span> en el registro de cambios <span class="termino">(bitácora)</span>. No interviene el Comité.</p>
+            <span class="origen firme"><span class="ico" data-icono="libro"></span>Lo dicen los Lineamientos · art. 13</span>
+          </li>
+          <li class="menor">
+            <h3>Cambia la estructura y los sistemas siguen igual</h3>
+            <p class="ejemplo-cambio">Se agrega el dato «superficie».</p>
+            <p class="salto-version"><span>1.0</span><span class="flecha"><span class="ico" data-icono="flecha-derecha"></span><span class="visualmente-oculto">pasa a</span></span><span>1.<u>1</u></span></p>
+            <p class="resultado"><b>Versión nueva:</b> sube el número de la derecha <span class="termino">(MENOR)</span>.</p>
+            <span class="origen propuesta"><span class="ico" data-icono="foco"></span>Numeración: propuesta DGETD</span>
+          </li>
+          <li class="mayor">
+            <h3>Cambia la estructura y los sistemas deben adaptarse</h3>
+            <p class="ejemplo-cambio">Se elimina el dato «uso».</p>
+            <p class="salto-version"><span>1.2</span><span class="flecha"><span class="ico" data-icono="flecha-derecha"></span><span class="visualmente-oculto">pasa a</span></span><span><u>2</u>.0</span></p>
+            <p class="resultado"><b>Versión nueva:</b> sube el número de la izquierda <span class="termino">(MAYOR)</span>.</p>
+            <span class="origen propuesta"><span class="ico" data-icono="foco"></span>Numeración: propuesta DGETD</span>
+          </li>
+        </ol>
+        <p class="versiones-nota"><span class="ico" data-icono="mensaje"></span><span><b>En ambos,</b> el cambio lo pide el área que decide sobre la lista <span class="termino">(propietario)</span>, se evalúa y se avisa antes a los sistemas que la usan.<span class="ref">art. 13</span></span></p>
+      </div>
     </section>
 
     <!-- Pendientes y compromisos -->
@@ -519,7 +529,7 @@
         <ul>
           <li>Damos trámite a todo registro con área, nombre y descripción, y completamos el resto con su área. <b>Si eso cuenta en tiempo</b> para el Transitorio CUARTO lo decide el Comité.</li>
           <li>Si el tipo de lista queda con la propuesta de la DGETD o lo formaliza el Comité.</li>
-          <li>Cómo se numeran las versiones y con cuántos días se avisa antes a los sistemas que usan la lista.</li>
+          <li>Cómo se numeran las versiones y con cuántos días de anticipación se avisa a los sistemas.</li>
         </ul>
       </section>
       <section class="franja compromisos" aria-labelledby="t-compromisos">
@@ -536,26 +546,10 @@
       </section>
     </div>
 
-    <!-- Para saber más -->
-    <div class="saber-mas">
-      <section aria-labelledby="t-ti">
-        <h2 id="t-ti"><span class="ico" data-icono="pantalla"></span>Para su equipo de TI</h2>
-        <p>Guarde la clave como texto, con prefijo y ceros, y acepte 5 dígitos: después de <span class="clave">CAT-9999</span> sigue <span class="clave">CAT-10000</span>. Su clave interna actual se conserva como referencia.</p>
-        <p class="no-validas"><b>Así no:</b>
-          <span><span class="ico" data-icono="cruz"></span><span class="clave">CAT-DGRH-01</span> siglas</span>
-          <span><span class="ico" data-icono="cruz"></span><span class="clave">CAT-2027-0042</span> año</span>
-          <span><span class="ico" data-icono="cruz"></span><span class="clave">CAT-42</span> sin ceros</span>
-        </p>
-      </section>
-      <section aria-labelledby="t-saber">
-        <h2 id="t-saber"><span class="ico" data-icono="libro"></span>Para saber más</h2>
-        <p>Detalle en ET-CAT-01: ficha, clave, estatus y valores (capítulos 5 a 8) y Anexo A. Versiones: propuesta del capítulo 11. Los capítulos 9 a 13 se completan en la ola 2. El Comité es el Comité de Gobernanza Digital.</p>
-        <p>Los Lineamientos piden publicar este estándar a más tardar el <span class="ph">[miércoles 16 de diciembre de 2026, por confirmar]</span> (Transitorio TERCERO).</p>
-      </section>
-    </div>
   </div>
 
-  <footer class="pie">
+  <footer class="pie doble">
+    <p class="pie-saber"><strong>Para saber más:</strong> ET-CAT-01, capítulos 5 a 8 y Anexo A; todos los cambios de estatus, en la sección 7.2; versiones, en el capítulo 11.</p>
     <span><strong>Borrador · no vigente</strong> · ¿Dudas? Asesoría DGETD: <span class="ph">[correo, extensión y horario de la asesoría DGETD]</span></span>
     <span class="num-pagina">Página 2 de 2</span>
   </footer>

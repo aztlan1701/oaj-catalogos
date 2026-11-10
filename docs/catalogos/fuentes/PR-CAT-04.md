@@ -1,7 +1,7 @@
 ---
 codigo: PR-CAT-04
 titulo: Procedimiento de registro de catálogos existentes
-subtitulo: Transitorio CUARTO de los Lineamientos Generales de Catálogos Institucionales
+subtitulo: Cómo registran las áreas y los órganos jurisdiccionales las listas que ya llevan
 tipo: Procedimiento
 version: "0.1"
 fecha: "Noviembre de 2026"
@@ -217,7 +217,7 @@ La DGETD revisa y propone; no aprueba catálogos. La aprobación de un catálogo
 
 ## 6.11 Datos personales y nivel de acceso
 
-El registro no pide datos personales ni el contenido de la lista. Solo pregunta si la lista los contiene ([E2]{custom-style="Clave"}), para protegerla, y quién debería poder consultarla ([E1]{custom-style="Clave"}). Las listas con información reservada o confidencial las revisan la DGETD y la unidad de transparencia competente, y se les aplican controles de acceso (art. 23).
+El registro no pide datos personales ni el contenido de la lista. Solo pregunta si la lista los contiene ([E2]{custom-style="Clave"}), para protegerla, y quién debería poder consultarla ([E1]{custom-style="Clave"}). Si la lista contiene información reservada o confidencial, el área la marca como «Clasificada». Esa clasificación se rige por la normativa de transparencia; el registro solo la usa para proteger la ficha y aplicar los controles de acceso (art. 23).
 
 ::: {custom-style="Pendiente"}
 **Por confirmar.** Los valores de nivel de acceso (Pública, Interna, Restringida, Clasificada y Por confirmar) son una propuesta de la DGETD. Deben alinearse con el Acuerdo General del Pleno del Órgano de Administración Judicial que establece las disposiciones en materia de transparencia, acceso a la información pública y protección de datos personales (art. 23), con la unidad de transparencia competente, antes de la versión 1.0.
@@ -310,10 +310,16 @@ El art. 14 fr. V obliga a la DGETD a dar asesoría técnica a propietarios y cus
 
 # 8. Diagrama de flujo
 
-![Diagrama de flujo de carriles con tres columnas: Área u órgano jurisdiccional, DGETD y Comité de Gobernanza Digital, este último marcado como fuera de este procedimiento. La DGETD prepara canales, piloto y kit (1–7). La persona titular designa a la persona enlace (8) y la DGETD le envía el kit (9). El área identifica sus listas; el órgano jurisdiccional usa la lista de verificación (10). Rombo 12: ¿el órgano lleva listas propias? Si no, concluye y confirmarlo es opcional. Si sí, registra cada lista por formulario, Excel o registro acompañado (11). La DGETD envía el acuse con folio y clave (13), revisa y prellena con las áreas de TI (14–15) y envía la ficha de confirmación (16). El área revisa la ficha y la confirma o pide corregirla (17); si pide corregir, el registro vuelve a revisión (14). Con la ficha confirmada, la DGETD depura con el artículo 6: la lista pasa a «En dictamen» y, en su caso, a «Uso local» o «Duplicado» (18–19). En el día 75 decide si hay listas conocidas sin registro (20); si las hay, el área completa una ficha prellenada (21) y el registro vuelve a revisión. Si no, la DGETD cierra el registro el día 90 (22), elabora el informe de cierre y lo somete al Comité (23–24), que lo considera y, en su caso, determina lo conducente. La DGETD devuelve a cada área su ficha y estatus (25), entrega el inventario para el plan de adecuación (26), que aprueba el Comité, y el procedimiento termina.](img/pr-cat-04-flujo.png){width=92%}\
+![Diagrama de flujo de carriles, parte 1 de 2, con tres columnas: Área u órgano jurisdiccional, DGETD y Comité de Gobernanza Digital, este último fuera de este procedimiento. La DGETD prepara canales, piloto y kit (1–7). La persona titular designa a la persona enlace (8) y la DGETD le envía el kit (9). El área identifica sus listas; el órgano jurisdiccional usa la lista de verificación (10). Rombo 12: ¿el órgano lleva listas propias? Si no, concluye y confirmarlo es opcional. Si sí, registra cada lista por formulario, Excel o registro acompañado (11). La DGETD envía el acuse con folio y clave (13), revisa y prellena con las áreas de TI (14–15) y envía la ficha de confirmación (16). El área revisa la ficha y la confirma o pide corregirla (17); si pide corregir, el registro vuelve a revisión (14). Con la ficha confirmada, el flujo sigue en la figura 2.](img/pr-cat-04-flujo-1.png){width=100%}\
 
 ::: {custom-style="Pequeno"}
-Figura 1. Flujo del registro de catálogos existentes por responsable. Los números corresponden a las actividades del capítulo 7; abajo, los mismos pasos en texto.
+Figura 1. Flujo del registro, parte 1: de la preparación a la confirmación de la ficha (actividades 1 a 17). Los números corresponden a las actividades del capítulo 7; después de la figura 2, los mismos pasos en texto.
+:::
+
+![Diagrama de flujo de carriles, parte 2 de 2, con las mismas tres columnas. Viene de la ficha confirmada (17). La DGETD depura con el artículo 6: la lista pasa a «En dictamen» y, en su caso, a «Uso local» o «Duplicado» (18–19). En el día 75 decide si hay listas conocidas sin registro (20); si las hay, el área completa una ficha prellenada (21) y el registro vuelve a revisión (14–15, figura 1). Si no, la DGETD cierra el registro el día 90 (22), elabora el informe de cierre y lo somete al Comité (23–24), que lo considera y, en su caso, determina lo conducente. La DGETD devuelve a cada área su ficha y estatus (25), entrega el inventario para el plan de adecuación (26), que aprueba el Comité, y el procedimiento termina.](img/pr-cat-04-flujo-2.png){width=100%}\
+
+::: {custom-style="Pequeno"}
+Figura 2. Flujo del registro, parte 2: de la depuración a la entrega del inventario (actividades 18 a 26).
 :::
 
 1. **Preparación (1 a 7).** La DGETD fija el calendario, prepara los canales, hace el piloto, publica el procedimiento, el formato y el kit, asigna contactos y gestiona el oficio a titulares y la comunicación a los órganos jurisdiccionales.
@@ -367,8 +373,8 @@ Los indicadores miden cómo funciona el registro, no la calidad de las listas. S
 Todos los plazos corren desde la entrada en vigor, que es el día siguiente a la publicación (Transitorio PRIMERO de los Lineamientos). Las fechas suponen que la publicación fue el 16 de octubre de 2026 y deben confirmarse: [fecha de entrada en vigor por confirmar]{custom-style="Marcador"}.
 
 | Hito | Fecha | Día |
-|:--------------------------------------|:---------------------------------------------|:------|
-| Entrada en vigor de los Lineamientos | [sábado 17 de octubre de 2026, por confirmar]{custom-style="Marcador"} | 0 |
+|:----------------------|:--------------------------------------------------------------|:------|
+| Entrada en vigor de los Lineamientos | [fecha de entrada en vigor por confirmar]{custom-style="Marcador"} | 0 |
 | Piloto con 3 perfiles | [segunda quincena de noviembre de 2026, por confirmar]{custom-style="Marcador"} | — |
 | Publicación anticipada de PR-CAT-04 y F-CAT-01 (propuesta) | [fines de noviembre de 2026, por confirmar]{custom-style="Marcador"} | — |
 | Reuniones bilaterales y oficio a titulares | [primera semana de diciembre de 2026, por confirmar]{custom-style="Marcador"} | — |

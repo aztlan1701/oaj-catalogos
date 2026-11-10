@@ -13,16 +13,26 @@ portada: sin-ficha
 **Circular:** [número y fecha por asignar]{custom-style="Marcador"} · **Emite:** [autoridad que emite la circular]{custom-style="Marcador"}\
 **Dirigida a:** personas titulares de las áreas administrativas
 
-Los Lineamientos Generales de Catálogos Institucionales (LGCI) piden a su área registrar ante la Dirección General de Estrategia y Transformación Digital (DGETD), a más tardar el [viernes 15 de enero de 2027, por confirmar]{custom-style="Marcador"}, cada lista que lleve y que otra área, un sistema, un reporte o un trámite use o copie, o que dependa de una sola persona, como la de inmuebles que ocupa el Órgano de Administración Judicial. Es una ficha por lista y, ante la duda, conviene registrarla: es el primer paso para que las cifras dejen de chocar.
+Su área debe registrar ante la Dirección General de Estrategia y Transformación Digital (DGETD) cada lista que lleva y que otra área, un sistema, un reporte o un trámite usa o copia, o que depende de una sola persona; por ejemplo, la de inmuebles que ocupa el Órgano de Administración Judicial. Es una ficha por lista y, ante la duda, regístrela. Es el primer paso para que dos áreas dejen de llegar con cifras distintas.
 
-**Lo que le pedimos a usted.** Designe a una persona enlace a más tardar el [fecha por definir]{custom-style="Marcador"} y comuníquenos sus datos. Esa persona registra cada lista y confirma su ficha. Usted respalda los registros: figura en cada ficha como persona titular que valida y recibe copia de cada acuse.
+**Fecha límite:** [viernes 15 de enero de 2027, por confirmar]{custom-style="Marcador"}, conforme a los Lineamientos Generales de Catálogos Institucionales (LGCI).
 
-**Lo que no se pide.** Ni la lista ni datos personales, solo datos sobre ella (metadatos). Registrar no la publica ni cambia quién la administra. Lo que no sepa, «Por confirmar».
+## Lo que le pedimos a usted
 
-**Tres formas de registrar sus listas.** En línea, un envío por lista: [liga al formulario de registro]{custom-style="Marcador"}. En Excel, si son más de 5: [liga a la carpeta de SharePoint para plantillas de Excel]{custom-style="Marcador"}. Con registro acompañado por Teams o teléfono, o para dudas: [correo, extensión y horario de la asesoría DGETD]{custom-style="Marcador"}.
+Designe a una persona enlace a más tardar el [fecha por definir]{custom-style="Marcador"} y comuníquenos sus datos. Esa persona registra cada lista y confirma su ficha. Usted respalda los registros: figura en cada ficha como persona titular que valida y recibe copia de cada acuse.
+
+## Lo que no se pide
+
+Ni la lista ni datos personales, solo datos sobre ella (metadatos). Registrar no la publica ni cambia quién la administra. Lo que no sepa, «Por confirmar».
+
+## Tres formas de registrar sus listas
+
+- **En línea**, un envío por lista: [liga al formulario de registro]{custom-style="Marcador"}.
+- **En Excel**, si son más de 5: [liga a la carpeta de SharePoint para plantillas de Excel]{custom-style="Marcador"}.
+- **Acompañado**, por Teams o teléfono, o para dudas: [correo, extensión y horario de la asesoría DGETD]{custom-style="Marcador"}.
 
 ::: {custom-style="Compromiso"}
-**Compromiso DGETD.** Envía un acuse con folio y asigna a cada lista su clave de catálogo, como [CAT-0042]{custom-style="Clave"}. Prellena lo que ya conoce y, en [plazo por definir según capacidad de la DGETD]{custom-style="Marcador"}, le envía la ficha para que su área la confirme. Asigna una persona de contacto con nombre y responde dudas en [plazo por definir según capacidad de la DGETD]{custom-style="Marcador"}. No le volverá a pedir lo que ya entregó. El registro no es una auditoría: los errores se corrigen sin costo hasta el dictamen.
+**Compromiso DGETD.** Le enviamos un acuse con folio y asignamos a cada lista su clave de catálogo (por ejemplo, [CAT-0042]{custom-style="Clave"}). Prellenamos lo que ya conocemos y, en [plazo por definir según capacidad de la DGETD]{custom-style="Marcador"}, le enviamos la ficha para que su área la confirme. Le asignamos una persona de contacto con nombre y respondemos sus dudas en [plazo por definir según capacidad de la DGETD]{custom-style="Marcador"}. No le volveremos a pedir lo que ya entregó. El registro no es una auditoría: los errores se corrigen sin costo hasta el dictamen.
 :::
 
 **Anexos:** guía de registro, F-CAT-01 y lista de verificación para órganos jurisdiccionales.\
@@ -35,5 +45,5 @@ Los Lineamientos Generales de Catálogos Institucionales (LGCI) piden a su área
 :::
 
 ::: {custom-style="Pendiente"}
-**Por confirmar.** Quién emite y firma, y si hay respaldo del Comité de Gobernanza Digital; si no emite la DGETD, cambia el fundamento (el art. 14 fija obligaciones de la DGETD). Los órganos jurisdiccionales reciben la lista de verificación por el conducto institucional, con un texto de invitación por redactar.
+**Nota interna, se elimina antes de firmar.** Por confirmar: quién emite y firma, y si hay respaldo del Comité de Gobernanza Digital; si no emite la DGETD, cambia el fundamento (el art. 14 fija obligaciones de la DGETD). Los órganos jurisdiccionales reciben la lista de verificación por el conducto institucional, con un texto de invitación por redactar.
 :::
